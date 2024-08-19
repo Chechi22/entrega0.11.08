@@ -1,7 +1,9 @@
 .jumbotron,
 .card-body,
 .container,
-.site-header {
+.site-header,
+.login-container,
+.form-group {
   font-family: 'Verdana', serif !important;
 }
 
@@ -97,10 +99,13 @@ footer p {
 
 .alert {
   position: fixed;
-  top: 80px;
-  width: 50%;
+  top: 150px;
+  width: 30%;
   left: 50%;
   transform: translate(-50%, 0);
+  background-color:rgb(200, 209, 205) ;
+  border-color: black;
+  color: black;
 }
 
 .lds-ring {
@@ -176,7 +181,7 @@ footer p {
 }
 
 main {
-  min-height: calc(100vh - 210px);
+  min-height: calc(90vh - 210px);
 }
 
 a.custom-card,
@@ -188,3 +193,10 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+#ingreso {
+  border: 2px solid rgb(198, 193, 193);  /* Ancho y color del borde */
+  border-radius: 10px; /* Opcional: bordes redondeados */
+}
+
+
