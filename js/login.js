@@ -23,5 +23,23 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
         // Si el nombre de usuario o la contraseña son incorrectos, muestra un mensaje de error
         // El mensaje se mostrará en el elemento con el ID 'error-message'
         document.getElementById("error-message").textContent = "Nombre de usuario o contraseña incorrectos";
+
+         // Limpia el mensaje después de 5 segundos
+         setTimeout(() => {
+            document.getElementById("error-message").textContent = "";
+        }, 5000);
     }
 });
+
+// Esta función cambia el tipo de campo de contraseña entre 'password' y 'text' para mostrar u ocultar la contraseña
+function togglePassword() {
+    // Obtén el elemento del campo de contraseña usando su id
+    const passwordInput = document.getElementById("password");
+    
+    // Verifica si el tipo actual del campo es "password"
+    // Si es "password", cambia a "text"; si es "text", cambia a "password"
+    const passwordFieldType = passwordInput.type === "password" ? "text" : "password";
+    
+    // Establece el tipo del campo de contraseña al nuevo valor (ya sea "text" o "password")
+    passwordInput.type = passwordFieldType;
+}
