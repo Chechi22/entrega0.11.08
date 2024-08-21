@@ -249,3 +249,8 @@ main{
 
 }
 
+#usuarioMostrado, #salir{
+  display: inline-block;
+  margin-right: 5px; /* Ajusta el espaciado entre los elementos según lo necesites */
+  cursor: pointer;
+}

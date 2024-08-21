@@ -18,28 +18,31 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     // Este es solo un ejemplo de verificación. En un caso real, la verificación de credenciales se realizaría en un servidor
     if (username === "USUARIO" && password === "CONTRASEÑA") {
         // Si el nombre de usuario y la contraseña son correctos, redirige al usuario a la página principal
+        localStorage.setItem("usuarioLogueado",username);
         window.location.href = "index.html";
+        
     } else {
         // Si el nombre de usuario o la contraseña son incorrectos, muestra un mensaje de error
         // El mensaje se mostrará en el elemento con el ID 'error-message'
         document.getElementById("error-message").textContent = "Nombre de usuario o contraseña incorrectos";
 
-         // Limpia el mensaje después de 5 segundos
-         setTimeout(() => {
+        // Limpia el mensaje después de 5 segundos
+        setTimeout(() => {
             document.getElementById("error-message").textContent = "";
         }, 5000);
     }
 });
 
-// Esta función cambia el tipo de campo de contraseña entre 'password' y 'text' para mostrar u ocultar la contraseña
+// Esta función cambia el tipo de campo de contraseña entre 'password' y 'text' para mostrar u ocultar la contraseña, HACE QUE FUNCIONE EL OJITO
 function togglePassword() {
     // Obtén el elemento del campo de contraseña usando su id
     const passwordInput = document.getElementById("password");
-    
+
     // Verifica si el tipo actual del campo es "password"
     // Si es "password", cambia a "text"; si es "text", cambia a "password"
     const passwordFieldType = passwordInput.type === "password" ? "text" : "password";
-    
+
     // Establece el tipo del campo de contraseña al nuevo valor (ya sea "text" o "password")
     passwordInput.type = passwordFieldType;
 }
+
