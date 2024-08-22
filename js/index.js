@@ -32,4 +32,16 @@ var ElUsuarioEstaLogueado=localStorage.getItem("usuarioLogueado")
         
     }
 
+    document.addEventListener('DOMContentLoaded',()=>{
+
+        let username= localStorage.getItem("usuarioLogueado");
     
+        if (username===null || password===null) {
+            location.href="login.html";
+    
+        }else{
+            document.getElementById('usuarioLogueado').innerText=username;
+        
+        } 
+        
+        })

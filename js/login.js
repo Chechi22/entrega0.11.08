@@ -19,7 +19,7 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     if (username === "USUARIO" && password === "CONTRASEÑA") {
         // Si el nombre de usuario y la contraseña son correctos, redirige al usuario a la página principal
         localStorage.setItem("usuarioLogueado",username);
-        window.location.href = "index.html";
+        location.href = "index.html";
         
     } else {
         // Si el nombre de usuario o la contraseña son incorrectos, muestra un mensaje de error
@@ -31,6 +31,11 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
             document.getElementById("error-message").textContent = "";
         }, 5000);
     }
+     //para cerrar sesion
+     document.getElementById("salir").addEventListener("click", function() {
+        localStorage.removeItem("usuarioLogueado");
+        window.location.href = "login.html";
+    });
 });
 
 // Esta función cambia el tipo de campo de contraseña entre 'password' y 'text' para mostrar u ocultar la contraseña, HACE QUE FUNCIONE EL OJITO
@@ -43,6 +48,4 @@ function togglePassword() {
     const passwordFieldType = passwordInput.type === "password" ? "text" : "password";
 
     // Establece el tipo del campo de contraseña al nuevo valor (ya sea "text" o "password")
-    passwordInput.type = passwordFieldType;
-}
-
+    passwordInput.type = passwordFieldType;}
