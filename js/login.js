@@ -49,3 +49,5 @@ function togglePassword() {
 
     // Establece el tipo del campo de contraseña al nuevo valor (ya sea "text" o "password")
     passwordInput.type = passwordFieldType;}
+
+   

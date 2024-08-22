@@ -17,12 +17,13 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location.href = "login.html";
     });
 });
-
-var ElUsuarioEstaLogueado=localStorage.getItem("usuarioLogueado")
+document.addEventListener('DOMContentLoaded',()=>{
+let ElUsuarioEstaLogueado=localStorage.getItem("usuarioLogueado")
     if (ElUsuarioEstaLogueado===null){
         document.getElementById("ingreso").style.display = 'block';
         document.getElementById("salir").style.display = 'none';
         document.getElementById("usuarioMostrado").style.display = 'none';
+        location.href="login.html";
     } 
     else {
         document.getElementById("ingreso").style.display = 'none';
@@ -31,17 +32,4 @@ var ElUsuarioEstaLogueado=localStorage.getItem("usuarioLogueado")
         document.getElementById("usuarioMostrado").textContent=ElUsuarioEstaLogueado;
         
     }
-
-    document.addEventListener('DOMContentLoaded',()=>{
-
-        let username= localStorage.getItem("usuarioLogueado");
-    
-        if (username===null || password===null) {
-            location.href="login.html";
-    
-        }else{
-            document.getElementById('usuarioLogueado').innerText=username;
-        
-        } 
-        
-        })
+});
