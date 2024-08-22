@@ -1,7 +1,9 @@
 .jumbotron,
 .card-body,
 .container,
-.site-header {
+.site-header,
+.login-container,
+.form-group {
   font-family: 'Verdana', serif !important;
 }
 
@@ -97,10 +99,13 @@ footer p {
 
 .alert {
   position: fixed;
-  top: 80px;
-  width: 50%;
+  top: 150px;
+  width: 30%;
   left: 50%;
   transform: translate(-50%, 0);
+  background-color:rgb(250, 254, 252) ;
+  border-color: black;
+  color: black;
 }
 
 .lds-ring {
@@ -176,7 +181,7 @@ footer p {
 }
 
 main {
-  min-height: calc(100vh - 210px);
+  min-height: calc(90vh - 210px);
 }
 
 a.custom-card,
@@ -187,4 +192,65 @@ a.custom-card:hover {
 
 .checked {
   color: orange;
+}
+
+#ingreso {
+  border: 2px solid rgb(245, 244, 244);  /* Ancho y color del borde */
+  border-radius: 10px; /* Opcional: bordes redondeados */
+}
+
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  padding-right: 50px;
+}
+
+.password-container .toggle-password {
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+}
+
+
+.toggle-password{
+  position: relative;
+  right: 40px;
+}
+
+#username{
+  position: relative;
+  right: 15px;
+}
+
+.bibi-person {
+  position: relative;
+  right: 20px;
+}
+.bibi-file-lock{
+  position:relative;
+  right: 7px;
+}
+
+main{
+  background-color: rgb(251, 250, 250);
+}
+
+.boton{
+  border: 2px solid rgb(242, 238, 238);  /* Ancho y color del borde */
+  border-radius: 10px; /* Opcional: bordes redondeados */
+  border-color:black;
+  color: #fff;
+  background-color: black;
+
+}
+
+#usuarioMostrado, #salir{
+  display: inline-block;
+  margin-right: 5px; /* Ajusta el espaciado entre los elementos según lo necesites */
+  cursor: pointer;
 }
