@@ -16,7 +16,7 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
 
     // Verifica si el nombre de usuario y la contraseña son correctos
     // Este es solo un ejemplo de verificación. En un caso real, la verificación de credenciales se realizaría en un servidor
-    if (username === "USUARIO" && password === "CONTRASEÑA") {
+    if (username != "" && password != "") {
         // Si el nombre de usuario y la contraseña son correctos, redirige al usuario a la página principal
         localStorage.setItem("usuarioLogueado",username);
         location.href = "index.html";
