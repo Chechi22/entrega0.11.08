@@ -190,10 +190,6 @@ a.custom-card:hover {
 }
 
 
-#autos, img {
-  margin: right 50px; /* Ajusta el espaciado entre los elementos según lo necesites */
-}
-
 .imagenAutos{
   width:20%;
 }
@@ -207,3 +203,4 @@ img {
 h4 {
   text-align: center;
 }
+
