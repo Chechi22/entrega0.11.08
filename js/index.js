@@ -11,4 +11,25 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
+    //para cerrar sesion
+    document.getElementById("salir").addEventListener("click", function() {
+        localStorage.removeItem("usuarioLogueado");
+        window.location.href = "login.html";
+    });
+});
+document.addEventListener('DOMContentLoaded',()=>{
+let ElUsuarioEstaLogueado=localStorage.getItem("usuarioLogueado")
+    if (ElUsuarioEstaLogueado===null){
+        document.getElementById("ingreso").style.display = 'block';
+        document.getElementById("salir").style.display = 'none';
+        document.getElementById("usuarioMostrado").style.display = 'none';
+        location.href="login.html";
+    } 
+    else {
+        document.getElementById("ingreso").style.display = 'none';
+        document.getElementById("salir").style.display = 'inline';
+        document.getElementById("usuarioMostrado").style.display = 'inline';
+        document.getElementById("usuarioMostrado").textContent=ElUsuarioEstaLogueado;
+        
+    }
 });

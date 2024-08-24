@@ -1,3 +1,10 @@
+
+//para cerrar sesion
+document.getElementById("salir").addEventListener("click", function() {
+    localStorage.removeItem("usuarioLogueado");
+    window.location.href = "login.html";
+});
+
 document.addEventListener('DOMContentLoaded', function(){
     fetch("https://japceibal.github.io/emercado-api/cats_products/101.json")
     .then(response=>response.json())
@@ -12,4 +19,5 @@ document.addEventListener('DOMContentLoaded', function(){
 
     })
 })
+
 
