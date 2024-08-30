@@ -208,3 +208,18 @@ img {
 h4 {
   text-align: center;
 }
+
+body {
+  background-color: rgb(248, 249, 250);
+}
+
+.login-container {
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-control {
+  width: 100%;
+  box-sizing: border-box;
+}
+
