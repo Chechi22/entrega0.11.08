@@ -12,12 +12,16 @@ document.addEventListener('DOMContentLoaded', function(){
 
         let listaautos="";
         for(let auto of autos.products){
-            listaautos+="<table><tr><td rowspan=4 class='imagenAutos'><img src="+ auto.image +"></td><td>"+ auto.name +"</td></tr><tr><td>Descripción: "+ auto.description
-            +"</td></tr><tr><td>"+auto.currency+" "+auto.cost+"</td></tr><tr><td>Vendidos: "+auto.soldCount+"</td></tr></table> <br>";
+            listaautos+=`
+            <div class="auto-item">
+                <img src="${auto.image}" class="imagenAutos" alt="Imagen de ${auto.name}">
+                <h5>${auto.name}</h5>
+                <p>Descripción: ${auto.description}</p>
+                <p>${auto.currency} ${auto.cost}</p>
+                <p>Vendidos: ${auto.soldCount}</p>
+            </div><br>`;
         }
         document.getElementById("autos").innerHTML=listaautos;
-
     })
-})
-
+});
 
