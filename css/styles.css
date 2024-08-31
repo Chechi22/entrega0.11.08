@@ -1,3 +1,4 @@
+/* Aplicación de la fuente 'Verdana' a varios elementos, asegurando su prioridad con !important */
 .jumbotron,
 .card-body,
 .container,
@@ -7,14 +8,17 @@
   font-family: 'Verdana', serif !important;
 }
 
+/* Estilo para los encabezados dentro de jumbotron, haciéndolos negrita */
 .jumbotron .display-4 {
   font-weight: bold;
 }
 
+/* Remover subrayado de los enlaces en la navegación */
 nav a {
   text-decoration: none;
 }
 
+/* Estilo para elementos con clase bd-placeholder-img */
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -24,25 +28,28 @@ nav a {
   user-select: none;
 }
 
+/* Media query para pantallas medianas hacia arriba */
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
   }
 }
 
+/* Estilos para la jumbotron */
 .jumbotron {
-  height: 50vh;
-  padding: 5em inherit;
-  margin-bottom: 0;
-  background-color: #53C0FB;
-  background: url('../img/cover_back.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: black;
-  font-weight: bold;
+  height: 50vh; /* Altura de la jumbotron */
+  padding: 5em inherit; /* Padding interno */
+  margin-bottom: 0; /* Sin margen inferior */
+  background-color: #53C0FB; /* Color de fondo */
+  background: url('../img/cover_back.png'); /* Imagen de fondo */
+  background-size: cover; /* Ajustar tamaño de fondo */
+  background-position: center; /* Centrar imagen de fondo */
+  background-repeat: no-repeat; /* No repetir la imagen de fondo */
+  color: black; /* Color del texto */
+  font-weight: bold; /* Peso de la fuente */
 }
 
+/* Media query para ajustar padding en pantallas medianas hacia arriba */
 @media (min-width: 768px) {
   .jumbotron {
     padding-top: 6rem;
@@ -50,64 +57,76 @@ nav a {
   }
 }
 
+/* Eliminar margen inferior del último párrafo dentro de jumbotron */
 .jumbotron p:last-child {
   margin-bottom: 0;
 }
 
+/* Estilo para el encabezado dentro de jumbotron */
 .jumbotron-heading {
   font-weight: 300;
 }
 
+/* Estilos para el contenedor dentro de jumbotron */
 .jumbotron .container {
-  max-width: 40rem;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
-  text-shadow: 1px 1px 2px grey;
+  max-width: 40rem; /* Ancho máximo */
+  background-color: rgba(255, 255, 255, 0.5); /* Fondo semitransparente */
+  border-radius: 10px; /* Bordes redondeados */
+  text-shadow: 1px 1px 2px grey; /* Sombra del texto */
 }
 
+/* Tamaño de fuente para elementos con clase lead dentro de jumbotron */
 .jumbotron .lead {
   font-size: 38px;
 }
 
+/* Estilos para el pie de página */
 footer {
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
 
+/* Margen inferior para párrafos dentro del pie de página */
 footer p {
   margin-bottom: .25rem;
 }
 
+/* Color y transición para enlaces dentro de site-header */
 .site-header a {
   color: white;
   transition: ease-in-out color .15s;
 }
 
+/* Color para enlaces dentro de dropdown-menu en site-header */
 .site-header .dropdown-menu a {
   color: black;
 }
 
+/* Estilo para dropzone (área de arrastrar y soltar archivos) */
 .dropzone {
   border: 2px dashed #0087F7;
   border-radius: 5px;
   background: white;
 }
 
+/* Ajuste de altura máxima para imágenes con clase img-fit */
 .img-fit {
   max-height: 100%;
 }
 
+/* Estilos para alertas */
 .alert {
   position: fixed;
   top: 150px;
   width: 30%;
   left: 50%;
   transform: translate(-50%, 0);
-  background-color:rgb(250, 254, 252) ;
+  background-color: rgb(250, 254, 252);
   border-color: black;
   color: black;
 }
 
+/* Estilos para el spinner de carga */
 .lds-ring {
   display: inline-block;
   position: relative;
@@ -117,16 +136,19 @@ footer p {
   left: 50%;
 }
 
+/* Cambiar cursor a pointer cuando está activo */
 .cursor-active {
   cursor: pointer;
 }
 
+/* Estilo para elementos con clase left */
 .left {
   float: left;
   padding: 4px;
   background-color: rgba(255, 255, 255, 0.5);
 }
 
+/* Estilos para los divs dentro de lds-ring para animación */
 .lds-ring div {
   box-sizing: border-box;
   display: block;
@@ -140,6 +162,7 @@ footer p {
   border-color: #fff transparent transparent transparent;
 }
 
+/* Retrasos de animación para los diferentes divs de lds-ring */
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;
 }
@@ -152,6 +175,7 @@ footer p {
   animation-delay: -0.15s;
 }
 
+/* Keyframes para la animación de rotación del spinner */
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);
@@ -162,6 +186,7 @@ footer p {
   }
 }
 
+/* Estilos para el formulario de inicio de sesión */
 .signin {
   width: 100%;
   max-width: 330px;
@@ -169,6 +194,7 @@ footer p {
   margin: auto;
 }
 
+/* Estilos para el contenedor del spinner */
 #spinner-wrapper {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
@@ -177,49 +203,75 @@ footer p {
   top: 0;
   left: 0;
   z-index: 1021;
-  display: none;
+  display: none; /* Oculto por defecto */
 }
 
+/* Altura mínima para el elemento main */
 main {
   min-height: calc(90vh - 210px);
 }
 
+/* Estilos para enlaces con clase custom-card, asegurando que hereden colores y sin subrayado */
 a.custom-card,
 a.custom-card:hover {
   color: inherit;
   text-decoration: inherit;
 }
 
+/* Color para elementos con clase checked */
 .checked {
   color: orange;
 }
 
-
+/* Estilo para las imágenes de autos */
 .imagenAutos{
-  width:20%;
+  width:20%; /* Ancho del 20% del contenedor */
 }
 
+/* Estilos generales para todas las imágenes */
 img { 
-  width: 100%;
-  float:left;
-  padding: 15px; 
+  width: 100%; /* Ancho completo del contenedor */
+  float:left; /* Flotar a la izquierda */
+  padding: 15px; /* Espaciado interno */
 }
 
+/* Alinear el texto de los encabezados h4 al centro */
 h4 {
   text-align: center;
 }
 
-body {
-  background-color: rgb(248, 249, 250);
-}
+/* Media Query para dispositivos móviles con ancho máximo de 768px */
+@media (max-width: 768px) {
+  /* Reducir el tamaño del texto en elementos con clase lead dentro de jumbotron */
+  .jumbotron .lead {
+    font-size: 24px; /* Ajuste del tamaño del texto en celulares */
+  }
 
-.login-container {
-  margin: 0 auto;
-  padding: 20px;
-}
+  /* Reducir el padding del contenedor dentro de jumbotron */
+  .jumbotron .container {
+    padding: 10px;
+  }
 
-.form-control {
-  width: 100%;
-  box-sizing: border-box;
-}
+  /* Ajustar el ancho y el orden de las imágenes en móviles */
+  .imagenAutos {
+    width: 100%; /* La imagen ocupará todo el ancho del contenedor en celulares */
+    order: -1; /* La imagen se mostrará primero en el orden de la columna */
+  }
 
+  /* Reducir el tamaño de fuente en elementos con clase bd-placeholder-img */
+  .bd-placeholder-img {
+    font-size: 0.875rem; /* Reducción del tamaño del texto en celulares */
+  }
+
+  /* Reducir el padding lateral del contenedor principal */
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  /* Alinear el texto de jumbotron al centro en pantallas pequeñas */
+  .jumbotron {
+    text-align: center; /* Alinea el texto en el centro para pantallas pequeñas */
+  }
+
+}
