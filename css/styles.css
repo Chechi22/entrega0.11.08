@@ -209,13 +209,16 @@ h4 {
   text-align: center;
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px){ /* tablet */
   .alert{
     width: 50%;
+    position: absolute;
+    top: 30%;
+    left: 50%
   }
 }
 
-@media (max-width: 767px){
+@media (max-width: 767px){ /* celular */
   .alert{
     width: 90%;  /* el campo de iniciar sesion ocupa el 90% de la pagina cuando es mas chica que tablet*/
     padding: 0%; /* hace que no tenga margen interior en los lados y entren las imagenes de contraseña*/
@@ -225,9 +228,12 @@ h4 {
   #password, #username{
     max-width: 100%; /* para que los cuadros input no se salgan*/
   }
+  table{
+    overflow-x: scroll;
+  }
 }
 
-@media (min-width: 1366px){
+@media (min-width: 1366px){ /* estandar */
   .alert{
     width: 25%;
   }
