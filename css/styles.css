@@ -247,6 +247,10 @@ h4 {
     top: 30%;
     left: 50%
   }
+  .imagenAutos {
+    width: 40%; /* La imagen ocupará todo el ancho del contenedor en celulares */
+    order: -1; /* La imagen se mostrará primero en el orden de la columna */
+  }
 }
 
 @media (max-width: 767px){ /* celular */
@@ -268,10 +272,14 @@ h4 {
   .alert{
     width: 25%;
   }
+  .imagenAutos {
+    width: 23%; /* La imagen ocupará todo el ancho del contenedor en celulares */
+    order: -1; /* La imagen se mostrará primero en el orden de la columna */
+  }
 }
 
 /* Media Query para dispositivos móviles con ancho máximo de 768px */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   /* Reducir el tamaño del texto en elementos con clase lead dentro de jumbotron */
   .jumbotron .lead {
     font-size: 24px; /* Ajuste del tamaño del texto en celulares */
@@ -303,5 +311,4 @@ h4 {
   .jumbotron {
     text-align: center; /* Alinea el texto en el centro para pantallas pequeñas */
   }
-
 }
