@@ -273,7 +273,7 @@ h4 {
     width: 25%;
   }
   .imagenAutos {
-    width: 23%; /* La imagen ocupará todo el ancho del contenedor en celulares */
+    width: 20%; /* La imagen ocupará todo el ancho del contenedor en celulares */
     order: -1; /* La imagen se mostrará primero en el orden de la columna */
   }
 }
