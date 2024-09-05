@@ -224,7 +224,7 @@ a.custom-card:hover {
 }
 
 /* Estilo para las imágenes de autos */
-.imagenAutos{
+.imagenProductos{
   width:20%; /* Ancho del 20% del contenedor */
 }
 
@@ -247,7 +247,7 @@ h4 {
     top: 30%;
     left: 50%
   }
-  .imagenAutos {
+  .imagenProductos {
     width: 40%; /* La imagen ocupará todo el ancho del contenedor en celulares */
     order: -1; /* La imagen se mostrará primero en el orden de la columna */
   }
@@ -272,8 +272,8 @@ h4 {
   .alert{
     width: 25%;
   }
-  .imagenAutos {
-    width: 23%; /* La imagen ocupará todo el ancho del contenedor en celulares */
+  .imagenProductos {
+    width: 20%; /* La imagen ocupará todo el ancho del contenedor en celulares */
     order: -1; /* La imagen se mostrará primero en el orden de la columna */
   }
 }
@@ -291,7 +291,7 @@ h4 {
   }
 
   /* Ajustar el ancho y el orden de las imágenes en móviles */
-  .imagenAutos {
+  .imagenProductos {
     width: 100%; /* La imagen ocupará todo el ancho del contenedor en celulares */
     order: -1; /* La imagen se mostrará primero en el orden de la columna */
   }
