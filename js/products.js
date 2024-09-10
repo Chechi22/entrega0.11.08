@@ -46,6 +46,10 @@ function MostrarListaProductos() {
                 }
 
             }
+            if (listaProductos == "") {
+                listaProductos += `<p>No hay productos en el rango de precios indicado</p>`;
+            }
+
             let nombreCat = productos.catName;
             // Inserta el contenido HTML generado dentro del contenedor con id "autos"
             document.getElementById('titulo').innerHTML = "<h2>Categoría/" + nombreCat + "</h2><br>";
@@ -88,11 +92,11 @@ document.getElementById("limpiarRangoFiltroPrecio").addEventListener("click", fu
     MostrarListaProductos();
 });
 
-function limpiarFiltro(){
+function limpiarFiltro() {
     document.getElementById("precioMaximo").value = "";
     document.getElementById("precioMinimo").value = "";
 
     minimoPrecio = undefined;
     maximoPrecio = undefined;
-   
+
 }
