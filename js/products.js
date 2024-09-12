@@ -36,7 +36,9 @@ function MostrarListaProductos() {
                     // Crea un bloque de HTML para cada producto, que incluye una imagen, nombre, descripción, costo y cantidad vendida
                     listaProductos += `
 <div class="producto-item">
-    <img src="${producto.image}" class="imagenProductos" alt="Imagen de ${producto.name}">
+   <a href="product-info.html" onclick="setProductId('${producto.id}')">
+                    <img src="${producto.image}" class="imagenProductos" alt="Imagen de ${producto.name}">
+                </a>
     <h5>${producto.name}</h5>
     <p>Descripción: ${producto.description}</p>
     <p>${producto.currency} ${producto.cost}</p>
@@ -105,4 +107,9 @@ function limpiarFiltro() {
     minimoPrecio = undefined;
     maximoPrecio = undefined;
 
+}
+
+// Función que guarda el ID del producto en localStorage y redirige a product-info.html
+function setProductId(productId) {
+    localStorage.setItem('selectedProductId', productId);
 }
