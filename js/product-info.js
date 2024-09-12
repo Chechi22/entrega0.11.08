@@ -35,3 +35,4 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('No product ID found in localStorage.');
     }
 });
+ 
