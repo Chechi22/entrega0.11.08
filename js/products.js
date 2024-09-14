@@ -200,34 +200,3 @@ function setProductId(productId) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let currentProductArray = []; // Esta variable debe almacenar tus productos
-
-let minCount = undefined;
-let maxCount = undefined;
-
-
-function setProdID(id) {
-    localStorage.setItem("prodID", id);
-    window.location = "products.html";
-}
-
-
-
