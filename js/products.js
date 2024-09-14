@@ -1,6 +1,11 @@
 // Defino dos variables para el rango de precios mínimo y máximo
 let minimoPrecio = undefined;
 let maximoPrecio = undefined;
+//criterios de ordenacion
+const ORDEN_DE_PRECIO_MENOR_A_MAYOR = "PrecioAscendente";  // Ordenar de MENOR a MAYOR
+const ORDEN_DE_PRECIO_MAYOR_A_MENOR = "PrecioDescendente"; // Ordenar de MAYOR a MENOR
+const ORDEN_MAYOR_A_MENOR_DE_VENDIDOS = "VendidosDescendentes"; // Ordenar por cantidad de productos vendidos
+let criterioDeOrdenacionActual = undefined; //criterio de ordenacion elegido por el usuario
 
 
 // Asigna un evento de clic al botón de "salir" para cerrar la sesión
@@ -11,13 +16,41 @@ document.getElementById("salir").addEventListener("click", function () {
     window.location.href = "login.html";
 });
 // Obtiene el ID de la categoría seleccionada del almacenamiento local
-const categoriaId = localStorage.getItem('catID'); 
+const categoriaId = localStorage.getItem('catID');
 
 // Escucha el evento "DOMContentLoaded" para ejecutar el código una vez que todo el contenido del DOM haya sido completamente cargado
 document.addEventListener('DOMContentLoaded', function () {
     //Llama a la función para mostrar la lista de productos. invoco la funcion creada a continuacion para no perder funcionalidad
     MostrarListaProductos();
 });
+
+//Cuando apreto los botones sucede esto:
+document.getElementById("menorAMayor").addEventListener("click", function () {
+    ordenaYMuestraProductos(ORDEN_DE_PRECIO_MENOR_A_MAYOR);
+});
+
+document.getElementById("mayorAMenor").addEventListener("click", function () {
+    ordenaYMuestraProductos(ORDEN_DE_PRECIO_MAYOR_A_MENOR);
+});
+
+document.getElementById("vendidosDescendente").addEventListener("click", function () {
+    ordenaYMuestraProductos(ORDEN_MAYOR_A_MENOR_DE_VENDIDOS);
+});
+
+//En funcion del click que se hace en los botones se ordena la lista
+function ordenaYMuestraProductos(criterioDeOrdenacionEnviado) {
+    criterioDeOrdenacionActual = criterioDeOrdenacionEnviado;
+
+    //  if (productArray != undefined) {
+    //      currentProductArray = productArray;
+    //  }
+
+    //currentProductArray = sortProduct(currentSortCriteria, currentProductArray);
+
+    // Mostrar las productos ordenadas
+    MostrarListaProductos();
+}
+
 
 // Creo una funcion mostrar lista de productos con el llamado a la API
 
@@ -29,30 +62,32 @@ function MostrarListaProductos() {
             // Inicializa una cadena vacía que almacenará el contenido HTML generado para cada auto
             let listaProductos = "";
 
+            let listaOrdenada = OrdenarProductos(productos.products);
+                    
             // Itera sobre cada producto en la lista obtenida del JSON
-            for (let producto of productos.products) {
+            for (let producto of listaOrdenada) {
                 // creo un if, si el rango de precio minimo y maximo es nulo o si el precio del producto es menor al maximo y mayor al minimo, muestra los productos
                 if ((minimoPrecio == undefined && maximoPrecio == undefined) || (maximoPrecio != undefined && minimoPrecio == undefined && producto.cost <= maximoPrecio) || (minimoPrecio != undefined && maximoPrecio == undefined && producto.cost >= minimoPrecio) || (producto.cost <= maximoPrecio && producto.cost >= minimoPrecio)) {
                     // Crea un bloque de HTML para cada producto, que incluye una imagen, nombre, descripción, costo y cantidad vendida
                     listaProductos += `
-<div class="producto-item">
-   <a href="product-info.html" onclick="setProductId('${producto.id}')">
-                    <img src="${producto.image}" class="imagenProductos" alt="Imagen de ${producto.name}">
-                </a>
-    <h5>${producto.name}</h5>
-    <p>Descripción: ${producto.description}</p>
-    <p>${producto.currency} ${producto.cost}</p>
-    <p>Vendidos: ${producto.soldCount}</p>
-</div><br>`;
+                            <div class="producto-item">
+                            <a href="product-info.html" onclick="setProductId('${producto.id}')">
+                                                <img src="${producto.image}" class="imagenProductos" alt="Imagen de ${producto.name}">
+                                            </a>
+                                <h5>${producto.name}</h5>
+                                <p>Descripción: ${producto.description}</p>
+                                <p>${producto.currency} ${producto.cost}</p>
+                                <p>Vendidos: ${producto.soldCount}</p>
+                            </div><br>`;
 
                 }
 
             }
-             // Si no hay productos que coincidan con el rango de precios, muestra un mensaje indicando que no hay productos en el rango
+            // Si no hay productos que coincidan con el rango de precios, muestra un mensaje indicando que no hay productos en el rango
             if (listaProductos == "") {
                 listaProductos += `<p>No hay productos en el rango de precios indicado</p>`;
             }
-   // Obtiene el nombre de la categoría y lo muestra en el título
+            // Obtiene el nombre de la categoría y lo muestra en el título
             let nombreCat = productos.catName;
             // Inserta el contenido HTML generado dentro del contenedor con id "productos"
             document.getElementById('titulo').innerHTML = "<h2>Categoría/" + nombreCat + "</h2><br>";
@@ -82,25 +117,25 @@ document.getElementById("rangoFiltroPrecio").addEventListener("click", function 
     else {
         maximoPrecio = undefined;
     }
-      // Verifica que el rango de precios sea válido; si el máximo es menor o igual al mínimo, muestra un mensaje de error
+    // Verifica que el rango de precios sea válido; si el máximo es menor o igual al mínimo, muestra un mensaje de error
     if (maximoPrecio != undefined && minimoPrecio != undefined && maximoPrecio <= minimoPrecio) {
-        alert("Error en rango de precios"); 
+        alert("Error en rango de precios");
         limpiarFiltro(); // Limpia los filtros si hay un error en el rango
     }
-     // Vuelve a mostrar la lista de productos aplicando los nuevos filtros de precio
+    // Vuelve a mostrar la lista de productos aplicando los nuevos filtros de precio
     MostrarListaProductos();
 
 });
 // Evento para borrar los filtros de precios
 document.getElementById("limpiarRangoFiltroPrecio").addEventListener("click", function () {
-   // Limpia los filtros y vuelve a mostrar la lista de productos sin filtros
+    // Limpia los filtros y vuelve a mostrar la lista de productos sin filtros
     limpiarFiltro();
     MostrarListaProductos();
 });
 
 // Función para limpiar los filtros de precios
 function limpiarFiltro() {
-      // Limpia los valores de los campos de precio mínimo y máximo en el formulario
+    // Limpia los valores de los campos de precio mínimo y máximo en el formulario
     document.getElementById("precioMaximo").value = "";
     document.getElementById("precioMinimo").value = "";
 
@@ -113,3 +148,91 @@ function limpiarFiltro() {
 function setProductId(productId) {
     localStorage.setItem('selectedProductId', productId);
 }
+
+//Funcion para ordenar los productos 
+
+function OrdenarProductos(listaDeProductosAOrdenar) {
+    let listaDeProductosOrdenados = [];
+
+    // Ordenar(SORT) productos de menor a mayor
+    if (criterioDeOrdenacionActual === ORDEN_DE_PRECIO_MENOR_A_MAYOR) {
+        listaDeProductosOrdenados = listaDeProductosAOrdenar.sort(function (a, b) {
+            if (a.cost < b.cost) { return -1; }
+            if (a.cost > b.cost) { return 1; }
+            return 0;
+        });
+    }
+    // Ordenar productos de mayor a menor
+    else if (criterioDeOrdenacionActual === ORDEN_DE_PRECIO_MAYOR_A_MENOR) {
+        listaDeProductosOrdenados = listaDeProductosAOrdenar.sort(function (a, b) {
+            if (a.cost > b.cost) { return -1; }
+            if (a.cost < b.cost) { return 1; }
+            return 0;
+        });
+    }
+    // Ordenar por cantidad de productos vendidos
+    else if (criterioDeOrdenacionActual === ORDEN_MAYOR_A_MENOR_DE_VENDIDOS) {
+        listaDeProductosOrdenados = listaDeProductosAOrdenar.sort(function (a, b) {
+            let asoldCount = parseInt(a.soldCount); // Asegúrate de que 'productCount' es la propiedad correcta
+            let bsoldCount = parseInt(b.soldCount); // Asegúrate de que 'productCount' es la propiedad correcta
+
+            if (asoldCount > bsoldCount) { return -1; }
+            if (asoldCount < bsoldCount) { return 1; }
+            return 0;
+        });
+        
+    }
+
+    else {
+        listaDeProductosOrdenados = listaDeProductosAOrdenar;
+    }
+
+
+
+    return listaDeProductosOrdenados;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let currentProductArray = []; // Esta variable debe almacenar tus productos
+
+let minCount = undefined;
+let maxCount = undefined;
+
+
+function setProdID(id) {
+    localStorage.setItem("prodID", id);
+    window.location = "products.html";
+}
+
+
+
