@@ -314,8 +314,13 @@ h4 {
 }
 
 
-
 .carousel-control-prev,
 .carousel-control-next {
     filter: invert(1); /* Invierte los colores si usas un fondo blanco y quieres que las flechas sean oscuras */
+}
+
+#searchInput {
+  width: 20%; /* Hace que el campo de búsqueda ocupe todo el ancho disponible. */
+  padding: 10px; /* Añade espacio dentro del campo de texto. */
+  font-size: 16px; /* Tamaño de la fuente del texto dentro del input. */
 }
