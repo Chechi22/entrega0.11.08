@@ -40,6 +40,24 @@
     </div>
   </nav>
   <br>
+  <!-- se agrega ordenamiento por mayor y menor precio y cantidad de productos vendidos -->
+<div class="container">
+  <div class="row">
+      <div class="col text-end">
+          <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
+              <!-- Botón para ordenar de menor a mayor -->
+              <input type="radio" class="btn-check" name="options" id="menorAMayor">
+              <label class="btn btn-light" for="menorAMayor">Menor precio</label>
+              <!-- Botón para ordenar de mayor a menor -->
+              <input type="radio" class="btn-check" name="options" id="mayorAMenor">
+              <label class="btn btn-light" for="mayorAMenor">Mayor precio</label>
+              <!-- Botón para ordenar por cantidad de productos vendidos -->
+              <input type="radio" class="btn-check" name="options" id="vendidosDescendente" checked>
+              <label class="btn btn-light" for="vendidosDescendente"><i class="fas fa-sort-amount-down mr-1"></i></label>
+          </div>
+      </div>
+  </div>
+
   <!-- se agrega filtro de precios -->
   <div class="row">
     <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
@@ -63,7 +81,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="list-group" id="cat-list-container">
+    <div class="list-group" id="prod-list-container">
     </div>
   </div>
   <main class="pb-5 container">
