@@ -41,12 +41,6 @@ document.getElementById("vendidosDescendente").addEventListener("click", functio
 function ordenaYMuestraProductos(criterioDeOrdenacionEnviado) {
     criterioDeOrdenacionActual = criterioDeOrdenacionEnviado;
 
-    //  if (productArray != undefined) {
-    //      currentProductArray = productArray;
-    //  }
-
-    //currentProductArray = sortProduct(currentSortCriteria, currentProductArray);
-
     // Mostrar las productos ordenadas
     MostrarListaProductos();
 }
@@ -130,7 +124,9 @@ document.getElementById("rangoFiltroPrecio").addEventListener("click", function 
 document.getElementById("limpiarRangoFiltroPrecio").addEventListener("click", function () {
     // Limpia los filtros y vuelve a mostrar la lista de productos sin filtros
     limpiarFiltro();
+    limpiarOrden();
     MostrarListaProductos();
+    
 });
 
 // Función para limpiar los filtros de precios
@@ -144,9 +140,11 @@ function limpiarFiltro() {
 
 }
 
-// Función que guarda el ID del producto en localStorage y redirige a product-info.html
-function setProductId(productId) {
-    localStorage.setItem('selectedProductId', productId);
+// Función para limpiar ordenamiento
+function limpiarOrden() {
+    
+    criterioDeOrdenacionActual = undefined;
+
 }
 
 //Funcion para ordenar los productos 
@@ -173,11 +171,8 @@ function OrdenarProductos(listaDeProductosAOrdenar) {
     // Ordenar por cantidad de productos vendidos
     else if (criterioDeOrdenacionActual === ORDEN_MAYOR_A_MENOR_DE_VENDIDOS) {
         listaDeProductosOrdenados = listaDeProductosAOrdenar.sort(function (a, b) {
-            let asoldCount = parseInt(a.soldCount); // Asegúrate de que 'productCount' es la propiedad correcta
-            let bsoldCount = parseInt(b.soldCount); // Asegúrate de que 'productCount' es la propiedad correcta
-
-            if (asoldCount > bsoldCount) { return -1; }
-            if (asoldCount < bsoldCount) { return 1; }
+            if (a.soldCount > b.soldCount) { return -1; }
+            if (a.soldCount < b.soldCount) { return 1; }
             return 0;
         });
         
@@ -194,10 +189,10 @@ function OrdenarProductos(listaDeProductosAOrdenar) {
 
 
 
-
-
-
-
+// Función que guarda el ID del producto en localStorage y redirige a product-info.html
+function setProductId(productId) {
+    localStorage.setItem('selectedProductId', productId);
+}
 
 
 
