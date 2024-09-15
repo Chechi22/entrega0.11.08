@@ -53,12 +53,11 @@ function MostrarListaProductos() {
     fetch("https://japceibal.github.io/emercado-api/cats_products/" + categoriaId + ".json")//añade el id de la categoria al link de la api
         .then(response => response.json()) // Convierte la respuesta a un objeto JSON
         .then(productos => {
-            // Inicializa una cadena vacía que almacenará el contenido HTML generado para cada auto
+            // Inicializa una cadena vacía que almacenará el contenido HTML generado para cada producto
             let listaProductos = "";
-
+// ordena por precio o cantidad de vendidos
             let listaOrdenada = OrdenarProductos(productos.products);
-                    
-            // Itera sobre cada producto en la lista obtenida del JSON
+            // Itera sobre cada producto luego de aplicar filtrado y ordenacion
             for (let producto of listaOrdenada) {
                 // creo un if, si el rango de precio minimo y maximo es nulo o si el precio del producto es menor al maximo y mayor al minimo, muestra los productos
                 if ((minimoPrecio == undefined && maximoPrecio == undefined) || (maximoPrecio != undefined && minimoPrecio == undefined && producto.cost <= maximoPrecio) || (minimoPrecio != undefined && maximoPrecio == undefined && producto.cost >= minimoPrecio) || (producto.cost <= maximoPrecio && producto.cost >= minimoPrecio)) {
@@ -79,7 +78,7 @@ function MostrarListaProductos() {
             }
             // Si no hay productos que coincidan con el rango de precios, muestra un mensaje indicando que no hay productos en el rango
             if (listaProductos == "") {
-                listaProductos += `<p>No hay productos en el rango de precios indicado</p>`;
+                listaProductos += `<p>No se encontraron productos</p>`;
             }
             // Obtiene el nombre de la categoría y lo muestra en el título
             let nombreCat = productos.catName;
@@ -126,7 +125,6 @@ document.getElementById("limpiarRangoFiltroPrecio").addEventListener("click", fu
     limpiarFiltro();
     limpiarOrden();
     MostrarListaProductos();
-    
 });
 
 // Función para limpiar los filtros de precios
@@ -142,7 +140,6 @@ function limpiarFiltro() {
 
 // Función para limpiar ordenamiento
 function limpiarOrden() {
-    
     criterioDeOrdenacionActual = undefined;
 
 }
@@ -175,7 +172,6 @@ function OrdenarProductos(listaDeProductosAOrdenar) {
             if (a.soldCount < b.soldCount) { return 1; }
             return 0;
         });
-        
     }
 
     else {
@@ -193,10 +189,5 @@ function OrdenarProductos(listaDeProductosAOrdenar) {
 function setProductId(productId) {
     localStorage.setItem('selectedProductId', productId);
 }
-
-
-
-
-
 
 
