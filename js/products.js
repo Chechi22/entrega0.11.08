@@ -55,11 +55,13 @@ function MostrarListaProductos() {
     fetch("https://japceibal.github.io/emercado-api/cats_products/" + categoriaId + ".json")//añade el id de la categoria al link de la api
         .then(response => response.json()) // Convierte la respuesta a un objeto JSON
         .then(productos => {
+            // Inicializa una cadena vacía que almacenará el contenido HTML generado para cada producto
 
             // Inicializa una cadena vacía que almacenará el contenido HTML generado para cada auto
             let listaProductos = "";
-
+// ordena por precio o cantidad de vendidos
             let listaOrdenada = OrdenarProductos(productos.products);
+            // Itera sobre cada producto luego de aplicar filtrado y ordenacion
             
             // Itera sobre cada producto en la lista obtenida del JSON
             for (let producto of listaOrdenada) {
@@ -130,6 +132,7 @@ document.getElementById("limpiarRangoFiltroPrecio").addEventListener("click", fu
     // Limpia los filtros y vuelve a mostrar la lista de productos sin filtros
     limpiarFiltro();
     limpiarOrden();
+    limpiarBuscador()
     MostrarListaProductos();
 });
 
@@ -145,7 +148,6 @@ function limpiarFiltro() {
 
 // Función para limpiar ordenamiento
 function limpiarOrden() {
-    
     criterioDeOrdenacionActual = undefined;
 }
 
@@ -199,3 +201,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+// Función para limpiar buscador
+function limpiarBuscador() {
+    document.getElementById("searchInput").value = ""
+    searchQuery = undefined;
+   
+   }
+   
+   
