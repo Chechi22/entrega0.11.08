@@ -84,11 +84,28 @@ nav a {
 footer {
   padding-top: 3rem;
   padding-bottom: 3rem;
+  background-color: #333;
+  color: #ccc;
+  text-align: center;
+}
+
+footer p.float-end {
+  margin: 0;
 }
 
 /* Margen inferior para párrafos dentro del pie de página */
 footer p {
   margin-bottom: .25rem;
+  color:#ccc;
+}
+/*enlaces del footer*/
+footer a {
+  color: #0087F7;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #fff;
 }
 
 /* Color y transición para enlaces dentro de site-header */
@@ -324,3 +341,103 @@ h4 {
   padding: 10px; /* Añade espacio dentro del campo de texto. */
   font-size: 16px; /* Tamaño de la fuente del texto dentro del input. */
 }
+
+/*agregamos estilo a los botones de navegación.*/
+.nav-link {
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #0087F7; /* Azul claro */
+  color: white;
+}
+
+/*Estilo a las barras de navegación. Fondo degradado y sombras*/
+.navbar {
+  background: linear-gradient(90deg, #333, #000);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/*Encabezados y descripciones del producto. Esto afecta a la página de product-info*/
+h1, h4 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+.product-info {
+  text-align: center;
+}
+
+h1, p {
+  font-family: 'Raleway', sans-serif;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+#product-description, #category-name, #sold-quantity {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+/*estilo para las imágenes del producto*/
+#product-images img {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+#product-images img:hover {
+  transform: scale(1.05);
+}
+
+/*Dale estilo a los botones de ordenamiento para que se vean más llamativos y claros.*/
+
+.btn-group-toggle .btn {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-group-toggle .btn:hover, .btn-group-toggle .btn:focus {
+  background-color: #0087F7;
+  color: white;
+  border-color: #007bff;
+}
+
+.form-control {
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #0087F7;
+  box-shadow: 0 0 0 0.2rem rgba(0,135,247,0.25);
+}
+
+#rangoFiltroPrecio {
+  background-color: #0087F7;
+  color: white;
+}
+
+#rangoFiltroPrecio:hover {
+  background-color: #0056b3;
+}
+
+/*fuente moderna y sombras suaves en los textos para que destaquen.*/
+#prod-list-container {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+
+
+
+
+
