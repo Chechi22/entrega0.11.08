@@ -132,6 +132,7 @@ document.getElementById("limpiarRangoFiltroPrecio").addEventListener("click", fu
     // Limpia los filtros y vuelve a mostrar la lista de productos sin filtros
     limpiarFiltro();
     limpiarOrden();
+    limpiarBuscador()
     MostrarListaProductos();
 });
 
@@ -200,3 +201,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+// Función para limpiar buscador
+function limpiarBuscador() {
+    document.getElementById("searchInput").value = ""
+    searchQuery = undefined;
+   
+   }
+   
+   
