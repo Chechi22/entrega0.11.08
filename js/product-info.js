@@ -96,6 +96,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Muestra un mensaje si no hay imágenes disponibles
                     imagesContainer.innerHTML = '<p>No images available.</p>';
                 }
+                //Llamo la funcion que muestra los comentarios luego de que se carga la pagina
+                MostrarComentarios(productId);
             })
             .catch(error => console.error('Error fetching product data:', error));
     } else {
@@ -105,9 +107,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-//product.images.forEach(imageUrl => {
-// const img = document.createElement('img');
-// img.src = imageUrl;
-//  img.classList.add('img-fluid'); // Agrega clases de Bootstrap para la responsividad
-//  imagesContainer.appendChild(img);
 
+function MostrarComentarios(productId) {
+    // Realiza una solicitud fetch a la URL especificada para obtener los comentarios de cada producto.
+    fetch(`https://japceibal.github.io/emercado-api/products_comments/${productId}.json`) //añade el id del productro al link de la api con los comentarios
+        .then(response => response.json()) // Convierte la respuesta a un objeto JSON
+        .then(comentarios => {
+            // Inicializa una cadena vacía que almacenará el contenido HTML generado
+            
+            let listaComentarios = "";
+            
+            // Itera sobre cada comentario en la lista obtenida del JSON
+            for (let comentario of comentarios) {
+                //Creo el formato de como se verá
+                listaComentarios += `
+               
+                <div class="comentariosDeLosProductos">
+        <strong><p id="nombreDelUsuario">${comentario.user}</p></strong>
+        <p id="fechaDelComentario">${comentario.dateTime}  </p>
+        <p id="calificacionDelProducto">Calificación del producto: <label id="estrellas">${comentario.score}</label></p>
+        <p id="descripcionDelProducto">Descripcion del producto: <label id="comentario">${comentario.description}</div><br>`; 
+                
+            }
+
+           
+            
+            // Inserta el contenido HTML generado dentro del contenedor con id "comentarioss"
+           
+            document.getElementById("comentarios").innerHTML = listaComentarios;
+        })
+        .catch(error => console.error('Error fetching data:', error)); // Maneja cualquier error que ocurra durante el fetch
+
+}
