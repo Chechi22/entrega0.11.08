@@ -98,6 +98,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 //Llamo la funcion que muestra los comentarios luego de que se carga la pagina
                 MostrarComentarios(productId);
+
+                // Mostrar los productos relacionados
+                mostrarProductosRelacionados(product.relatedProducts);
+                
             })
             .catch(error => console.error('Error fetching product data:', error));
     } else {
@@ -138,4 +142,24 @@ function MostrarComentarios(productId) {
         })
         .catch(error => console.error('Error fetching data:', error)); // Maneja cualquier error que ocurra durante el fetch
 
+}
+// funcion para mostrar productos relacionados //
+function mostrarProductosRelacionados(relatedProducts) {
+    let relatedHTML = '';
+
+    relatedProducts.forEach(product => {
+        relatedHTML += `
+            <div class="related-product col-3" onclick="seleccionarProducto(${product.id})">
+                <img src="${product.image}" class="img-thumbnail">
+                <h5>${product.name}</h5>
+            </div>
+        `;
+    });
+
+    document.getElementById('related-products').innerHTML = relatedHTML;
+}
+// redirecciona al product-info al hacer click en el producto relacionado //
+function seleccionarProducto(id) {
+    localStorage.setItem('selectedProductId', id);
+    window.location.href = 'product-info.html';
 }
