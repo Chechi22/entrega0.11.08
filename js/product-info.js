@@ -126,7 +126,7 @@ function MostrarComentarios(productId) {
                
                 <div class="comentariosDeLosProductos">
                     <strong><p id="nombreDelUsuario">Usuario: ${comentario.user}</p></strong>
-                    <p id="fechaDelComentario">${comentario.dateTime}</p>
+                    <p id="fechaDelComentario">${convertirFecha(comentario.dateTime)}</p>
                     <p id="calificacionDelProducto">Calificación del producto: 
                         <span id="estrellas">${estrellasHtml}</span></p>
                     <p id="descripcionDelProducto">Descripción del producto: 
@@ -144,7 +144,7 @@ function MostrarComentarios(productId) {
 
 // Función para generar estrellas basadas en la calificación
 function generarEstrellas(scoreProducto) { 
-    const estrellas = Math.round(scoreProducto / 2); // Redondeamos la calificación a un valor entre 0 y 5
+    const estrellas = Math.round(scoreProducto); // Redondeamos la calificación directamente a un valor entre 0 y 5
     let estrellasHtml = ''; // Variable para el HTML de las estrellas
 
     // Creamos el HTML para las estrellas
@@ -174,7 +174,43 @@ stars.forEach(function(star, index) {
         }
 
         // Asignamos la calificación basada en el número de estrellas seleccionadas
-        userRating = index + 1;
+        nuevaCalificacion = index + 1;
         console.log('Calificación del usuario:', nuevaCalificacion);  // Mostramos el puntaje en la consola
     });
 });
+
+function fechaActual(){
+    let fechaHoy=new Date();
+    return (fechaHoy.getDate()+"/"+(fechaHoy.getMonth()+1)+"/"+fechaHoy.getFullYear());
+}
+
+function convertirFecha(fecha){
+    fecha=new Date(fecha);
+    return (fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear());
+}
+
+
+document.getElementById("enviarComentario").addEventListener("click", function(){
+    let comUsuario= document.getElementById("comentarioUsuario").value;
+    let fechaComentario=fechaActual();
+    let nombreUsuario= localStorage.getItem("usuarioLogueado");
+    let listaNuevosComentarios="";
+
+    listaNuevosComentarios+=`
+               
+                <div class="comentariosDeLosProductos">
+                    <strong><p id="nombreDelUsuario">Usuario: ${nombreUsuario}</p></strong>
+                    <p id="fechaDelComentario">${fechaComentario}</p>
+                    <p id="calificacionDelProducto">Calificación del producto: 
+                        <span id="estrellas">${generarEstrellas(nuevaCalificacion)}</span></p>
+                    <p id="descripcionDelProducto">Descripción del producto: 
+                        <label id="comentario">${comUsuario}</label>
+                    </p>
+                </div><br>`; 
+
+    document.getElementById("nuevosComentarios").innerHTML = listaNuevosComentarios;
+}) 
+
+/*document.getElementById("enviarComentario").addEventListener("click", function(){
+    alert('hola');
+})*/
