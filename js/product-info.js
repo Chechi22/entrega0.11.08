@@ -106,8 +106,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
-
 function MostrarComentarios(productId) {
     // Realiza una solicitud fetch a la URL especificada para obtener los comentarios de cada producto.
     fetch(`https://japceibal.github.io/emercado-api/products_comments/${productId}.json`) //añade el id del productro al link de la api con los comentarios
@@ -119,23 +117,64 @@ function MostrarComentarios(productId) {
             
             // Itera sobre cada comentario en la lista obtenida del JSON
             for (let comentario of comentarios) {
+
+                // Generamos las estrellas usando la calificación del comentario
+                const estrellasHtml = generarEstrellas(comentario.score);
+
                 //Creo el formato de como se verá
                 listaComentarios += `
                
                 <div class="comentariosDeLosProductos">
-        <strong><p id="nombreDelUsuario">${comentario.user}</p></strong>
-        <p id="fechaDelComentario">${comentario.dateTime}  </p>
-        <p id="calificacionDelProducto">Calificación del producto: <label id="estrellas">${comentario.score}</label></p>
-        <p id="descripcionDelProducto">Descripcion del producto: <label id="comentario">${comentario.description}</div><br>`; 
+                    <strong><p id="nombreDelUsuario">Usuario: ${comentario.user}</p></strong>
+                    <p id="fechaDelComentario">${comentario.dateTime}</p>
+                    <p id="calificacionDelProducto">Calificación del producto: 
+                        <span id="estrellas">${estrellasHtml}</span></p>
+                    <p id="descripcionDelProducto">Descripción del producto: 
+                        <label id="comentario">${comentario.description}</label>
+                    </p>
+                </div><br>`; 
                 
             }
 
-           
-            
-            // Inserta el contenido HTML generado dentro del contenedor con id "comentarioss"
-           
+            // Inserta el contenido HTML generado dentro del contenedor con id "comentarios"
             document.getElementById("comentarios").innerHTML = listaComentarios;
         })
-        .catch(error => console.error('Error fetching data:', error)); // Maneja cualquier error que ocurra durante el fetch
-
+        .catch(error => console.error('Error fetching data:', error)); // Maneja cualquier error durante el fetch
 }
+
+// Función para generar estrellas basadas en la calificación
+function generarEstrellas(scoreProducto) { 
+    const estrellas = Math.round(scoreProducto / 2); // Redondeamos la calificación a un valor entre 0 y 5
+    let estrellasHtml = ''; // Variable para el HTML de las estrellas
+
+    // Creamos el HTML para las estrellas
+    for (let i = 1; i <= 5; i++) {
+        if (i <= estrellas) {
+            estrellasHtml += '<span class="fa fa-star checked"></span>'; // Estrella llena
+        } else {
+            estrellasHtml += '<span class="fa fa-star"></span>'; // Estrella vacía
+        }
+    }
+    return estrellasHtml; // Devolvemos el HTML generado
+}
+
+//apartado para las nuevas calificaciones, con estrellas
+
+const stars = document.querySelectorAll('.star');
+let nuevaCalificacion = 0;  // Variable para almacenar la calificación del usuario
+
+stars.forEach(function(star, index) {
+    star.addEventListener('click', function() {
+        // Agregamos o quitamos la clase "checked" (le da el color gold) para las estrellas seleccionadas
+        for (let i = 0; i <= index; i++) {
+            stars[i].classList.add('checked');
+        }
+        for (let i = index + 1; i < stars.length; i++) {
+            stars[i].classList.remove('checked');
+        }
+
+        // Asignamos la calificación basada en el número de estrellas seleccionadas
+        userRating = index + 1;
+        console.log('Calificación del usuario:', nuevaCalificacion);  // Mostramos el puntaje en la consola
+    });
+});
