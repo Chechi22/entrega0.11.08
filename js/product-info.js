@@ -144,7 +144,7 @@ function MostrarComentarios(productId) {
 
 // Función para generar estrellas basadas en la calificación
 function generarEstrellas(scoreProducto) { 
-    const estrellas = Math.round(scoreProducto / 2); // Redondeamos la calificación a un valor entre 0 y 5
+    const estrellas = Math.round(scoreProducto); // Redondeamos la calificación directamente a un valor entre 0 y 5
     let estrellasHtml = ''; // Variable para el HTML de las estrellas
 
     // Creamos el HTML para las estrellas
@@ -174,7 +174,7 @@ stars.forEach(function(star, index) {
         }
 
         // Asignamos la calificación basada en el número de estrellas seleccionadas
-        userRating = index + 1;
+        nuevaCalificacion = index + 1;
         console.log('Calificación del usuario:', nuevaCalificacion);  // Mostramos el puntaje en la consola
     });
 });
