@@ -209,8 +209,4 @@ document.getElementById("enviarComentario").addEventListener("click", function()
                 </div><br>`; 
 
     document.getElementById("nuevosComentarios").innerHTML = listaNuevosComentarios;
-}) 
-
-/*document.getElementById("enviarComentario").addEventListener("click", function(){
-    alert('hola');
-})*/
+})
