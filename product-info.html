@@ -10,6 +10,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> <!--iconos (estrellas)-->
 </head>
 
 <body>
@@ -51,12 +52,30 @@
           <!-- Imágenes del producto -->
         </div>
       </div>
-    </div> 
+    </div>
+    <div id="publicarComentario">
+      <div>
+          <h2>Déjanos tu opinión sobre el producto:</h2>
+          <p>
+            <label for="comentarioUsuario">Comentario:</label>
+            <textarea id="comentarioUsuario" name="comentario" rows="2" cols="50"></textarea>
+          </p>
+          <p>
+              Puntuación: 
+              <span class="puntuacion" id="estrellas"> 
+                  <i class="bi bi-star-fill star"></i> 
+                  <i class="bi bi-star-fill star"></i>
+                  <i class="bi bi-star-fill star"></i>
+                  <i class="bi bi-star-fill star"></i>
+                  <i class="bi bi-star-fill star"></i>
+              </span>
+          </p>
+          <button type="button" id="enviarComentario" class="btn btn-primary">Calificar</button>
+      </div>
+  </div>
+    <div id="nuevosComentarios" class="container my-4"></div>
     <div id="comentarios" class="container my-4">
     </div>
-
-    <div id="related-products" class="row">
-    </div> 
     
   </main>
 
