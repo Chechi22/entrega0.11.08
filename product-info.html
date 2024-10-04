@@ -58,7 +58,7 @@
           <h2>Déjanos tu opinión sobre el producto:</h2>
           <p>
             <label for="comentarioUsuario">Comentario:</label>
-            <textarea id="comentarioUsuario" rows="2" cols="50"></textarea>
+            <textarea id="comentarioUsuario" name="comentario" rows="2" cols="50"></textarea>
           </p>
           <p>
               Puntuación: 
@@ -70,15 +70,19 @@
                   <i class="bi bi-star-fill star"></i>
               </span>
           </p>
-          <button type="button" class="btn btn-primary">Calificar</button>
+          <button type="button" id="enviarComentario" class="btn btn-primary">Calificar</button>
       </div>
   </div>
   <div>
   <h3> Todos los comentarios: </h3>
+    <div id="nuevosComentarios" class="container my-4"></div>
     <div id="comentarios" class="container my-4">
     </div>
   </div>
     
+    </div>
+    <div id="related-products" class="row">
+    </div> 
   </main>
 
   <footer id="footerProducto" class="text-muted">
