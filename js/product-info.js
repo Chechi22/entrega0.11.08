@@ -214,3 +214,22 @@ document.getElementById("enviarComentario").addEventListener("click", function()
 
     document.getElementById("nuevosComentarios").innerHTML = listaNuevosComentarios;
 })
+
+// funcion para mostrar productos relacionados //
+function mostrarProductosRelacionados(relatedProducts) {
+    let relatedHTML = '';
+    relatedProducts.forEach(product => {
+        relatedHTML += `
+            <div class="related-product col-3" onclick="seleccionarProducto(${product.id})">
+                <img src="${product.image}" class="img-thumbnail">
+                <h5>${product.name}</h5>
+            </div>
+        `;
+    });
+    document.getElementById('related-products').innerHTML = relatedHTML;
+}
+// redirecciona al product-info al hacer click en el producto relacionado //
+function seleccionarProducto(id) {
+    localStorage.setItem('selectedProductId', id);
+    window.location.href = 'product-info.html';
+}
