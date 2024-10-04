@@ -207,12 +207,12 @@ document.getElementById("enviarComentario").addEventListener("click", function()
     listaNuevosComentarios+=`
                
                 <div class="comentariosDeLosProductos">
-                    <strong><p id="nombreDelUsuario">Usuario: ${nombreUsuario}</p></strong>
-                    <p id="fechaDelComentario">${fechaComentario}</p>
-                    <p id="calificacionDelProducto">Calificación del producto: 
-                        <span id="estrellas">${generarEstrellas(nuevaCalificacion)}</span></p>
-                    <p id="descripcionDelProducto">Descripción del producto: 
-                        <label id="comentario">${comUsuario}</label>
+                    <strong><p class="nombreDelUsuario">Usuario: ${nombreUsuario}</p></strong>
+                    <p class="fechaDelComentario">${fechaComentario}</p>
+                    <p class="calificacionDelProducto">Calificación del producto: 
+                        <span class="estrellas">${generarEstrellas(nuevaCalificacion)}</span></p>
+                    <p class="descripcionDelProducto">Descripción del producto: 
+                        <label class="comentario">${comUsuario}</label>
                     </p>
                 </div><br>`; 
 
