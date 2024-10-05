@@ -464,7 +464,8 @@ h1, p {
 }
 
 h3 {
-  margin-inline-start:7%;
+  margin-top: 50px;
+  text-align: center;
   color:#007bff;
 }
 
