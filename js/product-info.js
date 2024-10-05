@@ -122,15 +122,18 @@ function MostrarComentarios(productId) {
                 //Creo el formato de como se verá
                 listaComentarios += `
                
-                <div class="comentariosDeLosProductos">
-        <strong><p id="nombreDelUsuario">${comentario.user}</p></strong>
-        <p id="fechaDelComentario">${comentario.dateTime}  </p>
-        <p id="calificacionDelProducto">Calificación del producto: <label id="estrellas">${comentario.score}</label></p>
-        <p id="descripcionDelProducto">Descripcion del producto: <label id="comentario">${comentario.description}</div><br>`; 
+                <div class="comentariosDeLosProductos"> 
+                        <strong><p id="nombreDelUsuario">${comentario.user}</p></strong>
+        <p class="fechaDelComentario">${comentario.dateTime}  </p>
+        <p class="calificacionDelProducto">Calificación del producto: <label id="estrellas">${comentario.score}</label></p>
+        <p class="descripcionDelProducto">Descripcion del producto: <label id="comentario">${comentario.description}</div><br>`; 
                 
             }
 
-           
+            // Si no hay comentarios, muestra un mensaje.
+            if (listaComentarios == "") {
+                listaComentarios += `<p>No se encontraron comentarios.</p>`;
+            }
             
             // Inserta el contenido HTML generado dentro del contenedor con id "comentarioss"
            
