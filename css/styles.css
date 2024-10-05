@@ -435,3 +435,48 @@ h1, p {
   line-height: 1.6;
   margin-top: 10px;
 }
+
+/* Contenedor principal del formulario */
+#publicarComentario {
+  background-color: #f9f9f9;  /* Fondo claro para el contenedor */
+  border-radius: 10px;  /* Esquinas redondeadas */
+  padding: 20px;  /* Espacio interno */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+  max-width: 500px;  /* Ancho máximo */
+  margin: 20px auto;  /* Centrado en la página */
+}
+
+/* Título del formulario */
+#publicarComentario h2 {
+  font-size: 24px;  /* Tamaño del texto */
+  color: #333;  /* Color oscuro */
+  margin-bottom: 15px;  /* Espacio debajo del título */
+}
+
+.star {
+  font-size: 24px;  /* Tamaño de las estrellas */
+  cursor: pointer;  /* Cambiar cursor al pasar */
+  transition: transform 0.2s;  /* Transición suave al pasar */
+}
+
+.checked {
+  color: gold;
+}
+
+h3 {
+  margin-inline-start:15%;
+  color:#007bff;
+}
+
+#related-products {
+  display: flex; 
+  flex-wrap: wrap; /* Permite que los elementos se ajusten a múltiples líneas si es necesario */
+  justify-content: center; 
+  margin: 20px 0; /* Espacio superior e inferior para el contenedor */
+}
+
+h4 {
+  text-align: center;
+  color:#007bff;
+}
+

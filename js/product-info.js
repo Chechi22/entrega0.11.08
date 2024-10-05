@@ -98,14 +98,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 //Llamo la funcion que muestra los comentarios luego de que se carga la pagina
                 MostrarComentarios(productId);
+
+                // Mostrar los productos relacionados
+                mostrarProductosRelacionados(product.relatedProducts);
+                
             })
             .catch(error => console.error('Error fetching product data:', error));
     } else {
         console.error('No product ID found in localStorage.');
     }
 });
-
-
 
 
 function MostrarComentarios(productId) {
@@ -119,26 +121,125 @@ function MostrarComentarios(productId) {
             
             // Itera sobre cada comentario en la lista obtenida del JSON
             for (let comentario of comentarios) {
+
+                // Generamos las estrellas usando la calificación del comentario
+                const estrellasHtml = generarEstrellas(comentario.score);
+
                 //Creo el formato de como se verá
                 listaComentarios += `
                
-                <div class="comentariosDeLosProductos"> 
-                        <strong><p id="nombreDelUsuario">${comentario.user}</p></strong>
-        <p class="fechaDelComentario">${comentario.dateTime}  </p>
-        <p class="calificacionDelProducto">Calificación del producto: <label id="estrellas">${comentario.score}</label></p>
-        <p class="descripcionDelProducto">Descripcion del producto: <label id="comentario">${comentario.description}</div><br>`; 
+                <div class="comentariosDeLosProductos">
+                    <strong><p id="nombreDelUsuario">Usuario: ${comentario.user}</p></strong>
+                    <p id="fechaDelComentario">${convertirFecha(comentario.dateTime)}</p>
+                    <p id="calificacionDelProducto">Calificación del producto: 
+                        <span id="estrellas">${estrellasHtml}</span></p>
+                    <p id="descripcionDelProducto">Descripción del producto: 
+                        <label id="comentario">${comentario.description}</label>
+                    </p>
+                </div><br>`; 
                 
             }
+            // Si no hay comentarios, muestra un mensaje.
+             if (listaComentarios == "") {
+            listaComentarios += `<p>No se encontraron comentarios.</p>`;
+             }
 
             // Si no hay comentarios, muestra un mensaje.
             if (listaComentarios == "") {
                 listaComentarios += `<p>No se encontraron comentarios.</p>`;
             }
             
-            // Inserta el contenido HTML generado dentro del contenedor con id "comentarioss"
+            // Inserta el contenido HTML generado dentro del contenedor con id "comentarios"
            
             document.getElementById("comentarios").innerHTML = listaComentarios;
         })
-        .catch(error => console.error('Error fetching data:', error)); // Maneja cualquier error que ocurra durante el fetch
+        .catch(error => console.error('Error fetching data:', error)); // Maneja cualquier error durante el fetch
+}
 
+// Función para generar estrellas basadas en la calificación
+function generarEstrellas(scoreProducto) { 
+    const estrellas = Math.round(scoreProducto); // Redondeamos la calificación directamente a un valor entre 0 y 5
+    let estrellasHtml = ''; // Variable para el HTML de las estrellas
+
+    // Creamos el HTML para las estrellas
+    for (let i = 1; i <= 5; i++) {
+        if (i <= estrellas) {
+            estrellasHtml += '<span class="fa fa-star checked"></span>'; // Estrella llena
+        } else {
+            estrellasHtml += '<span class="fa fa-star"></span>'; // Estrella vacía
+        }
+    }
+    return estrellasHtml; // Devolvemos el HTML generado
+}
+
+//apartado para las nuevas calificaciones, con estrellas
+
+const stars = document.querySelectorAll('.star');
+let nuevaCalificacion = 0;  // Variable para almacenar la calificación del usuario
+
+stars.forEach(function(star, index) {
+    star.addEventListener('click', function() {
+        // Agregamos o quitamos la clase "checked" (le da el color gold) para las estrellas seleccionadas
+        for (let i = 0; i <= index; i++) {
+            stars[i].classList.add('checked');
+        }
+        for (let i = index + 1; i < stars.length; i++) {
+            stars[i].classList.remove('checked');
+        }
+
+        // Asignamos la calificación basada en el número de estrellas seleccionadas
+        nuevaCalificacion = index + 1;
+        console.log('Calificación del usuario:', nuevaCalificacion);  // Mostramos el puntaje en la consola
+    });
+});
+
+function fechaActual(){
+    let fechaHoy=new Date();
+    return (fechaHoy.getDate()+"/"+(fechaHoy.getMonth()+1)+"/"+fechaHoy.getFullYear());
+}
+
+function convertirFecha(fecha){
+    fecha=new Date(fecha);
+    return (fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear());
+}
+
+
+document.getElementById("enviarComentario").addEventListener("click", function(){
+    let comUsuario= document.getElementById("comentarioUsuario").value;
+    let fechaComentario=fechaActual();
+    let nombreUsuario= localStorage.getItem("usuarioLogueado");
+    let listaNuevosComentarios="";
+
+    listaNuevosComentarios+=`
+               
+                <div class="comentariosDeLosProductos">
+                    <strong><p class="nombreDelUsuario">Usuario: ${nombreUsuario}</p></strong>
+                    <p class="fechaDelComentario">${fechaComentario}</p>
+                    <p class="calificacionDelProducto">Calificación del producto: 
+                        <span class="estrellas">${generarEstrellas(nuevaCalificacion)}</span></p>
+                    <p class="descripcionDelProducto">Descripción del producto: 
+                        <label class="comentario">${comUsuario}</label>
+                    </p>
+                </div><br>`; 
+
+    document.getElementById("nuevosComentarios").innerHTML = listaNuevosComentarios;
+})
+
+// funcion para mostrar productos relacionados //
+function mostrarProductosRelacionados(relatedProducts) {
+    let relatedHTML = '';
+    relatedProducts.forEach(product => {
+        relatedHTML += `
+            <div class="related-product col-3" onclick="seleccionarProducto(${product.id})">
+                <img src="${product.image}" class="img-thumbnail">
+                <h5>${product.name}</h5>
+            </div>
+        `;
+    });
+    document.getElementById('related-products').innerHTML = relatedHTML;
+}
+// redirecciona al product-info al hacer click en el producto relacionado //
+function seleccionarProducto(id) {
+    localStorage.setItem('selectedProductId', id);
+    window.location.href = 'product-info.html';
 }
