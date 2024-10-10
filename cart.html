@@ -31,6 +31,18 @@
           </li>
           <li class="nav-item">
             <a class="nav-link"  id="ingreso" href="login.html">Ingresar</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="usuarioDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="nav-link" id="usuarioMostrado"></span>
+              </a>
+              <!-- Se agrega menu desplegable !-->
+              <ul class="dropdown-menu" aria-labelledby="usuarioDropdown">
+                <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+                <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="login.html" id="cerrarSesion">Cerrar sesión</a></li>
+              </ul>
+            </li>
               <span class="nav-link" id="usuarioMostrado"></span>
               <a class="nav-link" id="salir" >Cerrar sesión</a>
             
