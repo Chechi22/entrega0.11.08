@@ -480,3 +480,21 @@ h4 {
   color:#007bff;
 }
 
+/*apartado para perfil de usuario*/
+
+body {
+  background-color: white;
+  color: black;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.profile-button {
+  background-color: #007bff;
+  color: white;
+}
+
+
