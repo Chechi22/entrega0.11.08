@@ -1,5 +1,47 @@
- //para cerrar sesion
- document.getElementById("salir").addEventListener("click", function() {
+// Evento para cerrar sesión
+document.getElementById("salir").addEventListener("click", function() {
     localStorage.removeItem("usuarioLogueado");
     window.location.href = "login.html";
 });
+
+// Obtener el valor del usuario logueado (login.js) desde Local Storage
+const usuarioLogueado = localStorage.getItem("usuarioLogueado");
+
+// Verificar si hay un usuario logueado
+if (usuarioLogueado) {
+    // Asignar el valor del email al span en el HTML
+    document.getElementById("profileEmail").textContent = usuarioLogueado;
+
+    // Asignar el valor del email también al campo de entrada en el formulario
+    document.getElementById("email").value = usuarioLogueado;
+}
+
+// Función para guardar los cambios en el perfil
+function guardarCambios() {
+    // Obtener los valores de los campos
+    const nombre = document.getElementById('nombre').value;
+    const segundoNombre = document.getElementById('segundoNombre').value;
+    const apellido = document.getElementById('apellido').value;
+    const segundoApellido = document.getElementById('segundoApellido').value;
+    const email = document.getElementById('email').value;
+    const telefono = document.getElementById('telefono').value;
+
+    // Validar campos obligatorios
+    if (!nombre || !apellido || !email) {
+        alert('Por favor completa los campos obligatorios.');
+        return;
+    }
+
+    // Guardar en el Local Storage
+    const perfil = {
+        nombre: nombre,
+        segundoNombre: segundoNombre,
+        apellido: apellido,
+        segundoApellido: segundoApellido,
+        email: email,
+        telefono: telefono
+    };
+
+    localStorage.setItem('perfilUsuario', JSON.stringify(perfil));
+    alert('Los cambios han sido guardados exitosamente.');
+}
