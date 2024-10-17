@@ -457,6 +457,11 @@ h1, p {
   font-size: 24px;  /* Tamaño de las estrellas */
   cursor: pointer;  /* Cambiar cursor al pasar */
   transition: transform 0.2s;  /* Transición suave al pasar */
+  color:#666;
+}
+
+.fa-star {
+  color:#666;
 }
 
 .checked {
