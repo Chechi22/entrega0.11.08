@@ -239,11 +239,6 @@ function seleccionarProducto(id) {
     window.location.href = 'product-info.html';
 }
 
-let toggle=document.getElementById('toggle');
-toggle.addEventListener('change', (event)=>{
-    let checked=event.target.checked;
-    document.body.classList.toggle('dark');
-})
 //funcion para generar el HTML de todos los comentarios, exitentes y nuevos
 
 function generarComentariosHTML(usuario, fecha, calificacion, descripcion){

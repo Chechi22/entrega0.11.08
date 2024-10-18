@@ -503,19 +503,3 @@ body {
 }
 
 
-#toggle {
-  display: none;
-}
-
-#label_toggle {
-  position: absolute;
-  top: 45px;
-  right: 10px;
-  font-size: 2em;
-  cursor: pointer;
-}
-
-body.dark{
-  background-color: #333;
-  color: #fff;
-}
