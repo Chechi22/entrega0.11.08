@@ -462,3 +462,22 @@ h1, p {
 .checked {
   color: gold;
 }
+
+h3 {
+  margin-top: 50px;
+  text-align: center;
+  color:#007bff;
+}
+
+#related-products {
+  display: flex; 
+  flex-wrap: wrap; /* Permite que los elementos se ajusten a múltiples líneas si es necesario */
+  justify-content: center; 
+  margin: 20px 0; /* Espacio superior e inferior para el contenedor */
+}
+
+h4 {
+  text-align: center;
+  color:#007bff;
+}
+
