@@ -111,3 +111,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 });
+
+function aplicarModoOscuro() {
+    const darkModeSwitch = document.getElementById('darkModeSwitch');
+    const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+    const elementosConModoOscuro = [
+        document.documentElement, // <html>
+        document.body,           
+        document.querySelector('main'), 
+    ];
+
+    // Aplica o quita la clase dark-mode según la preferencia
+    elementosConModoOscuro.forEach(el => el.classList.toggle('dark-mode', darkModeEnabled));
+    darkModeSwitch.checked = darkModeEnabled;
+
+    // Evento para alternar modo oscuro y guardar la preferencia
+    darkModeSwitch.addEventListener('change', () => {
+        elementosConModoOscuro.forEach(el => el.classList.toggle('dark-mode'));
+        localStorage.setItem('darkMode', darkModeSwitch.checked);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', aplicarModoOscuro);

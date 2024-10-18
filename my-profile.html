@@ -67,14 +67,14 @@
   </nav>
   <main>
     <!--apartado para perfil de usuario"-->
-    <div class="container rounded bg-white mt-5 mb-5">
+    <div class="container rounded mt-5 mb-5">
       <div class="row">
           <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
               <img class="rounded-circle mt-5 img-fluid w-80" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="Profile Picture" id="profilePic">
               <input type="file" class="form-control" id="profilePicInput" accept="image/*">
               <span class="font-weight-bold" id="profileName">Email de usuario:</span>
-              <span class="text-black-50" id="profileEmail">email@example.com</span>
+              <span id="profileEmail">email@example.com</span>
               <span> </span>
             </div>
           </div>
@@ -116,14 +116,10 @@
                       </div>
                   </div>
                   <br>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="theme" id="themeLight" value="light" checked>
-                    <label class="form-check-label" for="themeLight">Tema claro</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="theme" id="themeDark" value="dark">
-                    <label class="form-check-label" for="themeDark">Tema oscuro</label>
-                </div>
+                    <!-- Selector para activar el modo oscuro -->
+                    <div class="form-check form-switch mb-3">
+                      <input class="form-check-input" type="checkbox" id="darkModeSwitch">
+                      <label class="form-check-label" for="darkModeSwitch">Modo Noche</label>
                   </div>
                   <div class="mt-5 text-center">
                       <button class="btn btn-primary profile-button" type="button" onclick="guardarCambios()">Guardar cambios</button>

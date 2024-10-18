@@ -502,4 +502,30 @@ body {
   color: white;
 }
 
+/* Estilos para el modo oscuro */
+
+.dark-mode {
+  background-color: black; 
+  color: white;            
+}
+
+.dark-mode h4 {
+  color:aqua;
+}
+
+nav.dark-mode {
+  background-color: #1c1c1c;
+}
+
+/* Inputs y formularios en modo oscuro */
+input.dark-mode {
+  background-color: #333333;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+
+label.dark-mode {
+  color: #e0e0e0;
+}
+
 
