@@ -457,6 +457,11 @@ h1, p {
   font-size: 24px;  /* Tamaño de las estrellas */
   cursor: pointer;  /* Cambiar cursor al pasar */
   transition: transform 0.2s;  /* Transición suave al pasar */
+  color:#666;
+}
+
+.fa-star {
+  color:#666;
 }
 
 .checked {
@@ -480,4 +485,48 @@ h4 {
   text-align: center;
   color:#007bff;
 }
+
+/*apartado para perfil de usuario*/
+
+body {
+  background-color: white;
+  color: black;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.profile-button {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Estilos para el modo oscuro */
+
+.dark-mode {
+  background-color: black; 
+  color: white;            
+}
+
+.dark-mode h4 {
+  color:aqua;
+}
+
+nav.dark-mode {
+  background-color: #1c1c1c;
+}
+
+/* Inputs y formularios en modo oscuro */
+input.dark-mode {
+  background-color: #333333;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+
+label.dark-mode {
+  color: #e0e0e0;
+}
+
 

@@ -122,21 +122,13 @@ function MostrarComentarios(productId) {
             // Itera sobre cada comentario en la lista obtenida del JSON
             for (let comentario of comentarios) {
 
-                // Generamos las estrellas usando la calificación del comentario
-                const estrellasHtml = generarEstrellas(comentario.score);
-
                 //Creo el formato de como se verá
-                listaComentarios += `
-               
-                <div class="comentariosDeLosProductos">
-                    <strong><p id="nombreDelUsuario">Usuario: ${comentario.user}</p></strong>
-                    <p id="fechaDelComentario">${convertirFecha(comentario.dateTime)}</p>
-                    <p id="calificacionDelProducto">Calificación del producto: 
-                        <span id="estrellas">${estrellasHtml}</span></p>
-                    <p id="descripcionDelProducto">Descripción del producto: 
-                        <label id="comentario">${comentario.description}</label>
-                    </p>
-                </div><br>`; 
+                listaComentarios += generarComentariosHTML(
+                    comentario.user,
+                    comentario.dateTime,
+                    comentario.score,
+                    comentario.description
+                );
                 
             }
             // Si no hay comentarios, muestra un mensaje.
@@ -144,7 +136,13 @@ function MostrarComentarios(productId) {
             listaComentarios += `<p>No se encontraron comentarios.</p>`;
              }
 
+            // Si no hay comentarios, muestra un mensaje.
+            if (listaComentarios == "") {
+                listaComentarios += `<p>No se encontraron comentarios.</p>`;
+            }
+            
             // Inserta el contenido HTML generado dentro del contenedor con id "comentarios"
+           
             document.getElementById("comentarios").innerHTML = listaComentarios;
         })
         .catch(error => console.error('Error fetching data:', error)); // Maneja cualquier error durante el fetch
@@ -202,22 +200,25 @@ document.getElementById("enviarComentario").addEventListener("click", function()
     let comUsuario= document.getElementById("comentarioUsuario").value;
     let fechaComentario=fechaActual();
     let nombreUsuario= localStorage.getItem("usuarioLogueado");
+    let calificacionComentario=nuevaCalificacion;
+
+    // Verificar si el campo de comentario y calificación están llenos 
+    if (!comUsuario || !calificacionComentario) { 
+        Swal.fire("¡Por favor, completa los campos antes de enviar!"); //usamos sweet alert
+    return; // Detener la ejecución si hay campos vacíos
+    }
+
     let listaNuevosComentarios="";
 
-    listaNuevosComentarios+=`
-               
-                <div class="comentariosDeLosProductos">
-                    <strong><p class="nombreDelUsuario">Usuario: ${nombreUsuario}</p></strong>
-                    <p class="fechaDelComentario">${fechaComentario}</p>
-                    <p class="calificacionDelProducto">Calificación del producto: 
-                        <span class="estrellas">${generarEstrellas(nuevaCalificacion)}</span></p>
-                    <p class="descripcionDelProducto">Descripción del producto: 
-                        <label class="comentario">${comUsuario}</label>
-                    </p>
-                </div><br>`; 
+    listaNuevosComentarios+= generarComentariosHTML(
+        nombreUsuario,
+        fechaComentario,
+        calificacionComentario,
+        comUsuario,
+    );
 
-    document.getElementById("nuevosComentarios").innerHTML = listaNuevosComentarios;
-})
+    document.getElementById("nuevosComentarios").innerHTML += listaNuevosComentarios; //se agrega funcionalidad para que se guarden los nuevos comentarios
+});
 
 // funcion para mostrar productos relacionados //
 function mostrarProductosRelacionados(relatedProducts) {
@@ -236,4 +237,21 @@ function mostrarProductosRelacionados(relatedProducts) {
 function seleccionarProducto(id) {
     localStorage.setItem('selectedProductId', id);
     window.location.href = 'product-info.html';
+}
+
+//funcion para generar el HTML de todos los comentarios, exitentes y nuevos
+
+function generarComentariosHTML(usuario, fecha, calificacion, descripcion){
+    const estrellasHtml = generarEstrellas(calificacion);
+
+    return `
+                <div class="comentariosDeLosProductos">
+                    <strong><p id="nombreDelUsuario">Usuario: ${usuario}</p></strong>
+                    <p id="fechaDelComentario">${fecha}</p>
+                    <p id="calificacionDelProducto">Calificación del producto: 
+                        <span id="estrellas">${estrellasHtml}</span></p>
+                    <p id="descripcionDelProducto">Descripción del producto: 
+                        <label id="comentario">${descripcion}</label>
+                    </p>
+                </div><br>`;
 }
