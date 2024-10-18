@@ -86,7 +86,24 @@ document.addEventListener('DOMContentLoaded', function () {
             const reader = new FileReader(); // Crear un lector de archivos
             reader.onload = function (e) {
                 profilePic.src = e.target.result; // Cambiar la imagen de perfil
-                imagenPerfil = e.target.result; // Guardar la imagen en localStorage
+                
+                profilePic.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+              
+                    // Ajusta el tamaño del canvas
+                    const MAX_WIDTH = 800;
+                    const scaleSize = MAX_WIDTH / profilePic.width;
+                    canvas.width = MAX_WIDTH;
+                    canvas.height = profilePic.height * scaleSize;
+              
+                    ctx.drawImage(profilePic, 0, 0, canvas.width, canvas.height);
+              
+                    // Convertir a base64 con calidad reducida
+                    const reducedBase64 = canvas.toDataURL('image/jpeg', 0.7); // Calidad 70%
+              imagenPerfil = reducedBase64; // Guardar la imagen en localStorage
+                    callback(reducedBase64);
+                  };
             };
             reader.readAsDataURL(file); // Leer el archivo como URL de datos
         }
