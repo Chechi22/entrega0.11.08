@@ -53,7 +53,7 @@ function updateTotals() {
         subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
     }
 
-    const shippingCost = 6.94; // Opcional un Costo de envío fijo
+    const shippingCost = 6.94; // Opcional Costo de envío fijo
     const total = subtotal + shippingCost;
 
     // Actualiza el total
@@ -62,3 +62,4 @@ function updateTotals() {
         totalElement.textContent = `$${total.toFixed(2)}`;
     }
 }
+
