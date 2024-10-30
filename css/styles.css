@@ -542,7 +542,7 @@ label.dark-mode {
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  font-size: 30px;
+  font-size: 25px;
 }
 
 #botonComprar:hover {
