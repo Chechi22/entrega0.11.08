@@ -259,7 +259,7 @@ function generarComentariosHTML(usuario, fecha, calificacion, descripcion){
                 </div><br>`;
 }
 
-//función para botón de comprar, guardar producto en local storage y redirigir al cart.html
+//función para botón de comprar, guardar producto en localstorage y redirigir al cart.html
 document.addEventListener('DOMContentLoaded', ()=>{
     let btnAgregar= document.getElementById("botonComprar");
     btnAgregar.addEventListener('click',()=>{
@@ -287,11 +287,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
             producto.description = document.getElementById("product-description").textContent;
             producto.cost = parseInt(document.getElementById("product-cost").textContent);
             producto.currency = document.getElementById("product-currency").textContent;
-            //falta agregar imagen
-            producto.subtotal = producto.cost
+            //falta agregar imagen 
+            producto.image = document.getElementById("product-images"); //arreglar / completar
+            producto.subtotal = producto.cost   //era parte 4 de la entrega? revisar
             producto.quantity = 1;
 
-             // Guardo el producto en mi carritoproduct-images
+             // Guardo el producto en mi carrito
             carrito.push(producto);
         }
         
@@ -301,7 +302,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         console.log(carrito);
 
         //ya puedo redireccionar
-        //window.location.href = '/cart.html';
+        window.location.href = '/cart.html';
     })
 })
 
