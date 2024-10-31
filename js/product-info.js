@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         console.log(carrito);
 
         //ya puedo redireccionar
-        window.location.href = '/cart.html';
+        window.location.href = "cart.html";
     })
 })
 
