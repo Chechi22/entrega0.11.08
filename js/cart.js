@@ -1,4 +1,4 @@
-
+let cantProductos=0;
 document.addEventListener("DOMContentLoaded", function() {
     
     // Obtiene el carrito del localStorage y lo convierte en un array
@@ -42,7 +42,10 @@ function displayCartItems(carrito){
 
     //agregar la fila creada al cuerpo de la tabla
     cartTableBody.appendChild(row);
+    cantProductos+=1;
     });
+
+    
 }
 
 // Inicializa eventos de botones y entradas
@@ -100,4 +103,8 @@ function updateTotals() {
         totalElement.textContent = `$${total.toFixed(2)}`;
     }
 }
+
+document.addEventListener("DOMContentLoaded", function(){
+    localStorage.setItem('cantProductos', cantProductos);
+})
 

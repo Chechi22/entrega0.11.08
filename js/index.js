@@ -50,3 +50,8 @@ if (ElUsuarioEstaLogueado===null){
         
     }
 });
+
+document.addEventListener('DOMContentLoaded', function(){
+    let cantProductos=localStorage.getItem('cantProductos');
+    document.getElementById('cantCarrito').innerText=cantProductos;
+})
