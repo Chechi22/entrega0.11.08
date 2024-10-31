@@ -9,6 +9,8 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+
 </head>
 
 <body>
@@ -30,40 +32,140 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link"  id="ingreso" href="login.html">Ingresar</a>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="usuarioDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="nav-link" id="usuarioMostrado"></span>
-              </a>
-              <!-- Se agrega menu desplegable !-->
-              <ul class="dropdown-menu" aria-labelledby="usuarioDropdown">
-                <li><a class="dropdown-item" href="cart.html"><i class="fas fa-shopping-cart"></i> Mi carrito</a></li>
-                <li><a class="dropdown-item" href="my-profile.html"><i class="fas fa-solid fa-user"></i> Mi perfil</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="login.html" id="cerrarSesion">Cerrar sesión</a></li>
-              </ul>
-            </li>
+            <a class="nav-link" id="ingreso" href="login.html">Ingresar</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="usuarioDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
               <span class="nav-link" id="usuarioMostrado"></span>
-              <a class="nav-link" id="salir" >Cerrar sesión</a>
-            
+            </a>
+            <!-- Se agrega menu desplegable !-->
+            <ul class="dropdown-menu" aria-labelledby="usuarioDropdown">
+              <li><a class="dropdown-item" href="cart.html"><i class="fas fa-shopping-cart"></i> Mi carrito
+                <span class="badge bg-danger" id="cantCarrito"></span></a></li>
+              <li><a class="dropdown-item" href="my-profile.html"><i class="fas fa-solid fa-user"></i> Mi perfil</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="login.html" id="cerrarSesion">Cerrar sesión</a></li>
+            </ul>
+          </li>
+          <span class="nav-link" id="usuarioMostrado"></span>
+          <a class="nav-link" id="salir">Cerrar sesión</a>
+
           </li>
         </ul>
       </div>
     </div>
   </nav>
   <main>
-    <div class="container">
+    <!--<div class="container">
       <div class="alert alert-danger text-center" role="alert">
         <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
       </div>
-    </div>
+    </div>!-->
+    <br>
+    <div class="container" id="cart-items">
+      <div class="row">
+          <div class="col-sm-12 col-md-10 col-md-offset-1">
+              <table class="table table-hover">
+                  <thead>
+                      <tr>
+                          <th>Producto</th>
+                          <th>Cantidad</th>
+                          <th class="text-center">Precio</th>
+                          <th class="text-center">Total</th>
+                          <th> </th>
+                      </tr>
+                  </thead>
+                  <tbody id="cart-table-body">
+                      <!-- Aquí se agregarán las filas de productos -->
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+                    <!--<tbody>
+                        <tr>
+                            <td class="col-sm-8 col-md-6">
+                                <div class="media">
+                                    <a class="thumbnail pull-left" href="#">
+                                        <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;">
+                                    </a>-->
+                                    
+                                    <!--<div class="media-body">
+                                        <h4 class="media-heading"><a href="#">Nombre del producto</a></h4>
+                                        <h5 class="media-heading"> por <a href="#">Nombre de la marca</a></h5>
+                                        <span>Estado: </span><span class="text-success"><strong>En Stock</strong></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="col-sm-1 col-md-1" style="text-align: center">
+                                <input type="number" class="form-control" value="3">
+                            </td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>$4.87</strong></td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>$14.61</strong></td>
+                            <td class="col-sm-1 col-md-1">
+                                <button type="button" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-remove"></span> Eliminar
+                                </button>
+                            </td>
+                        </tr> -->
+                        <!-- Más filas de productos aquí -->
+                        <!--<tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><h5>Subtotal</h5></td>
+                            <td class="text-right" id="subtotal"><h5><strong>$24.59</strong></h5></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><h5>Envío estimado</h5></td>
+                            <td class="text-right"><h5><strong>$0.00</strong></h5></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><h3>Total</h3></td>
+                            <td class="text-right" id="total"><h3><strong>$31.53</strong></h3></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                              <button type="button" class="btn btn-default" onclick="window.location.href='categories.html';">
+                                  <span class="glyphicon glyphicon-shopping-cart"></span> Continuar comprando
+                              </button>
+                              <button id="empty-cart">Vaciar Carrito</button>
+                          </td>
+                            
+                            <td>
+                                <button type="button" class="btn btn-success">
+                                    Pagar <span class="glyphicon glyphicon-play"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> -->
+    
+
+
   </main>
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+      </p>
     </div>
   </footer>
   <div id="spinner-wrapper">
@@ -79,6 +181,9 @@
   <script src="js/cart.js"></script>
   <script src="js/index.js"></script>
   <script src="js/login.js"></script>
+  <script src="js/product-info.js"></script>
+  <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> !-->
+  <!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> !-->
 </body>
 
 </html>

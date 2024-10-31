@@ -40,7 +40,8 @@
               </a>
               <!-- Se agrega menu desplegable !-->
               <ul class="dropdown-menu" aria-labelledby="usuarioDropdown">
-                <li><a class="dropdown-item" href="cart.html"><i class="fas fa-shopping-cart"></i> Mi carrito</a></li>
+                <li><a class="dropdown-item" href="cart.html"><i class="fas fa-shopping-cart"></i> Mi carrito
+                  <span class="badge bg-danger" id="cantCarrito"></span></a></li>
                 <li><a class="dropdown-item" href="my-profile.html"><i class="fas fa-solid fa-user"></i> Mi perfil</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="login.html" id="cerrarSesion">Cerrar sesión</a></li>
@@ -61,10 +62,14 @@
         <p id="product-description">Descripción del Producto</p>
         <p id="product-category">Categoría: <span id="category-name">Nombre de la Categoría</span></p>
         <p id="product-sold">Cantidad Vendida: <span id="sold-quantity">0</span></p>
+        <p id="product-currency"></p><p id="product-cost"> </p>
         <div class="images" id="product-images">
           <!-- Imágenes del producto -->
         </div>
       </div>
+    </div>
+    <div id="divBtnComprar">
+      <button id="botonComprar" class="buy-button">¡Comprar!</button>
     </div>
     <div id="publicarComentario">
       <div>
@@ -120,6 +125,7 @@
   <script src="js/product-info.js"></script>
   <script src="js/index.js"></script>
   <script src="js/login.js"></script>
+  <script src="js/cart.js"></script>
 
 </body>
 

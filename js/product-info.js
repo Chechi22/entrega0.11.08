@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Obtiene el ID del producto seleccionado desde el almacenamiento local
     const productId = localStorage.getItem('selectedProductId');
 
+
     if (productId) {
         // Realiza una solicitud fetch para obtener la información del producto desde la API
         fetch(`https://japceibal.github.io/emercado-api/products/${productId}.json`)
@@ -17,6 +18,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('product-description').textContent = product.description;
                 document.getElementById('category-name').textContent = product.category;
                 document.getElementById('sold-quantity').textContent = product.soldCount;
+                document.getElementById('product-cost').textContent = product.cost;
+                document.getElementById('product-currency').textContent = product.currency;
 
                 // Obtiene el contenedor de imágenes y limpia cualquier contenido previo
                 const imagesContainer = document.getElementById('product-images');
@@ -255,3 +258,51 @@ function generarComentariosHTML(usuario, fecha, calificacion, descripcion){
                     </p>
                 </div><br>`;
 }
+
+//función para botón de comprar, guardar producto en localstorage y redirigir al cart.html
+document.addEventListener('DOMContentLoaded', ()=>{
+    let btnAgregar= document.getElementById("botonComprar");
+    btnAgregar.addEventListener('click',()=>{
+        const productId = localStorage.getItem('selectedProductId');
+        let producto = {};
+        let carrito = [];
+        let existeEnCarrito = false
+
+        // Obtengo el carrito del LocalStorage y, si no hay carrito, creo uno vacío
+        carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+
+        // Recorre cada producto en el carrito y si ya existe le aumentamos la cantidad
+        carrito.forEach((productoEnCarrito) => {
+            if (productoEnCarrito.id === productId){
+                productoEnCarrito.quantity += 1
+                productoEnCarrito.subtotal = productoEnCarrito.cost * productoEnCarrito.quantity
+                existeEnCarrito = true
+            }
+        });
+
+        if (!existeEnCarrito){
+            // Creo el producto con todos los atributos
+            producto.id = productId
+            producto.name = document.getElementById("product-name").textContent;
+            producto.description = document.getElementById("product-description").textContent;
+            producto.cost = parseInt(document.getElementById("product-cost").textContent);
+            producto.currency = document.getElementById("product-currency").textContent;
+            //falta agregar imagen 
+            producto.image = document.getElementById("product-images"); //arreglar / completar
+            producto.subtotal = producto.cost   //era parte 4 de la entrega? revisar
+            producto.quantity = 1;
+
+             // Guardo el producto en mi carrito
+            carrito.push(producto);
+        }
+        
+        // Guardo en el localStorage el carrito actualizado (convierto a JSON)
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        
+        console.log(carrito);
+
+        //ya puedo redireccionar
+        window.location.href = "cart.html";
+    })
+})
+
