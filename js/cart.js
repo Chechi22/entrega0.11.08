@@ -16,12 +16,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function displayCartItems(carrito) {
     const cartTableBody = document.getElementById("cart-table-body");
+    const exchangeRate = 40; // Tasa de cambio fija de 1 USD = 40 UYU
 
     // Limpia el contenido existente del cuerpo de la tabla
     cartTableBody.innerHTML = "";
 
+    // Variable para acumular el total general
+    let totalGeneral = 0;
+
     carrito.forEach((producto, index) => {
         const row = document.createElement("tr");
+
+        // Subtotal en USD si el producto está en UYU, o directamente en USD si ya lo está
+        let productSubtotalInUSD = producto.subtotal;
+        if (producto.currency === "UYU") {
+            productSubtotalInUSD = (producto.subtotal / exchangeRate).toFixed(2);
+        }
 
         row.innerHTML = `
             <td class="col-sm-2 col-md-2 text-center">
@@ -35,10 +45,10 @@ function displayCartItems(carrito) {
                 ${producto.quantity} 
             </td>
             <td class="col-sm-1 col-md-1 text-center">
-                ${producto.currency} ${producto.cost}
+                ${producto.currency} ${producto.cost} <!-- Precio en moneda original -->
             </td>
             <td class="col-sm-1 col-md-1 text-center">
-                ${producto.currency} ${producto.subtotal}
+                USD ${productSubtotalInUSD} <!-- Subtotal siempre en USD -->
             </td>
             <td class="col-sm-1 col-md-1">
                 <button class="btn btn-danger" id="btnClear" data-index="${index}">Eliminar</button>
@@ -46,7 +56,21 @@ function displayCartItems(carrito) {
         `;
 
         cartTableBody.appendChild(row);
+
+        // Suma el subtotal al total general
+        totalGeneral += parseFloat(productSubtotalInUSD); 
     });
+
+    const tfoot = document.querySelector("tfoot");
+    if (tfoot) {
+        tfoot.innerHTML = `
+            <tr>
+                <td colspan="4" class="text-right"><strong>Total General:</strong></td>
+                <td class="text-center">USD ${totalGeneral.toFixed(2)}</td> <!-- Cambia aquí -->
+                <td></td>
+            </tr>
+        `;
+    }
 
 // Asigna el evento de eliminación a cada botón
 const deleteButtons = document.querySelectorAll(".btn-danger");
