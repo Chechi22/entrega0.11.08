@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Obtiene el carrito del localStorage y lo convierte en un array
     const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-    
+   
     // Muestra los productos en la página
     displayCartItems(carrito);
 
@@ -14,35 +14,69 @@ document.addEventListener("DOMContentLoaded", function() {
     updateTotals();
 });
 
-function displayCartItems(carrito){
+function displayCartItems(carrito) {
     const cartTableBody = document.getElementById("cart-table-body");
 
-    carrito.forEach(producto => {
-        //crea elementos HTML para cada producto del carrito
-        const row = document.createElement("tr");   // Crea una nueva fila para cada producto
+    // Limpia el contenido existente del cuerpo de la tabla
+    cartTableBody.innerHTML = "";
+
+    carrito.forEach((producto, index) => {
+        const row = document.createElement("tr");
 
         row.innerHTML = `
-        <td class="col-sm-8 col-md-6">
-            <h4>${producto.name}</h4> 
-            <p>${producto.description}</p> 
-        </td>
-        <td class="col-sm-1 col-md-1" style="text-align: center">
-            ${producto.quantity} 
-        </td>
-        <td class="col-sm-1 col-md-1 text-center">
-            ${producto.currency} ${producto.cost} <!-- Precio unitario con la moneda -->
-        </td>
-        <td class="col-sm-1 col-md-1 text-center">
-            ${producto.currency} ${producto.subtotal} <!-- Subtotal del producto (precio * cantidad) -->
-        </td>
-        <td class="col-sm-1 col-md-1">
-            <button class="btn btn-danger">Eliminar</button> <!-- Botón para eliminar el producto del carrito -->
-        </td>
-    `;
+            <td class="col-sm-2 col-md-2 text-center">
+            <img src="${producto.image}" alt="${producto.name}" class="img-thumbnail">
+            </td>
+            <td class="col-sm-8 col-md-6">
+                <h4>${producto.name}</h4> 
+                <p>${producto.description}</p> 
+            </td>
+            <td class="col-sm-1 col-md-1" style="text-align: center">
+                ${producto.quantity} 
+            </td>
+            <td class="col-sm-1 col-md-1 text-center">
+                ${producto.currency} ${producto.cost}
+            </td>
+            <td class="col-sm-1 col-md-1 text-center">
+                ${producto.currency} ${producto.subtotal}
+            </td>
+            <td class="col-sm-1 col-md-1">
+                <button class="btn btn-danger" id="btnClear" data-index="${index}">Eliminar</button>
+            </td>
+        `;
 
-    //agregar la fila creada al cuerpo de la tabla
-    cartTableBody.appendChild(row);
+        cartTableBody.appendChild(row);
     });
+
+// Asigna el evento de eliminación a cada botón
+const deleteButtons = document.querySelectorAll(".btn-danger");
+// Recorre todos los botones de eliminación encontrados
+deleteButtons.forEach(button => {
+    // Asigna un evento de clic a cada botón
+    button.addEventListener("click", function() {
+        // Obtiene el índice del producto desde el atributo "data-index" del botón
+        const index = this.getAttribute("data-index");
+        
+        // Llama a la función removeProduct y pasa el índice para eliminar el producto del carrito
+        removeProduct(index);
+    });
+});
+
+function removeProduct(index) {
+    // Obtiene el carrito actual del localStorage
+    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+
+    // Elimina el producto en el índice especificado
+    carrito.splice(index, 1);
+
+    // Actualiza el carrito en localStorage
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+
+    // Actualiza los totales después de eliminar un producto
+    updateTotals();
+
+    // Actualiza la lista de productos mostrados
+    displayCartItems(carrito);
 }
 
 // Inicializa eventos de botones y entradas
@@ -100,4 +134,4 @@ function updateTotals() {
         totalElement.textContent = `$${total.toFixed(2)}`;
     }
 }
-
+}
