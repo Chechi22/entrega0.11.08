@@ -27,11 +27,15 @@ function displayCartItems(carrito) {
     carrito.forEach((producto, index) => {
         const row = document.createElement("tr");
 
-        // Subtotal en USD si el producto está en UYU, o directamente en USD si ya lo está
-        let productSubtotalInUSD = producto.subtotal;
-        if (producto.currency === "UYU") {
-            productSubtotalInUSD = (producto.subtotal / exchangeRate).toFixed(2);
-        }
+    // Obtiene el subtotal del producto en USD si ya está en esa moneda,
+    // o realiza la conversión si el subtotal está en UYU.  
+    let productSubtotalInUSD = producto.subtotal;  // Inicialmente asigna el subtotal tal cual
+
+    // Verifica si la moneda del producto es UYU para realizar la conversión
+    if (producto.currency === "UYU") {
+    // Convierte el subtotal de UYU a USD usando la tasa de cambio (exchangeRate) y limita a 2 decimales
+    productSubtotalInUSD = (producto.subtotal / exchangeRate).toFixed(2);
+    }
 
         row.innerHTML = `
             <td class="col-sm-2 col-md-2 text-center">
