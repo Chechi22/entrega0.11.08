@@ -62,19 +62,30 @@ function displayCartItems(carrito) {
         cartTableBody.appendChild(row);
 
         // Suma el subtotal al total general
+        // Convertimos el subtotal del producto a un número decimal con parseFloat()
         totalGeneral += parseFloat(productSubtotalInUSD); 
     });
 
+    // Selecciona el elemento <tfoot> de la tabla en el documento
     const tfoot = document.querySelector("tfoot");
-    if (tfoot) {
-        tfoot.innerHTML = `
-            <tr>
-                <td colspan="4" class="text-right"><strong>Total General:</strong></td>
-                <td class="text-center">USD ${totalGeneral.toFixed(2)}</td> <!-- Cambia aquí -->
-                <td></td>
-            </tr>
-        `;
-    }
+
+// Verifica si el elemento <tfoot> existe en la página
+if (tfoot) {
+    // Establece el contenido HTML del <tfoot> con una fila para el total general
+    tfoot.innerHTML = `
+        <tr>
+            <!-- Celda que ocupa 4 columnas y alinea el texto a la derecha, mostrando "Total General:" en negrita -->
+            <td colspan="4" class="text-right"><strong>Total General:</strong></td>
+            
+            <!-- Celda que muestra el total general en USD, formateado a dos decimales, y alineado al centro -->
+            <td class="text-center">USD ${totalGeneral.toFixed(2)}</td> 
+            
+            <!-- Celda vacía para mantener el diseño de la tabla -->
+            <td></td>
+        </tr>
+    `;
+}
+
 
 // Asigna el evento de eliminación a cada botón
 const deleteButtons = document.querySelectorAll(".btn-danger");
