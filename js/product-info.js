@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch(`https://japceibal.github.io/emercado-api/products/${productId}.json`)
             .then(response => response.json()) // Convierte la respuesta en JSON
             .then(product => {
+
+                localStorage.setItem('product', JSON.stringify(product))
+
                 // Actualiza la información del producto en el HTML
                 document.getElementById('product-name').textContent = product.name;
                 document.getElementById('product-description').textContent = product.description;
@@ -263,7 +266,8 @@ function generarComentariosHTML(usuario, fecha, calificacion, descripcion){
 document.addEventListener('DOMContentLoaded', ()=>{
     let btnAgregar= document.getElementById("botonComprar");
     btnAgregar.addEventListener('click',()=>{
-        const productId = localStorage.getItem('selectedProductId');
+        //const productId = localStorage.getItem('selectedProductId');
+        const product = JSON.parse(localStorage.getItem('product'));
         let producto = {};
         let carrito = [];
         let existeEnCarrito = false
@@ -273,7 +277,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
         // Recorre cada producto en el carrito y si ya existe le aumentamos la cantidad
         carrito.forEach((productoEnCarrito) => {
-            if (productoEnCarrito.id === productId){
+            if (productoEnCarrito.id === product.id){
                 productoEnCarrito.quantity += 1
                 productoEnCarrito.subtotal = productoEnCarrito.cost * productoEnCarrito.quantity
                 existeEnCarrito = true
@@ -282,14 +286,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
         if (!existeEnCarrito){
             // Creo el producto con todos los atributos
-            producto.id = productId
-            producto.name = document.getElementById("product-name").textContent;
+            producto.id = product.id
+            /*producto.name = document.getElementById("product-name").textContent;
             producto.description = document.getElementById("product-description").textContent;
             producto.cost = parseInt(document.getElementById("product-cost").textContent);
-            producto.currency = document.getElementById("product-currency").textContent;
-            //falta agregar imagen 
-            producto.image = document.getElementById("product-images"); //arreglar / completar
-            producto.subtotal = producto.cost   //era parte 4 de la entrega? revisar
+            producto.currency = document.getElementById("product-currency").textContent;*/            
+            //producto.image = document.getElementById("product-images");
+
+            producto.name = product.name
+            producto.description = product.description
+            producto.cost = product.cost
+            producto.currency = product.currency            
+            producto.image = product.images[0];             
+            producto.subtotal = producto.cost   
             producto.quantity = 1;
 
              // Guardo el producto en mi carrito
@@ -302,7 +311,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         console.log(carrito);
 
         //ya puedo redireccionar
-        window.location.href = "cart.html";
+        window.location.href = 'cart.html'; 
     })
 })
 
