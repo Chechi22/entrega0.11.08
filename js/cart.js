@@ -2,7 +2,7 @@ let cantProductos = 0;
 document.addEventListener("DOMContentLoaded", function() {
     // Obtiene el carrito del localStorage y lo convierte en un array
     const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-    
+   
     // Muestra los productos en la página
     displayCartItems(carrito);
 
@@ -16,33 +16,66 @@ document.addEventListener("DOMContentLoaded", function() {
 function displayCartItems(carrito) {
     const cartTableBody = document.getElementById("cart-table-body");
 
-    carrito.forEach(producto => {
-        // Crea elementos HTML para cada producto del carrito
-        const row = document.createElement("tr");   // Crea una nueva fila para cada producto
+    // Limpia el contenido existente del cuerpo de la tabla
+    cartTableBody.innerHTML = "";
+
+    carrito.forEach((producto, index) => {
+        const row = document.createElement("tr");
 
         row.innerHTML = `
-        <td class="col-sm-8 col-md-6">
-            <h4>${producto.name}</h4> 
-            <p>${producto.description}</p> 
-        </td>
-        <td class="col-sm-1 col-md-1" style="text-align: center">
-            <input type="number" value="${producto.quantity}" min="1" class="quantity-input" style="width: 60px; text-align: center"> 
-        </td>
-        <td class="col-sm-1 col-md-1 text-center">
-            <span class="price">${producto.currency} ${producto.cost}</span> <!-- Precio unitario -->
-        </td>
-        <td class="col-sm-1 col-md-1 text-center">
-            <span class="subtotal">${producto.currency} ${producto.subtotal.toFixed(2)}</span> <!-- Subtotal del producto -->
-        </td>
-        <td class="col-sm-1 col-md-1">
-            <button class="btn btn-danger">Eliminar</button> <!-- Botón para eliminar el producto -->
-        </td>
-    `;
+            <td class="col-sm-2 col-md-2 text-center">
+            <img src="${producto.image}" alt="${producto.name}" class="img-thumbnail">
+            </td>
+            <td class="col-sm-8 col-md-6">
+                <h4>${producto.name}</h4> 
+                <p>${producto.description}</p> 
+            </td>
+            <td class="col-sm-1 col-md-1" style="text-align: center">
+                ${producto.quantity} 
+            </td>
+            <td class="col-sm-1 col-md-1 text-center">
+                ${producto.currency} ${producto.cost}
+            </td>
+            <td class="col-sm-1 col-md-1 text-center">
+                ${producto.currency} ${producto.subtotal}
+            </td>
+            <td class="col-sm-1 col-md-1">
+                <button class="btn btn-danger" id="btnClear" data-index="${index}">Eliminar</button>
+            </td>
+        `;
 
-        // Agregar la fila creada al cuerpo de la tabla
         cartTableBody.appendChild(row);
-        cantProductos += 1;
     });
+
+// Asigna el evento de eliminación a cada botón
+const deleteButtons = document.querySelectorAll(".btn-danger");
+// Recorre todos los botones de eliminación encontrados
+deleteButtons.forEach(button => {
+    // Asigna un evento de clic a cada botón
+    button.addEventListener("click", function() {
+        // Obtiene el índice del producto desde el atributo "data-index" del botón
+        const index = this.getAttribute("data-index");
+        
+        // Llama a la función removeProduct y pasa el índice para eliminar el producto del carrito
+        removeProduct(index);
+    });
+});
+
+function removeProduct(index) {
+    // Obtiene el carrito actual del localStorage
+    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+
+    // Elimina el producto en el índice especificado
+    carrito.splice(index, 1);
+
+    // Actualiza el carrito en localStorage
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+
+    // Actualiza los totales después de eliminar un producto
+    updateTotals();
+
+    // Actualiza la lista de productos mostrados
+    displayCartItems(carrito);
 }
 
 // Inicializa eventos de botones y entradas
@@ -100,7 +133,4 @@ function updateTotals() {
         totalElement.textContent = `${rows[0].querySelector('.price').textContent.split(' ')[0]} ${total.toFixed(2)}`;
     }
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    localStorage.setItem('cantProductos', cantProductos);
-});
+}
