@@ -7,9 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Muestra los productos en la página
     displayCartItems(carrito);
 
-    // Inicializa los eventos de botones y entradas
-    initEventListeners();
-
     // Actualiza totales iniciales al cargar
     updateTotals();
 });
