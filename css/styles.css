@@ -529,4 +529,140 @@ label.dark-mode {
   color: #e0e0e0;
 }
 
+/*botón comprar */
 
+#botonComprar {
+  background: linear-gradient(50deg, #4facfe, #00f2fe);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 50px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  font-size: 25px;
+}
+
+#botonComprar:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+#botonComprar:active {
+  transform: scale(0.98);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#divBtnComprar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 70px;
+}
+
+
+/* Estilos generales para el carrito */
+#cart-items {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para la tabla del carrito */
+table.table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+thead th {
+  color: #6c757d;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 10px;
+  border-bottom: 2px solid #dee2e6;
+}
+
+tbody td {
+  padding: 15px;
+  vertical-align: middle;
+  border-top: 1px solid #dee2e6;
+}
+
+/* Centrar contenido en la columna de precio y subtotal */
+.text-center {
+  text-align: center;
+}
+
+/* Estilo para el botón eliminar (icono o texto) */
+tbody td:last-child {
+  color: #dc3545;
+  cursor: pointer;
+}
+
+tbody td:last-child:hover {
+  color: #c82333;
+}
+
+/* Estilo para el total general */
+#grand-total {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #495057;
+}
+
+tfoot tr {
+  border-top: 2px solid #dee2e6;
+}
+
+/* Botón 'Volver arriba' */
+.float-end a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.float-end a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo de los productos en el carrito */
+#cart-table-body tr {
+  transition: background-color 0.3s ease;
+}
+
+#cart-table-body tr:hover {
+  background-color: #f1f3f5;
+}
+
+/* Adaptaciones para pantallas pequeñas */
+@media (max-width: 768px) {
+  #cart-items {
+      padding: 10px;
+  }
+
+  thead th, tbody td {
+      font-size: 12px;
+      padding: 8px;
+  }
+
+  /* Ocultar la columna de imágenes en pantallas pequeñas */
+  thead th:first-child, tbody td:first-child {
+      display: none;
+  }
+
+  /* Centrar total general en pantallas pequeñas */
+  #grand-total {
+      font-size: 1em;
+      text-align: center;
+  }
+}
