@@ -47,6 +47,11 @@ if (ElUsuarioEstaLogueado===null){
         //Establece el contenido de texto del elemento con el ID usuarioMostrado al valor de ElUsuarioEstaLogueado,
         // que es el nombre del usuario almacenado en localStorage.
         document.getElementById("usuarioMostrado").textContent=ElUsuarioEstaLogueado;
-        
     }
+
 });
+
+document.addEventListener('DOMContentLoaded', function(){
+    let cantProductos=localStorage.getItem('cantProductos');
+    document.getElementById('cantCarrito').innerText=cantProductos;
+})

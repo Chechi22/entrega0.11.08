@@ -1,3 +1,4 @@
+let cantProductos = 0;
 
 document.addEventListener("DOMContentLoaded", function() {
     
@@ -16,16 +17,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function displayCartItems(carrito) {
     const cartTableBody = document.getElementById("cart-table-body");
-    const exchangeRate = 40; // Tasa de cambio fija de 1 USD = 40 UYU
 
     // Limpia el contenido existente del cuerpo de la tabla
     cartTableBody.innerHTML = "";
+
+        // Si el carrito está vacío, muestra una alerta y sale de la función
+        if (carrito.length === 0) {
+            swal("¡Carrito vacío!", "No hay productos en el carrito.", "warning");
+            return; // Salir de la función si no hay productos
+        }
 
     // Variable para acumular el total general
     let totalGeneral = 0;
 
     carrito.forEach((producto, index) => {
-        const row = document.createElement("tr");
+    const row = document.createElement("tr");
 
     // Obtiene el subtotal del producto en USD si ya está en esa moneda,
     // o realiza la conversión si el subtotal está en UYU.  
@@ -33,6 +39,7 @@ function displayCartItems(carrito) {
 
     // Verifica si la moneda del producto es UYU para realizar la conversión
     if (producto.currency === "UYU") {
+        const exchangeRate = 40; // Tasa de cambio fija de 1 USD = 40 UYU
     // Convierte el subtotal de UYU a USD usando la tasa de cambio (exchangeRate) y limita a 2 decimales
     productSubtotalInUSD = (producto.subtotal / exchangeRate).toFixed(2);
     }
@@ -46,7 +53,7 @@ function displayCartItems(carrito) {
                 <p>${producto.description}</p> 
             </td>
             <td class="col-sm-1 col-md-1" style="text-align: center">
-                ${producto.quantity} 
+            <input type="number" value="${producto.quantity}" min="1" class="quantity-input" style="width: 60px; text-align: center" data-index="${index}"> 
             </td>
             <td class="col-sm-1 col-md-1 text-center">
                 ${producto.currency} ${producto.cost} <!-- Precio en moneda original -->
@@ -68,22 +75,55 @@ function displayCartItems(carrito) {
 
     // Selecciona el elemento <tfoot> de la tabla en el documento
     const tfoot = document.querySelector("tfoot");
+    // Verifica si el elemento <tfoot> existe en la página
+    if (tfoot) {
+        // Establece el contenido HTML del <tfoot> con una fila para el total general
+        tfoot.innerHTML = `
+            <tr>
+                <td colspan="4" class="text-right"><strong>Total General:</strong></td>
+                <td class="text-center">USD ${totalGeneral.toFixed(2)}</td> 
+                <td></td>
+            </tr>
+        `;
+    }
 
-// Verifica si el elemento <tfoot> existe en la página
-if (tfoot) {
-    // Establece el contenido HTML del <tfoot> con una fila para el total general
-    tfoot.innerHTML = `
-        <tr>
-            <!-- Celda que ocupa 4 columnas y alinea el texto a la derecha, mostrando "Total General:" en negrita -->
-            <td colspan="4" class="text-right"><strong>Total General:</strong></td>
-            
-            <!-- Celda que muestra el total general en USD, formateado a dos decimales, y alineado al centro -->
-            <td class="text-center">USD ${totalGeneral.toFixed(2)}</td> 
-            
-            <!-- Celda vacía para mantener el diseño de la tabla -->
-            <td></td>
-        </tr>
-    `;
+    // Asigna eventos a los botones de eliminación y cambios de cantidad
+    attachDeleteButtons();
+    attachQuantityChangeEvents();
+}
+
+// Asigna eventos a los botones de eliminación
+function attachDeleteButtons() {
+    const deleteButtons = document.querySelectorAll(".btn-danger");
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            const index = this.getAttribute("data-index"); // Obtiene el índice del producto a eliminar
+            removeProduct(index); // Llama a la función para eliminar el producto
+        });
+    });
+}
+
+// Asigna eventos para cambios en la cantidad de productos
+function attachQuantityChangeEvents() {
+    const quantityInputs = document.querySelectorAll('.quantity-input');
+    quantityInputs.forEach(input => {
+        input.addEventListener('change', () => {
+            const index = input.getAttribute('data-index'); // Obtiene el índice del producto
+            updateProductQuantity(index, input.value); // Llama a la función para actualizar la cantidad
+        });
+    });
+}
+
+// Actualiza la cantidad de un producto
+function updateProductQuantity(index, quantity) {
+    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    const producto = carrito[index]; // Obtiene el producto a actualizar
+    producto.quantity = Math.max(1, parseInt(quantity)); // Asegura que la cantidad no sea menos de 1
+    producto.subtotal = producto.quantity * producto.cost; // Actualiza el subtotal
+
+    localStorage.setItem('carrito', JSON.stringify(carrito)); // Guarda el carrito actualizado
+    displayCartItems(carrito); // Muestra los productos actualizados
+    updateTotals(); // Actualiza los totales
 }
 
 
@@ -98,7 +138,7 @@ deleteButtons.forEach(button => {
         
         // Llama a la función removeProduct y pasa el índice para eliminar el producto del carrito
         removeProduct(index);
-    });
+   });
 });
 
 function removeProduct(index) {
@@ -120,32 +160,17 @@ function removeProduct(index) {
 
 // Inicializa eventos de botones y entradas
 function initEventListeners() {
-    const removeButtons = document.querySelectorAll('.btn-danger');
-    const quantityInputs = document.querySelectorAll('input[type="number"]');
-
-    removeButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            button.closest('tr').remove();
-            updateTotals();
-        });
-    });
-
-    quantityInputs.forEach(input => {
-        input.addEventListener('change', () => {
-            updateRowTotal(input);
-            updateTotals();
-        });
-    });
+    // No es necesario aquí, ya que ahora los eventos se asignan en displayCartItems
 }
 
 // Función para actualizar el total de una fila
 function updateRowTotal(input) {
     const row = input.closest('tr');
-    const price = parseFloat(row.querySelector('td:nth-child(3) strong').textContent.replace('$', ''));
+    const price = parseFloat(row.querySelector('td:nth-child(4)').textContent.replace('USD ', ''));
     const quantity = Math.max(parseInt(input.value) || 0, 0); // Asegura que no sea negativo
     const total = quantity * price;
 
-    row.querySelector('td:nth-child(4) strong').textContent = `$${total.toFixed(2)}`;
+    row.querySelector('td:nth-child(5)').textContent = `USD ${total.toFixed(2)}`;
 }
 
 // Función para actualizar los totales de la tabla
@@ -154,14 +179,14 @@ function updateTotals() {
     let subtotal = 0;
 
     rows.forEach(row => {
-        const total = parseFloat(row.querySelector('td:nth-child(4) strong')?.textContent.replace('$', '')) || 0;
+        const total = parseFloat(row.querySelector('td:nth-child(5)').textContent.replace('USD ', '')) || 0;
         subtotal += total;
     });
 
     // Actualiza el subtotal
     const subtotalElement = document.getElementById('subtotal');
     if (subtotalElement) {
-        subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+        subtotalElement.textContent = `USD ${subtotal.toFixed(2)}`;
     }
 
     const shippingCost = 0.00; // Opcional Costo de envío fijo
@@ -170,7 +195,11 @@ function updateTotals() {
     // Actualiza el total
     const totalElement = document.getElementById('total');
     if (totalElement) {
-        totalElement.textContent = `$${total.toFixed(2)}`;
+        totalElement.textContent = `USD ${total.toFixed(2)}`;
     }
 }
-}
+
+document.addEventListener('DOMContentLoaded', function(){
+    let cantProductos=localStorage.getItem('cantProductos');
+    document.getElementById('cantCarrito').innerText=cantProductos;
+})
