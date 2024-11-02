@@ -113,6 +113,8 @@ function updateRowTotal(input) {
     row.querySelector('.subtotal').textContent = `${row.querySelector('.price').textContent.split(' ')[0]} ${total.toFixed(2)}`;
 }
 
+// no funciona como queremos
+
 // Función para actualizar los totales de la tabla
 function updateTotals() {
     const rows = document.querySelectorAll('tbody tr');
@@ -122,6 +124,10 @@ function updateTotals() {
         const total = parseFloat(row.querySelector('.subtotal').textContent.replace(/[^0-9.-]+/g, "")) || 0;
         subtotal += total;
     });
+
+    // Tasa de cambio (ajusta según sea necesario)
+    const exchangeRate = 40; // 1 dólar = 40 pesos
+    const subtotalDolares = (subtotal / exchangeRate).toFixed(2);
 
     // Actualiza el subtotal
     const subtotalElement = document.getElementById('subtotal');
@@ -133,7 +139,7 @@ function updateTotals() {
     const total = subtotal + shippingCost;
 
     // Actualiza el total
-    const totalElement = document.getElementById('total');
+    const totalElement = document.getElementById('grand-total');
     if (totalElement) {
         totalElement.textContent = `${rows[0].querySelector('.price').textContent.split(' ')[0]} ${total.toFixed(2)}`;
     }
