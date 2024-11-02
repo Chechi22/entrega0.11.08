@@ -48,7 +48,6 @@ if (ElUsuarioEstaLogueado===null){
         // que es el nombre del usuario almacenado en localStorage.
         document.getElementById("usuarioMostrado").textContent=ElUsuarioEstaLogueado;
     }
-
 });
 
 document.addEventListener('DOMContentLoaded', function(){

@@ -1,5 +1,6 @@
 let cantProductos = 0;
 
+let cantProductos=0;
 document.addEventListener("DOMContentLoaded", function() {
     
     // Obtiene el carrito del localStorage y lo convierte en un array
