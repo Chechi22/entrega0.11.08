@@ -1,59 +1,76 @@
 let cantProductos = 0;
 
-document.addEventListener("DOMContentLoaded", function() {
-    
+document.addEventListener("DOMContentLoaded", function () {
     // Obtiene el carrito del localStorage y lo convierte en un array
     const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-   
+
     // Muestra los productos en la página
     displayCartItems(carrito);
-
-    // Inicializa los eventos de botones y entradas
-    initEventListeners();
 
     // Actualiza totales iniciales al cargar
     updateTotals();
 });
 
+// Función para actualizar la cantidad de productos en el carrito
+function updateCantProductos() {
+    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    const totalCant = carrito.reduce((acc, producto) => acc + producto.quantity, 0);
+    localStorage.setItem('cantProductos', totalCant);
+    document.getElementById('cantCarrito').innerText = totalCant;
+}
+
 function displayCartItems(carrito) {
     const cartTableBody = document.getElementById("cart-table-body");
-
     // Limpia el contenido existente del cuerpo de la tabla
     cartTableBody.innerHTML = "";
 
-        // Si el carrito está vacío, muestra una alerta y sale de la función
-        if (carrito.length === 0) {
-            swal("¡Carrito vacío!", "No hay productos en el carrito.", "warning");
-            return; // Salir de la función si no hay productos
+    // Si el carrito está vacío, muestra una alerta y sale de la función
+    if (carrito.length === 0) {
+        swal("¡Carrito vacío!", "No hay productos en el carrito.", "warning");
+ 
+        // Ajustamos el total general a 0
+        let totalGeneral = 0;
+        const tfoot = document.querySelector("tfoot");
+        if (tfoot) {
+            tfoot.innerHTML = `
+                <tr>
+                    <td colspan="4" class="text-right"><strong>Total General:</strong></td>
+                    <td class="text-center">USD ${totalGeneral.toFixed(2)}</td> 
+                    <td></td>
+                </tr>
+            `;
         }
+
+        return; // Salimos de la función si el carrito está vacío
+    }
 
     // Variable para acumular el total general
     let totalGeneral = 0;
 
     carrito.forEach((producto, index) => {
-    const row = document.createElement("tr");
+        const row = document.createElement("tr");
 
-    // Obtiene el subtotal del producto en USD si ya está en esa moneda,
-    // o realiza la conversión si el subtotal está en UYU.  
-    let productSubtotalInUSD = producto.subtotal;  // Inicialmente asigna el subtotal tal cual
+        // Obtiene el subtotal del producto en USD si ya está en esa moneda,
+        // o realiza la conversión si el subtotal está en UYU.  
+        let productSubtotalInUSD = producto.subtotal;  // Inicialmente asigna el subtotal tal cual
 
-    // Verifica si la moneda del producto es UYU para realizar la conversión
-    if (producto.currency === "UYU") {
-        const exchangeRate = 40; // Tasa de cambio fija de 1 USD = 40 UYU
-    // Convierte el subtotal de UYU a USD usando la tasa de cambio (exchangeRate) y limita a 2 decimales
-    productSubtotalInUSD = (producto.subtotal / exchangeRate).toFixed(2);
-    }
+        // Verifica si la moneda del producto es UYU para realizar la conversión
+        if (producto.currency === "UYU") {
+            const exchangeRate = 40; // Tasa de cambio fija de 1 USD = 40 UYU
+            // Convierte el subtotal de UYU a USD usando la tasa de cambio (exchangeRate) y limita a 2 decimales
+            productSubtotalInUSD = (producto.subtotal / exchangeRate).toFixed(2);
+        }
 
         row.innerHTML = `
             <td class="col-sm-2 col-md-2 text-center">
-            <img src="${producto.image}" alt="${producto.name}" class="img-thumbnail">
+                <img src="${producto.image}" alt="${producto.name}" class="img-thumbnail">
             </td>
             <td class="col-sm-8 col-md-6">
                 <h4>${producto.name}</h4> 
                 <p>${producto.description}</p> 
             </td>
             <td class="col-sm-1 col-md-1" style="text-align: center">
-            <input type="number" value="${producto.quantity}" min="1" class="quantity-input" style="width: 60px; text-align: center" data-index="${index}"> 
+                <input type="number" value="${producto.quantity}" min="1" class="quantity-input" style="width: 60px; text-align: center" data-index="${index}"> 
             </td>
             <td class="col-sm-1 col-md-1 text-center">
                 ${producto.currency} ${producto.cost} <!-- Precio en moneda original -->
@@ -66,11 +83,10 @@ function displayCartItems(carrito) {
             </td>
         `;
 
+        // Agregar la fila creada al cuerpo de la tabla
         cartTableBody.appendChild(row);
-        cantProductos+=1;
 
         // Suma el subtotal al total general
-        // Convertimos el subtotal del producto a un número decimal con parseFloat()
         totalGeneral += parseFloat(productSubtotalInUSD); 
     });
 
@@ -87,6 +103,9 @@ function displayCartItems(carrito) {
             </tr>
         `;
     }
+
+    // Actualiza la cantidad de productos
+    updateCantProductos();
 
     // Asigna eventos a los botones de eliminación y cambios de cantidad
     attachDeleteButtons();
@@ -127,21 +146,7 @@ function updateProductQuantity(index, quantity) {
     updateTotals(); // Actualiza los totales
 }
 
-
-// Asigna el evento de eliminación a cada botón
-const deleteButtons = document.querySelectorAll(".btn-danger");
-// Recorre todos los botones de eliminación encontrados
-deleteButtons.forEach(button => {
-    // Asigna un evento de clic a cada botón
-    button.addEventListener("click", function() {
-        // Obtiene el índice del producto desde el atributo "data-index" del botón
-        const index = this.getAttribute("data-index");
-        
-        // Llama a la función removeProduct y pasa el índice para eliminar el producto del carrito
-        removeProduct(index);
-   });
-});
-
+// Elimina un producto del carrito
 function removeProduct(index) {
     // Obtiene el carrito actual del localStorage
     const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
@@ -152,16 +157,14 @@ function removeProduct(index) {
     // Actualiza el carrito en localStorage
     localStorage.setItem('carrito', JSON.stringify(carrito));
 
+    // Actualiza la cantidad de productos
+    updateCantProductos();
+
     // Actualiza los totales después de eliminar un producto
     updateTotals();
 
     // Actualiza la lista de productos mostrados
     displayCartItems(carrito);
-}
-
-// Inicializa eventos de botones y entradas
-function initEventListeners() {
-    // No es necesario aquí, ya que ahora los eventos se asignan en displayCartItems
 }
 
 // Función para actualizar el total de una fila
@@ -184,6 +187,11 @@ function updateTotals() {
         subtotal += total;
     });
 
+    // Verifica si el carrito está vacío y ajusta el subtotal a 0
+    if (rows.length === 0) {
+         subtotal = 0;
+    }
+
     // Actualiza el subtotal
     const subtotalElement = document.getElementById('subtotal');
     if (subtotalElement) {
@@ -200,7 +208,7 @@ function updateTotals() {
     }
 }
 
+// Al cargar el DOM, establece la cantidad de productos
 document.addEventListener('DOMContentLoaded', function(){
-    let cantProductos=localStorage.getItem('cantProductos');
-    document.getElementById('cantCarrito').innerText=cantProductos;
-})
+    updateCantProductos();
+});
