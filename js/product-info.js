@@ -285,11 +285,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
         if (!existeEnCarrito){
             // Creo el producto con todos los atributos
             producto.id = product.id
-            /*producto.name = document.getElementById("product-name").textContent;
-            producto.description = document.getElementById("product-description").textContent;
-            producto.cost = parseInt(document.getElementById("product-cost").textContent);
-            producto.currency = document.getElementById("product-currency").textContent;*/            
-            //producto.image = document.getElementById("product-images");
 
             producto.name = product.name
             producto.description = product.description

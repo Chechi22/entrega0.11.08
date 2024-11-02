@@ -27,7 +27,21 @@ function displayCartItems(carrito) {
     // Si el carrito está vacío, muestra una alerta y sale de la función
     if (carrito.length === 0) {
         swal("¡Carrito vacío!", "No hay productos en el carrito.", "warning");
-        return; // Salir de la función si no hay productos
+ 
+        // Ajustamos el total general a 0
+        let totalGeneral = 0;
+        const tfoot = document.querySelector("tfoot");
+        if (tfoot) {
+            tfoot.innerHTML = `
+                <tr>
+                    <td colspan="4" class="text-right"><strong>Total General:</strong></td>
+                    <td class="text-center">USD ${totalGeneral.toFixed(2)}</td> 
+                    <td></td>
+                </tr>
+            `;
+        }
+
+        return; // Salimos de la función si el carrito está vacío
     }
 
     // Variable para acumular el total general
@@ -172,6 +186,11 @@ function updateTotals() {
         const total = parseFloat(row.querySelector('td:nth-child(5)').textContent.replace('USD ', '')) || 0;
         subtotal += total;
     });
+
+    // Verifica si el carrito está vacío y ajusta el subtotal a 0
+    if (rows.length === 0) {
+         subtotal = 0;
+    }
 
     // Actualiza el subtotal
     const subtotalElement = document.getElementById('subtotal');
