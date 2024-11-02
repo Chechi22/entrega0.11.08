@@ -1,8 +1,8 @@
 let cantProductos = 0;
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // Obtiene el carrito del localStorage y lo convierte en un array
     const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-    
+
     // Muestra los productos en la página
     displayCartItems(carrito);
 
@@ -15,10 +15,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function displayCartItems(carrito) {
     const cartTableBody = document.getElementById("cart-table-body");
-
-    carrito.forEach(producto => {
-        // Crea elementos HTML para cada producto del carrito
-        const row = document.createElement("tr");   // Crea una nueva fila para cada producto
+// Limpia el contenido existente del cuerpo de la tabla
+cartTableBody.innerHTML = "";
+carrito.forEach((producto, index) => {
+    const row = document.createElement("tr");
 
         row.innerHTML = `
         <td class="col-sm-8 col-md-6">
@@ -35,14 +35,49 @@ function displayCartItems(carrito) {
             <span class="subtotal">${producto.currency} ${producto.subtotal.toFixed(2)}</span> <!-- Subtotal del producto -->
         </td>
         <td class="col-sm-1 col-md-1">
-            <button class="btn btn-danger">Eliminar</button> <!-- Botón para eliminar el producto -->
-        </td>
+                <button class="btn btn-danger" id="btnClear" data-index="${index}">Eliminar</button>
+            </td>
     `;
 
         // Agregar la fila creada al cuerpo de la tabla
         cartTableBody.appendChild(row);
         cantProductos += 1;
     });
+
+    // Asigna el evento de eliminación a cada botón
+    const deleteButtons = document.querySelectorAll(".btn-danger");
+    // Recorre todos los botones de eliminación encontrados
+    deleteButtons.forEach(button => {
+        // Asigna un evento de clic a cada botón
+        button.addEventListener("click", function () {
+            // Obtiene el índice del producto desde el atributo "data-index" del botón
+            const index = this.getAttribute("data-index");
+
+            // Llama a la función removeProduct y pasa el índice para eliminar el producto del carrito
+            removeProduct(index);
+        });
+    });
+    
+}
+
+function removeProduct(index) {
+    // Obtiene el carrito actual del localStorage
+    let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+
+    // Elimina el producto en el índice especificado
+    carrito.splice(index, 1);
+
+    // Actualiza el carrito en localStorage
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+
+    // Actualiza los totales después de eliminar un producto
+    updateTotals();
+console.log(carrito.length)
+    // Actualiza la lista de productos mostrados
+    displayCartItems(carrito);
+    
+    localStorage.setItem('cantProductos', carrito.length);
+    document.getElementById('cantCarrito').innerText=carrito.length;
 }
 
 // Inicializa eventos de botones y entradas
@@ -68,7 +103,7 @@ function initEventListeners() {
 // Función para actualizar el total de una fila
 function updateRowTotal(input) {
     const row = input.closest('tr');
-    const price = parseFloat(row.querySelector('.price').textContent.replace(/[^0-9.-]+/g,""));
+    const price = parseFloat(row.querySelector('.price').textContent.replace(/[^0-9.-]+/g, ""));
     const quantity = Math.max(parseInt(input.value) || 0, 0); // Asegura que no sea negativo
     const total = quantity * price;
 
@@ -81,7 +116,7 @@ function updateTotals() {
     let subtotal = 0;
 
     rows.forEach(row => {
-        const total = parseFloat(row.querySelector('.subtotal').textContent.replace(/[^0-9.-]+/g,"")) || 0;
+        const total = parseFloat(row.querySelector('.subtotal').textContent.replace(/[^0-9.-]+/g, "")) || 0;
         subtotal += total;
     });
 
@@ -101,6 +136,6 @@ function updateTotals() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem('cantProductos', cantProductos);
 });
