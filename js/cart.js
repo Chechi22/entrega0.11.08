@@ -21,6 +21,9 @@ carrito.forEach((producto, index) => {
     const row = document.createElement("tr");
 
         row.innerHTML = `
+        <td class="col-sm-2 col-md-2 text-center">
+            <img src="${producto.image}" alt="${producto.name}" class="img-thumbnail">
+            </td>
         <td class="col-sm-8 col-md-6">
             <h4>${producto.name}</h4> 
             <p>${producto.description}</p> 
