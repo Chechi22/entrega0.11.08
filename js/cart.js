@@ -1,6 +1,5 @@
 let cantProductos = 0;
 
-let cantProductos=0;
 document.addEventListener("DOMContentLoaded", function() {
     
     // Obtiene el carrito del localStorage y lo convierte en un array
@@ -68,6 +67,7 @@ function displayCartItems(carrito) {
         `;
 
         cartTableBody.appendChild(row);
+        cantProductos+=1;
 
         // Suma el subtotal al total general
         // Convertimos el subtotal del producto a un número decimal con parseFloat()
