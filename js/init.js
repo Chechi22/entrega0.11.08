@@ -39,9 +39,3 @@ let getJSONData = function(url){
         return result;
     });
 }
-
- //para cerrar sesion
- document.getElementById("salir").addEventListener("click", function() {
-  localStorage.removeItem("usuarioLogueado");
-  window.location.href = "login.html";
-});
