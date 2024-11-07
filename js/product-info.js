@@ -1,8 +1,3 @@
-//para cerrar sesion
-document.getElementById("salir").addEventListener("click", function () {
-    localStorage.removeItem("usuarioLogueado");
-    window.location.href = "login.html";
-});
 document.addEventListener('DOMContentLoaded', function () {
     // Obtiene el ID del producto seleccionado desde el almacenamiento local
     const productId = localStorage.getItem('selectedProductId');
@@ -13,9 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch(`https://japceibal.github.io/emercado-api/products/${productId}.json`)
             .then(response => response.json()) // Convierte la respuesta en JSON
             .then(product => {
-
                 localStorage.setItem('product', JSON.stringify(product))
-
                 // Actualiza la información del producto en el HTML
                 document.getElementById('product-name').textContent = product.name;
                 document.getElementById('product-description').textContent = product.description;
@@ -266,8 +259,8 @@ function generarComentariosHTML(usuario, fecha, calificacion, descripcion){
 document.addEventListener('DOMContentLoaded', ()=>{
     let btnAgregar= document.getElementById("botonComprar");
     btnAgregar.addEventListener('click',()=>{
-        //const productId = localStorage.getItem('selectedProductId');
-        const product = JSON.parse(localStorage.getItem('product'));
+         //const productId = localStorage.getItem('selectedProductId');
+         const product = JSON.parse(localStorage.getItem('product'));
         let producto = {};
         let carrito = [];
         let existeEnCarrito = false
@@ -293,7 +286,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             producto.cost = product.cost
             producto.currency = product.currency            
             producto.image = product.images[0];             
-            producto.subtotal = producto.cost   
+            producto.subtotal = producto.cost     //era parte 4 de la entrega? revisar
             producto.quantity = 1;
 
              // Guardo el producto en mi carrito
@@ -306,7 +299,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         console.log(carrito);
 
         //ya puedo redireccionar
-        window.location.href = 'cart.html'; 
+        window.location.href = "cart.html";
     })
 })
 

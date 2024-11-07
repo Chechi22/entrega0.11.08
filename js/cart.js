@@ -200,7 +200,7 @@ function updateTotals() {
 
     const shippingCost = 0.00; // Opcional Costo de envío fijo
     const total = subtotal + shippingCost;
-
+    
     // Actualiza el total
     const totalElement = document.getElementById('total');
     if (totalElement) {
