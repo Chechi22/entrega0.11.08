@@ -10,13 +10,6 @@ const ORDEN_MAYOR_A_MENOR_DE_VENDIDOS = "VendidosDescendentes"; // Ordenar por c
 let criterioDeOrdenacionActual = undefined; //criterio de ordenacion elegido por el usuario
 
 
-// Asigna un evento de clic al botón de "salir" para cerrar la sesión
-document.getElementById("salir").addEventListener("click", function () {
-    // Elimina el item "usuarioLogueado" del almacenamiento local (localStorage), lo que efectivamente cierra la sesión del usuario
-    localStorage.removeItem("usuarioLogueado");
-    // Redirige al usuario a la página de login
-    window.location.href = "login.html";
-});
 // Obtiene el ID de la categoría seleccionada del almacenamiento local
 const categoriaId = localStorage.getItem('catID');
 
@@ -206,7 +199,6 @@ document.addEventListener('DOMContentLoaded', function () {
 function limpiarBuscador() {
     document.getElementById("searchInput").value = ""
     searchQuery = undefined;
-   
    }
    
    

@@ -1,8 +1,3 @@
-// Evento para cerrar sesión
-document.getElementById("salir").addEventListener("click", function () {
-    localStorage.removeItem("usuarioLogueado");
-    window.location.href = "login.html";
-});
 
 // Variable para almacenar la imagen de perfil
 let imagenPerfil = undefined

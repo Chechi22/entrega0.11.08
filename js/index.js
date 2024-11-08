@@ -11,11 +11,7 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
-    //para cerrar sesion
-    document.getElementById("salir").addEventListener("click", function() {
-        localStorage.removeItem("usuarioLogueado");
-        window.location.href = "login.html";
-    });
+   
 });
 //cuando el contenido del documento HTML este cargado
 document.addEventListener('DOMContentLoaded',()=>{
@@ -28,8 +24,6 @@ let ElUsuarioEstaLogueado=localStorage.getItem("usuarioLogueado")
 if (ElUsuarioEstaLogueado===null){
     //Muestra el elemento con el ID ingreso, que podría ser un botón o enlace para iniciar sesión.
         document.getElementById("ingreso").style.display = 'block';
-        //Oculta el elemento con el ID salir, que podría ser un botón o enlace para cerrar sesión.
-        document.getElementById("salir").style.display = 'none';
         //Oculta el elemento con el ID usuarioMostrado, que podría mostrar el nombre del usuario.
         document.getElementById("usuarioMostrado").style.display = 'none';
         //Redirige al usuario a la página login.html
@@ -40,8 +34,6 @@ if (ElUsuarioEstaLogueado===null){
     else {
         //Oculta el elemento con el ID ingreso, ya que no es necesario mostrar la opción de inicio de sesión.
         document.getElementById("ingreso").style.display = 'none';
-        //Muestra el elemento con el ID salir, permitiendo al usuario cerrar sesión.
-        document.getElementById("salir").style.display = 'inline';
         //Muestra el elemento con el ID usuarioMostrado
         document.getElementById("usuarioMostrado").style.display = 'inline';
         //Establece el contenido de texto del elemento con el ID usuarioMostrado al valor de ElUsuarioEstaLogueado,
@@ -54,3 +46,25 @@ document.addEventListener('DOMContentLoaded', function(){
     let cantProductos=localStorage.getItem('cantProductos');
     document.getElementById('cantCarrito').innerText=cantProductos;
 })
+
+function updateCantProductos() {
+    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    const totalCant = carrito.reduce((acc, producto) => acc + producto.quantity, 0);
+    
+    // Guarda el total de productos en localStorage
+    localStorage.setItem('cantProductos', totalCant);
+
+    // Actualiza el contador con el id 'cantCarrito'
+    const cantCarritoElement = document.getElementById('cantCarrito');
+    if (cantCarritoElement) {
+        cantCarritoElement.innerText = totalCant;
+    }
+
+    // Actualiza todos los elementos con la clase 'cart-count'
+    document.querySelectorAll('.cart-count').forEach(function(element) {
+        element.innerText = totalCant;
+    });
+}
+
+// Llama a la función cuando se carga la página
+document.addEventListener('DOMContentLoaded', updateCantProductos);

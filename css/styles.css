@@ -489,8 +489,9 @@ h4 {
 /*apartado para perfil de usuario*/
 
 body {
-  background-color: white;
-  color: black;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+  color: #495057;
 }
 
 .container {
@@ -566,45 +567,43 @@ label.dark-mode {
 
 /* Estilos generales para el carrito */
 #cart-items {
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column; /* Apilar los elementos verticalmente */
+  align-items: stretch; /* Asegura que los elementos dentro de cart-items ocupen todo el ancho */
   padding: 20px;
   background-color: #f8f9fa;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto; /* Centrar el contenedor */
 }
 
 /* Estilos para la tabla del carrito */
 table.table {
-  border-collapse: collapse;
   width: 100%;
+  border-collapse: collapse;
   background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .table-hover tbody tr:hover {
-  background-color: #e9ecef;
+  background-color: #e8f0fe;
 }
 
 thead th {
-  color: #6c757d;
-  font-weight: bold;
+  color: #007bff;
+  font-weight: 600;
   text-transform: uppercase;
-  font-size: 14px;
-  padding: 10px;
-  border-bottom: 2px solid #dee2e6;
+  font-size: 13px;
+  padding: 12px;
+  border-bottom: 2px solid #e2e6ea;
 }
 
 tbody td {
   padding: 15px;
   vertical-align: middle;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #e2e6ea;
 }
 
-/* Centrar contenido en la columna de precio y subtotal */
-.text-center {
-  text-align: center;
-}
-
-/* Estilo para el botón eliminar (icono o texto) */
 tbody td:last-child {
   color: #dc3545;
   cursor: pointer;
@@ -612,57 +611,139 @@ tbody td:last-child {
 
 tbody td:last-child:hover {
   color: #c82333;
+  text-decoration: underline;
 }
 
-/* Estilo para el total general */
+/* Centrado y estilo para precios y subtotales */
+.text-center {
+  text-align: center;
+}
+
 #grand-total {
   font-weight: bold;
-  font-size: 1.2em;
-  color: #495057;
+  font-size: 1.4em;
+  color: #007bff;
 }
 
 tfoot tr {
-  border-top: 2px solid #dee2e6;
+  border-top: 2px solid #e2e6ea;
 }
 
 /* Botón 'Volver arriba' */
 .float-end a {
   color: #007bff;
   text-decoration: none;
+  font-weight: 500;
 }
 
 .float-end a:hover {
   text-decoration: underline;
 }
 
-/* Estilo de los productos en el carrito */
-#cart-table-body tr {
-  transition: background-color 0.3s ease;
+/* Sección de Envío y Dirección */
+.section h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #007bff;
+  margin-bottom: 15px;
 }
 
-#cart-table-body tr:hover {
-  background-color: #f1f3f5;
+.section .form-group {
+  margin-bottom: 20px;
+}
+
+#tipoEnvio {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  color: #495057;
+}
+
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  padding: 10px;
+}
+
+.form-check-label {
+  font-size: 14px;
+}
+
+/* Estilo para los botones de acción */
+.btn-finalizar {
+  width: 30%;
+  align-items: center;
+  align-self: center;
+  padding: 15px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-finalizar:hover {
+  background-color: #0004ff;
+}
+
+/* Costos finales */
+.mt-3 p {
+  font-size: 16px;
+  color: #495057;
+}
+
+.mt-3 span {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #007bff;
 }
 
 /* Adaptaciones para pantallas pequeñas */
 @media (max-width: 768px) {
   #cart-items {
-      padding: 10px;
+    padding: 15px;
   }
 
   thead th, tbody td {
-      font-size: 12px;
-      padding: 8px;
+    font-size: 12px;
+    padding: 8px;
   }
 
   /* Ocultar la columna de imágenes en pantallas pequeñas */
   thead th:first-child, tbody td:first-child {
-      display: none;
+    display: none;
   }
 
-  /* Centrar total general en pantallas pequeñas */
+  /* Ajustar el tamaño del total general */
   #grand-total {
-      font-size: 1em;
-      text-align: center;
+    font-size: 1em;
+    text-align: center;
   }
+
+  /* Mejorar la visibilidad de los botones y formularios */
+  .section h4 {
+    font-size: 16px;
+  }
+}
+
+/* Ajustes para las filas dentro de la tabla */
+table.table tbody tr {
+  height: 60px; /* Altura uniforme de las filas */
+  transition: background-color 0.3s ease; /* Efecto al pasar el ratón por encima */
+  display: table-row; /* Asegura que cada fila sea un "row" de la tabla */
+}
+
+table.table tbody td {
+  padding: 12px; /* Espaciado dentro de las celdas */
+  vertical-align: middle; /* Alineación vertical del texto */
+  font-size: 14px; /* Tamaño de fuente uniforme */
+  border-top: 1px solid #e2e6ea; /* Borde superior para las filas */
+  word-wrap: break-word; /* Evita el desbordamiento de texto */
+  text-align: left; /* Alineación del texto a la izquierda */
 }

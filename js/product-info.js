@@ -1,8 +1,3 @@
-//para cerrar sesion
-document.getElementById("salir").addEventListener("click", function () {
-    localStorage.removeItem("usuarioLogueado");
-    window.location.href = "login.html";
-});
 document.addEventListener('DOMContentLoaded', function () {
     // Obtiene el ID del producto seleccionado desde el almacenamiento local
     const productId = localStorage.getItem('selectedProductId');
@@ -309,4 +304,3 @@ document.addEventListener('DOMContentLoaded', ()=>{
         window.location.href = 'cart.html'; 
     })
 })
-
