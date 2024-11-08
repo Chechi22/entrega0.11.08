@@ -187,9 +187,8 @@ function updateTotals() {
         subtotal += total;
     });
 
-    // Verifica si el carrito está vacío y ajusta el subtotal a 0
     if (rows.length === 0) {
-         subtotal = 0;
+        subtotal = 0;
     }
 
     // Actualiza el subtotal
@@ -198,7 +197,23 @@ function updateTotals() {
         subtotalElement.textContent = `USD ${subtotal.toFixed(2)}`;
     }
 
-    const shippingCost = 0.00; // Opcional Costo de envío fijo
+    // ENTREGA 7 Obtener el tipo de envío seleccionado y calcular el costo de envío
+    const tipoEnvio = document.getElementById('tipoEnvio').value;
+    let shippingCost = 0;
+
+    if (tipoEnvio === "premium") {
+        shippingCost = subtotal * 0.15;
+    } else if (tipoEnvio === "express") {
+        shippingCost = subtotal * 0.07;
+    } else if (tipoEnvio === "standard") {
+        shippingCost = subtotal * 0.05;
+    }
+
+    const shippingCostElement = document.getElementById('costoEnvio');
+    if (shippingCostElement) {
+        shippingCostElement.textContent = `USD ${shippingCost.toFixed(2)}`;
+    }
+
     const total = subtotal + shippingCost;
 
     // Actualiza el total
@@ -207,8 +222,13 @@ function updateTotals() {
         totalElement.textContent = `USD ${total.toFixed(2)}`;
     }
 }
+    // Llamar a updateTotals al cargar la página para el cálculo inicial
+    updateTotals();
 
-// Al cargar el DOM, establece la cantidad de productos
-document.addEventListener('DOMContentLoaded', function(){
+    // Agregar el evento change al select de tipo de envío porque el usuario puede cambiar de opinión y elegir otro tipo de envío
+    document.getElementById('tipoEnvio').addEventListener('change', updateTotals);
+
+    // Al cargar el DOM, establece la cantidad de productos
+    document.addEventListener('DOMContentLoaded', function(){
     updateCantProductos();
 });
