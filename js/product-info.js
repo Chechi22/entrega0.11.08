@@ -302,4 +302,3 @@ document.addEventListener('DOMContentLoaded', ()=>{
         window.location.href = "cart.html";
     })
 })
-
