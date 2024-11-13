@@ -47,11 +47,11 @@ function displayCartItems(carrito) {
                 <h4>${producto.name}</h4> 
                 <p>${producto.description}</p> 
             </td>
-            <td class="col-sm-1 col-md-1" style="text-align: center">
-                <input type="number" value="${producto.quantity}" min="1" class="quantity-input" style="width: 60px; text-align: center" data-index="${index}"> 
-            </td>
             <td class="col-sm-1 col-md-1 text-center">
                 ${producto.currency} ${producto.cost}
+            </td>
+            <td class="col-sm-1 col-md-1" style="text-align: center">
+                <input type="number" value="${producto.quantity}" min="1" class="quantity-input" style="width: 60px; text-align: center" data-index="${index}"> 
             </td>
             <td class="col-sm-1 col-md-1 text-center">
                 USD ${productSubtotalInUSD}
