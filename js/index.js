@@ -13,10 +13,11 @@ document.addEventListener("DOMContentLoaded", function(){
     });
    
 });
+let ElUsuarioEstaLogueado;
 //cuando el contenido del documento HTML este cargado
 document.addEventListener('DOMContentLoaded',()=>{
     // se obtiene el valor asociado a la clave "usuarioLogueado" del localStorage.
-let ElUsuarioEstaLogueado=localStorage.getItem("usuarioLogueado")
+ ElUsuarioEstaLogueado=localStorage.getItem("usuarioLogueado")
 
  //  ElUsuarioEstaLogueado será null si no hay ningún valor asociado a esa clave, 
  //significa que el usuario no está logueado.
@@ -43,16 +44,16 @@ if (ElUsuarioEstaLogueado===null){
 });
 
 document.addEventListener('DOMContentLoaded', function(){
-    let cantProductos=localStorage.getItem('cantProductos');
+    let cantProductos=localStorage.getItem('cantProductos-'+ElUsuarioEstaLogueado);
     document.getElementById('cantCarrito').innerText=cantProductos;
 })
 
 function updateCantProductos() {
-    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    const carrito = JSON.parse(localStorage.getItem('carrito-'+ElUsuarioEstaLogueado) || '[]');
     const totalCant = carrito.reduce((acc, producto) => acc + producto.quantity, 0);
     
     // Guarda el total de productos en localStorage
-    localStorage.setItem('cantProductos', totalCant);
+    localStorage.setItem('cantProductos-'+ElUsuarioEstaLogueado, totalCant);
 
     // Actualiza el contador con el id 'cantCarrito'
     const cantCarritoElement = document.getElementById('cantCarrito');

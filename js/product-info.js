@@ -264,9 +264,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
         let producto = {};
         let carrito = [];
         let existeEnCarrito = false
-
+        let nombreUsuario= localStorage.getItem("usuarioLogueado");
         // Obtengo el carrito del LocalStorage y, si no hay carrito, creo uno vacío
-        carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+        carrito = JSON.parse(localStorage.getItem('carrito-'+nombreUsuario) || '[]');
 
         // Recorre cada producto en el carrito y si ya existe le aumentamos la cantidad
         carrito.forEach((productoEnCarrito) => {
@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
         
         // Guardo en el localStorage el carrito actualizado (convierto a JSON)
-        localStorage.setItem('carrito', JSON.stringify(carrito));
+        localStorage.setItem('carrito-'+nombreUsuario, JSON.stringify(carrito));
         
         console.log(carrito);
 
