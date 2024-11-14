@@ -134,6 +134,24 @@
           </div>
       </div>
   </div>
+  <!-- Modal para la vista previa de la imagen de perfil -->
+  <div class="modal fade" id="modalProfilePicPreview" tabindex="-1" aria-labelledby="modalProfilePicPreviewLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalProfilePicPreviewLabel">Vista previa de la imagen</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img id="modalProfilePic" src="" alt="Vista previa de la foto de perfil" class="img-fluid rounded-circle w-100">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="guardarImagen()">Guardar imagen</button>
+        </div>
+      </div>
+    </div>
+  </div>
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -148,6 +166,8 @@
   <script src="js/my-profile.js"></script>
   <script src="js/index.js"></script>
   <script src="js/login.js"></script>
+   <!-- Incluir SweetAlert CDN -->
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
