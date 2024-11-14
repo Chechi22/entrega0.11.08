@@ -204,7 +204,6 @@ document.addEventListener('DOMContentLoaded', function () {
 function limpiarBuscador() {
     document.getElementById("searchInput").value = ""
     searchQuery = undefined;
-   
    }
    
    
