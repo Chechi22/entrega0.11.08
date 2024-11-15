@@ -124,7 +124,7 @@ function MostrarComentarios(productId) {
                 //Creo el formato de como se verá
                 listaComentarios += generarComentariosHTML(
                     comentario.user,
-                    comentario.dateTime,
+                    convertirFecha(comentario.dateTime),
                     comentario.score,
                     comentario.description
                 );
