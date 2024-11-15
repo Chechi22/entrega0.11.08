@@ -63,15 +63,19 @@ function MostrarListaProductos() {
                     if (searchQuery == undefined || searchQuery === "" || producto.name.toLowerCase().includes(searchQuery) || producto.description.toLowerCase().includes(searchQuery)) {
                         // Crea un bloque de HTML para cada producto, que incluye una imagen, nombre, descripción, costo y cantidad vendida
                         listaProductos += `
-                                <div class="producto-item">
-                                <a href="product-info.html" onclick="setProductId('${producto.id}')">
-                                                    <img src="${producto.image}" class="imagenProductos" alt="Imagen de ${producto.name}">
-                                                </a>
-                                    <h5>${producto.name}</h5>
-                                    <p>Descripción: ${producto.description}</p>
-                                    <p>${producto.currency} ${producto.cost}</p>
-                                    <p>Vendidos: ${producto.soldCount}</p>
-                                </div><br>`;
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <a href="product-info.html" onclick="setProductId('${producto.id}')">
+                                <img src="${producto.image}" class="card-img-top" alt="Imagen de ${producto.name}">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">${producto.name}</h5>
+                                <p class="card-text">${producto.description}</p>
+                                <p class="card-text text-primary"><strong>${producto.currency} ${producto.cost}</strong></p>
+                                <p class="card-text text-muted">Vendidos: ${producto.soldCount}</p>                                
+                            </div>
+                        </div>
+                    </div>`;
                     }
                 }
 
