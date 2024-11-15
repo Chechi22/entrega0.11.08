@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     displayCartItems(carrito);
     document.getElementById('tipoEnvio').addEventListener('change', updateTotals);
     updateCantProductos();
+    ocultarDetalleTarjeta();
 });
 
 // Función para actualizar la cantidad de productos en el carrito
@@ -232,3 +233,23 @@ else {
     });
 }
 })
+// Seleccionamos los elementos relevantes
+const tarjetaOption = document.getElementById("tarjeta");
+const transferenciaOption = document.getElementById("transferencia");
+const detalleTarjeta = document.getElementById("detalleTarjeta");
+
+// Función para mostrar u ocultar los detalles de la tarjeta de crédito
+function actualizarVistaFormaPago() {
+  if (tarjetaOption.checked) {
+    detalleTarjeta.style.display = "block"; // Mostramos los detalles de la tarjeta
+  } else {
+    detalleTarjeta.style.display = "none"; // Ocultamos los detalles de la tarjeta
+  }
+}
+
+// Escuchamos los cambios en las opciones de pago
+tarjetaOption.addEventListener("change", actualizarVistaFormaPago);
+transferenciaOption.addEventListener("change", actualizarVistaFormaPago);
+
+// Ejecutamos la función al cargar la página para mostrar/ocultar según la opción seleccionada inicialmente
+actualizarVistaFormaPago();
