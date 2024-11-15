@@ -19,6 +19,7 @@ if (emailUsuarioLogueado) {
         document.getElementById('segundoApellido').value = perfilUsuariologueado.segundoApellido;
         document.getElementById('email').value = perfilUsuariologueado.email;
         document.getElementById('telefono').value = perfilUsuariologueado.telefono;
+        document.getElementById('darkModeSwitch').checked = perfilUsuariologueado.tema;
        
    // Si hay una foto de perfil, la asigna al elemento de imagen correspondiente
         if (perfilUsuariologueado.foto) {
@@ -45,10 +46,17 @@ function guardarCambios() {
     const segundoApellido = document.getElementById('segundoApellido').value;
     const email = document.getElementById('email').value;
     const telefono = document.getElementById('telefono').value;
+    const darkMode = document.getElementById('darkModeSwitch').checked;
 
     // Validar campos obligatorios
     if (!nombre || !apellido || !email) {
-        alert('Por favor completa los campos obligatorios.');
+        // SweetAlert para campos obligatorios
+        Swal.fire({
+            icon: 'error',
+            title: '¡Oops!',
+            text: 'Por favor completa los campos obligatorios.',
+            confirmButtonText: 'Aceptar'
+        });
         return;  // Salir de la función si hay campos vacíos
     }
 
@@ -60,13 +68,20 @@ function guardarCambios() {
         segundoApellido: segundoApellido,
         email: email,
         telefono: telefono,
-        foto: imagenPerfil // Incluye la imagen de perfil
+        foto: imagenPerfil, // Incluye la imagen de perfil
+        tema: darkMode
     };
 
     // Guarda el perfil en Local Storage, usando el email como clave
     //localStorage.setItem('perfilUsuario', JSON.stringify(perfil)); modifico para que el valor se modifique al cambiar el usuario.
     localStorage.setItem(perfil.email, JSON.stringify(perfil));
-    alert('Los cambios han sido guardados exitosamente.');
+      // SweetAlert para indicar éxito
+      Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: 'Los cambios han sido guardados exitosamente.',
+        confirmButtonText: 'Aceptar'
+    });
 }
 
 // Funcionalidad para cambiar la foto de perfil
@@ -80,8 +95,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (file) {
             const reader = new FileReader(); // Crear un lector de archivos
             reader.onload = function (e) {
-                profilePic.src = e.target.result; // Cambiar la imagen de perfil
-                
+                // Se AGREGA: Mostrar la imagen seleccionada en el modal
+                const modalImage = document.getElementById('modalProfilePic');
+                modalImage.src = e.target.result;
+                /*profilePic.src = e.target.result;*/ // Cambiar la imagen de perfil
+                // SE AGREGA: Mostrar el modal
+                const modal = new bootstrap.Modal(document.getElementById('modalProfilePicPreview'));
+                modal.show();
+
                 profilePic.onload = function() {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
@@ -107,9 +128,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+// Función para guardar la imagen seleccionada
+function guardarImagen() {
+    const modalImage = document.getElementById('modalProfilePic');
+    // Guardar la imagen en el perfil
+    imagenPerfil = modalImage.src; // Asignar la imagen a la variable global
+
+    // Actualizar la imagen de perfil en la página
+    document.getElementById('profilePic').src = imagenPerfil;
+
+    // Cerrar el modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modalProfilePicPreview'));
+    modal.hide();
+}
+
 function aplicarModoOscuro() {
     const darkModeSwitch = document.getElementById('darkModeSwitch');
-    const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+    //const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+    const darkModeEnabled = darkModeSwitch.checked;
     const elementosConModoOscuro = [
         document.documentElement, // <html>
         document.body,           
@@ -118,12 +154,12 @@ function aplicarModoOscuro() {
 
     // Aplica o quita la clase dark-mode según la preferencia
     elementosConModoOscuro.forEach(el => el.classList.toggle('dark-mode', darkModeEnabled));
-    darkModeSwitch.checked = darkModeEnabled;
+    //darkModeSwitch.checked = darkModeEnabled;
 
     // Evento para alternar modo oscuro y guardar la preferencia
     darkModeSwitch.addEventListener('change', () => {
         elementosConModoOscuro.forEach(el => el.classList.toggle('dark-mode'));
-        localStorage.setItem('darkMode', darkModeSwitch.checked);
+       // localStorage.setItem('darkMode', darkModeSwitch.checked);
     });
 }
 

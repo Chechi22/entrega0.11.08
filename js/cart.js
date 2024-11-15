@@ -1,7 +1,12 @@
 let cantProductos = 0;
+// Obtener el valor del usuario logueado (login.js) desde Local Storage
+const emailUsuarioLogueado = localStorage.getItem("usuarioLogueado");
 
 document.addEventListener("DOMContentLoaded", function () {
-    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    // Obtiene el carrito del localStorage y lo convierte en un array
+    const carrito = JSON.parse(localStorage.getItem('carrito-'+emailUsuarioLogueado) || '[]');
+
+    // Muestra los productos en la página
     displayCartItems(carrito);
     document.getElementById('tipoEnvio').addEventListener('change', updateTotals);
     updateCantProductos();
@@ -9,9 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Función para actualizar la cantidad de productos en el carrito
 function updateCantProductos() {
-    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    const carrito = JSON.parse(localStorage.getItem('carrito-'+emailUsuarioLogueado) || '[]');
     const totalCant = carrito.reduce((acc, producto) => acc + producto.quantity, 0);
-    localStorage.setItem('cantProductos', totalCant);
+    localStorage.setItem('cantProductos-'+emailUsuarioLogueado, totalCant);
     document.getElementById('cantCarrito').innerText = totalCant;
 }
 
@@ -94,20 +99,28 @@ function attachQuantityChangeEvents() {
 
 // Función para actualizar la cantidad de un producto
 function updateProductQuantity(index, quantity) {
-    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-    const producto = carrito[index];
-    producto.quantity = Math.max(1, parseInt(quantity));
-    producto.subtotal = producto.quantity * producto.cost;
+    const carrito = JSON.parse(localStorage.getItem('carrito-'+emailUsuarioLogueado) || '[]');
+    const producto = carrito[index]; // Obtiene el producto a actualizar
+    producto.quantity = Math.max(1, parseInt(quantity)); // Asegura que la cantidad no sea menos de 1
+    producto.subtotal = producto.quantity * producto.cost; // Actualiza el subtotal
 
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    displayCartItems(carrito);
+    localStorage.setItem('carrito-'+emailUsuarioLogueado, JSON.stringify(carrito)); // Guarda el carrito actualizado
+    displayCartItems(carrito); // Muestra los productos actualizados
+   // updateTotals(); // Actualiza los totales
 }
 
 // Función para eliminar un producto del carrito
 function removeProduct(index) {
-    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    // Obtiene el carrito actual del localStorage
+    const carrito = JSON.parse(localStorage.getItem('carrito-'+emailUsuarioLogueado) || '[]');
+
+    // Elimina el producto en el índice especificado
     carrito.splice(index, 1);
-    localStorage.setItem('carrito', JSON.stringify(carrito));
+
+    // Actualiza el carrito en localStorage
+    localStorage.setItem('carrito-'+emailUsuarioLogueado, JSON.stringify(carrito));
+
+    // Actualiza la cantidad de productos
     updateCantProductos();
     displayCartItems(carrito);
 }

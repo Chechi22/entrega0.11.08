@@ -8,9 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch(`https://japceibal.github.io/emercado-api/products/${productId}.json`)
             .then(response => response.json()) // Convierte la respuesta en JSON
             .then(product => {
-
                 localStorage.setItem('product', JSON.stringify(product))
-
                 // Actualiza la información del producto en el HTML
                 document.getElementById('product-name').textContent = product.name;
                 document.getElementById('product-description').textContent = product.description;
@@ -126,7 +124,7 @@ function MostrarComentarios(productId) {
                 //Creo el formato de como se verá
                 listaComentarios += generarComentariosHTML(
                     comentario.user,
-                    comentario.dateTime,
+                    convertirFecha(comentario.dateTime),
                     comentario.score,
                     comentario.description
                 );
@@ -261,14 +259,14 @@ function generarComentariosHTML(usuario, fecha, calificacion, descripcion){
 document.addEventListener('DOMContentLoaded', ()=>{
     let btnAgregar= document.getElementById("botonComprar");
     btnAgregar.addEventListener('click',()=>{
-        //const productId = localStorage.getItem('selectedProductId');
-        const product = JSON.parse(localStorage.getItem('product'));
+         //const productId = localStorage.getItem('selectedProductId');
+         const product = JSON.parse(localStorage.getItem('product'));
         let producto = {};
         let carrito = [];
         let existeEnCarrito = false
-
+        let nombreUsuario= localStorage.getItem("usuarioLogueado");
         // Obtengo el carrito del LocalStorage y, si no hay carrito, creo uno vacío
-        carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+        carrito = JSON.parse(localStorage.getItem('carrito-'+nombreUsuario) || '[]');
 
         // Recorre cada producto en el carrito y si ya existe le aumentamos la cantidad
         carrito.forEach((productoEnCarrito) => {
@@ -288,7 +286,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             producto.cost = product.cost
             producto.currency = product.currency            
             producto.image = product.images[0];             
-            producto.subtotal = producto.cost   
+            producto.subtotal = producto.cost     //era parte 4 de la entrega? revisar
             producto.quantity = 1;
 
              // Guardo el producto en mi carrito
@@ -296,11 +294,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
         
         // Guardo en el localStorage el carrito actualizado (convierto a JSON)
-        localStorage.setItem('carrito', JSON.stringify(carrito));
+        localStorage.setItem('carrito-'+nombreUsuario, JSON.stringify(carrito));
         
         console.log(carrito);
 
         //ya puedo redireccionar
-        window.location.href = 'cart.html'; 
+        window.location.href = "cart.html";
     })
 })
