@@ -9,7 +9,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">-->
   <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 
 </head>
@@ -138,20 +138,20 @@
         <br>
 
          <!-- Detalles de la tarjeta, visibles solo si se selecciona "Tarjeta de Crédito" -->
-  <div id="detalleTarjeta" style="display: block;">
-    <div class="form-group">
-        <label for="numeroTarjeta">Número de Tarjeta</label>
-        <input type="text" id="numeroTarjeta" class="form-control" placeholder="Número de tarjeta" required>
-    </div>
-    <div class="form-group">
-        <label for="fechaVencimiento">Fecha de Vencimiento</label>
-        <input type="month" id="fechaVencimiento" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label for="codigoSeguridad">Código de Seguridad (CVV)</label>
-        <input type="text" id="codigoSeguridad" class="form-control" placeholder="Código CVV" required>
-    </div>
-</div>
+         <div id="detalleTarjeta" style="display: block;">
+          <div class="form-group">
+              <label for="numeroTarjeta">Número de Tarjeta</label>
+              <input type="text" id="numeroTarjeta" class="form-control" placeholder="Número de tarjeta" required>
+          </div>
+          <div class="form-group">
+              <label for="fechaVencimiento">Fecha de Vencimiento</label>
+              <input type="month" id="fechaVencimiento" class="form-control" required>
+          </div>
+          <div class="form-group">
+              <label for="codigoSeguridad">Código de Seguridad (CVV)</label>
+              <input type="text" id="codigoSeguridad" class="form-control" placeholder="Código CVV" required>
+          </div>
+        </div>
     </div>
 
      <!-- Costos finales -->
@@ -163,7 +163,7 @@
 
 
     <!-- Botón de Finalizar Compra -->
-    <button class="btn btn-success btn-finalizar">Finalizar Compra</button>
+    <button id="finalizar" class="btn btn-success btn-finalizar">Finalizar Compra</button>
 </div>
 </main>
   </div>
@@ -191,7 +191,7 @@
   <script src="js/index.js"></script>
   <script src="js/login.js"></script>
   <script src="js/product-info.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!--sweet alert-->
   <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> !-->
   <!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> !-->
   <!-- Incluir SweetAlert CDN -->
