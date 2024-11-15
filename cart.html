@@ -135,6 +135,23 @@
             <input class="form-check-input" type="radio" name="formaPago" id="transferencia" value="transferencia">
             <label class="form-check-label" for="transferencia">Transferencia Bancaria</label>
         </div>
+        <br>
+
+         <!-- Detalles de la tarjeta, visibles solo si se selecciona "Tarjeta de Crédito" -->
+         <div id="detalleTarjeta" style="display: block;">
+          <div class="form-group">
+              <label for="numeroTarjeta">Número de Tarjeta</label>
+              <input type="text" id="numeroTarjeta" class="form-control" placeholder="Número de tarjeta" required>
+          </div>
+          <div class="form-group">
+              <label for="fechaVencimiento">Fecha de Vencimiento</label>
+              <input type="month" id="fechaVencimiento" class="form-control" required>
+          </div>
+          <div class="form-group">
+              <label for="codigoSeguridad">Código de Seguridad (CVV)</label>
+              <input type="text" id="codigoSeguridad" class="form-control" placeholder="Código CVV" required>
+          </div>
+        </div>
     </div>
 
      <!-- Costos finales -->

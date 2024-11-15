@@ -204,10 +204,24 @@ document.getElementById('finalizar').addEventListener('click', function(){
     const numero = document.getElementById('numero').value;
     const esquina = document.getElementById('esquina').value;
     const cantidadProductos = localStorage.getItem('cantProductos-'+emailUsuarioLogueado);
+    const tarjeta = document.getElementById('tarjeta').checked;
+    const numeroTarjeta = document.getElementById('numeroTarjeta').value;
+    const fechaVencimiento = document.getElementById('fechaVencimiento').value;
+    const codigoSeguridad = document.getElementById('codigoSeguridad').value;
 
     // Validar campos obligatorios
 if (departamento=="" || localidad=="" || calle=="" || numero=="" || esquina=="" || cantidadProductos == 0) {
     // SweetAlert para campos obligatorios
+    swal.fire({
+        icon: 'error',
+        title: '¡Oops!',
+        text: 'Por favor completa los campos obligatorios.',
+        confirmButtonText: 'Aceptar',
+        timer: 3000
+    });
+    return;
+}
+else if (tarjeta && (numeroTarjeta=="" || fechaVencimiento=="" || codigoSeguridad=="")){
     swal.fire({
         icon: 'error',
         title: '¡Oops!',
