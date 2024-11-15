@@ -104,23 +104,23 @@
         <h4>Dirección de Envío</h4>
         <div class="form-group">
             <label for="departamento">Departamento</label>
-            <input type="text" id="departamento" class="form-control" placeholder="Departamento">
+            <input type="text" id="departamento" class="form-control" placeholder="Departamento" required>
         </div>
         <div class="form-group">
             <label for="localidad">Localidad</label>
-            <input type="text" id="localidad" class="form-control" placeholder="Localidad">
+            <input type="text" id="localidad" class="form-control" placeholder="Localidad" required>
         </div>
         <div class="form-group">
             <label for="calle">Calle</label>
-            <input type="text" id="calle" class="form-control" placeholder="Calle">
+            <input type="text" id="calle" class="form-control" placeholder="Calle" required>
         </div>
         <div class="form-group">
             <label for="numero">Número</label>
-            <input type="text" id="numero" class="form-control" placeholder="Número">
+            <input type="text" id="numero" class="form-control" placeholder="Número" required>
         </div>
         <div class="form-group">
             <label for="esquina">Esquina</label>
-            <input type="text" id="esquina" class="form-control" placeholder="Esquina">
+            <input type="text" id="esquina" class="form-control" placeholder="Esquina" required>
         </div>
     </div>
 
@@ -135,6 +135,23 @@
             <input class="form-check-input" type="radio" name="formaPago" id="transferencia" value="transferencia">
             <label class="form-check-label" for="transferencia">Transferencia Bancaria</label>
         </div>
+        <br>
+
+         <!-- Detalles de la tarjeta, visibles solo si se selecciona "Tarjeta de Crédito" -->
+  <div id="detalleTarjeta" style="display: block;">
+    <div class="form-group">
+        <label for="numeroTarjeta">Número de Tarjeta</label>
+        <input type="text" id="numeroTarjeta" class="form-control" placeholder="Número de tarjeta" required>
+    </div>
+    <div class="form-group">
+        <label for="fechaVencimiento">Fecha de Vencimiento</label>
+        <input type="month" id="fechaVencimiento" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="codigoSeguridad">Código de Seguridad (CVV)</label>
+        <input type="text" id="codigoSeguridad" class="form-control" placeholder="Código CVV" required>
+    </div>
+</div>
     </div>
 
      <!-- Costos finales -->
@@ -174,10 +191,12 @@
   <script src="js/index.js"></script>
   <script src="js/login.js"></script>
   <script src="js/product-info.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
   <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> !-->
   <!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> !-->
- 
+  <!-- Incluir SweetAlert CDN -->
+ <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>!-->
+
 </body>
 
 </html>

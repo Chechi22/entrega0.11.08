@@ -190,3 +190,91 @@ function updateTotals() {
     document.addEventListener('DOMContentLoaded', function(){
     updateCantProductos();
 });
+
+function finalizarCompra (){
+
+    //const btnFinalizarCompra = document.querySelector('.btn-finalizar');
+    const tipoEnvio = document.getElementById('tipoEnvio').value;
+    const departamento = document.getElementById('departamento').value;
+    const localidad = document.getElementById('localidad').value;
+    const calle = document.getElementById('calle').value;
+    const numero = document.getElementById('numero').value;
+    const esquina = document.getElementById('esquina').value;
+    const formaPago = document.getElementsByName('formaPago').value;
+   /* const formaPagoTarjeta = document.getElementById('tarjeta').value;
+    const formaPagoTransferencia = document.getElementById('transferencia').value;
+    const cantidadesProductos = document.querySelectorAll('.cantidad-producto').value;*/
+
+    // Validar campos obligatorios
+if (!tipoEnvio || !departamento || !localidad || !calle || !numero || !esquina || !formaPago || cantProductos == 0) {
+    // SweetAlert para campos obligatorios
+     Swal.fire({
+        icon: 'error',
+        title: '¡Oops!',
+        text: 'Por favor completa los campos obligatorios.',
+        confirmButtonText: 'Aceptar'
+    });
+    return;
+}
+
+}
+
+
+/*const btnFinalizarCompra = document.querySelector('.btn-finalizar');
+const tipoEnvio = document.getElementById('tipoEnvio');
+const departamento = document.getElementById('departamento');
+const localidad = document.getElementById('localidad');
+const calle = document.getElementById('calle');
+const numero = document.getElementById('numero');
+const esquina = document.getElementById('esquina');
+const formaPagoTarjeta = document.getElementById('tarjeta');
+const formaPagoTransferencia = document.getElementById('transferencia');
+const cantidadesProductos = document.querySelectorAll('.cantidad-producto')
+
+// Mensaje de feedback
+const mensajeResultado = document.createElement('p');
+mensajeResultado.style.fontWeight = 'bold';
+mensajeResultado.style.color = '#28a745';
+document.body.appendChild(mensajeResultado);
+
+// Función de validación
+btnFinalizarCompra.addEventListener('click', () => {
+    // Limpiar mensaje previo
+    mensajeResultado.textContent = '';
+
+    // Validar campos de dirección de envío
+    if (!departamento.value || !localidad.value || !calle.value || !numero.value || !esquina.value) {
+        mensajeResultado.textContent = "Por favor, complete todos los campos de la dirección.";
+        mensajeResultado.style.color = 'red';
+        return;
+    }
+
+    // Validar tipo de envío
+    if (!tipoEnvio.value) {
+        mensajeResultado.textContent = "Seleccione un tipo de envío.";
+        mensajeResultado.style.color = 'red';
+        return;
+    }
+
+    // Validar forma de pago
+    const formaPagoSeleccionada = document.querySelector('input[name="formaPago"]:checked');
+    if (!formaPagoSeleccionada) {
+        mensajeResultado.textContent = "Seleccione una forma de pago.";
+        mensajeResultado.style.color = 'red';
+        return;
+    }
+
+
+    // Validar campos adicionales para tarjeta de crédito o transferencia bancaria
+    if (formaPagoSeleccionada.value === 'tarjeta') {
+        // Aquí podrías agregar validaciones adicionales para los datos de la tarjeta si fuera necesario
+        mensajeResultado.textContent = "Pago con tarjeta seleccionado.";
+    } else if (formaPagoSeleccionada.value === 'transferencia') {
+        // Aquí podrías agregar validaciones adicionales para la transferencia bancaria si fuera necesario
+        mensajeResultado.textContent = "Pago con transferencia bancaria seleccionado.";
+    }
+
+    // Mostrar mensaje de compra exitosa
+    mensajeResultado.textContent = "¡Compra exitosa!";
+    mensajeResultado.style.color = '#28a745';
+});// */
