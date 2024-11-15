@@ -40,54 +40,129 @@ function ordenaYMuestraProductos(criterioDeOrdenacionEnviado) {
     MostrarListaProductos();
 }
 
+// Asegurarte de agregar el manejador de eventos después de que los productos se hayan cargado
+document.addEventListener('DOMContentLoaded', function () {
+    // Llama a la función para mostrar la lista de productos (ya debe agregar los eventos)
+    MostrarListaProductos();
+});
 
-// Creo una funcion mostrar lista de productos con el llamado a la API
-
+// Función para mostrar los productos
 function MostrarListaProductos() {
-    // Realiza una solicitud fetch a la URL especificada para obtener los datos de los productos (en este caso, una lista de autos)
-    fetch("https://japceibal.github.io/emercado-api/cats_products/" + categoriaId + ".json")//añade el id de la categoria al link de la api
-        .then(response => response.json()) // Convierte la respuesta a un objeto JSON
+    fetch("https://japceibal.github.io/emercado-api/cats_products/" + categoriaId + ".json")
+        .then(response => response.json())
         .then(productos => {
-            // Inicializa una cadena vacía que almacenará el contenido HTML generado para cada producto
-
-            // Inicializa una cadena vacía que almacenará el contenido HTML generado para cada auto
             let listaProductos = "";
-// ordena por precio o cantidad de vendidos
             let listaOrdenada = OrdenarProductos(productos.products);
-            // Itera sobre cada producto luego de aplicar filtrado y ordenacion
-            
-            // Itera sobre cada producto en la lista obtenida del JSON
+
             for (let producto of listaOrdenada) {
-                // creo un if, si el rango de precio minimo y maximo es nulo o si el precio del producto es menor al maximo y mayor al minimo, muestra los productos
-                if ((minimoPrecio == undefined && maximoPrecio == undefined) || (maximoPrecio != undefined && minimoPrecio == undefined && producto.cost <= maximoPrecio) || (minimoPrecio != undefined && maximoPrecio == undefined && producto.cost >= minimoPrecio) || (producto.cost <= maximoPrecio && producto.cost >= minimoPrecio)) {
-                    if (searchQuery == undefined || searchQuery === "" || producto.name.toLowerCase().includes(searchQuery) || producto.description.toLowerCase().includes(searchQuery)) {
-                        // Crea un bloque de HTML para cada producto, que incluye una imagen, nombre, descripción, costo y cantidad vendida
-                        listaProductos += `
-                                <div class="producto-item">
-                                <a href="product-info.html" onclick="setProductId('${producto.id}')">
-                                                    <img src="${producto.image}" class="imagenProductos" alt="Imagen de ${producto.name}">
-                                                </a>
-                                    <h5>${producto.name}</h5>
-                                    <p>Descripción: ${producto.description}</p>
-                                    <p>${producto.currency} ${producto.cost}</p>
-                                    <p>Vendidos: ${producto.soldCount}</p>
-                                </div><br>`;
-                    }
-                }
+                listaProductos += `
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <a href="product-info.html" onclick="setProductId('${producto.id}')">
+                                <img src="${producto.image}" class="card-img-top" alt="Imagen de ${producto.name}">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">${producto.name}</h5>
+                                <p class="card-text">${producto.description}</p>
+                                <p class="card-text text-primary"><strong>${producto.currency} ${producto.cost}</strong></p>
+                                <p class="card-text text-muted">Vendidos: ${producto.soldCount}</p>
+                                <!-- Botón de agregar al carrito -->
+                                <button class="btn btn-outline-primary agregarCarrito" data-id="${producto.id}">
+                                    <i class="fas fa-shopping-cart"></i> Agregar al carrito
+                                </button>
+                            </div>
+                        </div>
+                    </div>`;
+            }
 
-            }
-            // Si no hay productos que coincidan con el rango de precios, muestra un mensaje indicando que no hay productos en el rango
-            if (listaProductos == "") {
-                listaProductos += `<p>No hay productos encontrados.</p>`;
-            }
-            // Obtiene el nombre de la categoría y lo muestra en el título
-            let nombreCat = productos.catName;
-            // Inserta el contenido HTML generado dentro del contenedor con id "productos"
-            document.getElementById('titulo').innerHTML = "<h2>Categoría/" + nombreCat + "</h2><br>";
             document.getElementById("productos").innerHTML = listaProductos;
-        })
-        .catch(error => console.error('Error fetching data:', error)); // Maneja cualquier error que ocurra durante el fetch
 
+            // Agregar el manejador de eventos para los botones de agregar al carrito
+            document.querySelectorAll('.agregarCarrito').forEach((boton) => {
+                boton.addEventListener('click', function (event) {
+                    // Obtener el ID del producto desde el atributo data-id
+                    let productoId = event.target.getAttribute('data-id');
+                    let producto = listaOrdenada.find(item => item.id == productoId);
+                    if (producto) {
+                        agregarAlCarrito(producto);  // Pasar el objeto producto a la función agregarAlCarrito
+                    }
+                });
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Seleccionar todos los botones de agregar al carrito
+    let botonesAgregar = document.querySelectorAll('.agregarCarrito');
+
+    botonesAgregar.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            // Obtener el ID del producto desde el atributo data-id
+            const productId = btn.getAttribute('data-id');
+
+            // Aquí deberías obtener el producto, ya sea desde un array de productos
+            // o desde localStorage, según cómo estés manejando tus productos.
+            const product = getProductById(productId);
+
+            // Llamar a la función para agregar el producto al carrito
+            agregarAlCarrito(product);
+        });
+    });
+});
+
+// Función para obtener un producto por su ID (ajusta según cómo guardes los productos)
+function getProductById(productId) {
+    const productos = JSON.parse(localStorage.getItem('productos')) || []; // O de otro lugar, si tienes un array de productos
+    return productos.find(product => product.id === productId); // O consulta según el producto
+}
+
+/// Función para agregar el producto al carrito
+function agregarAlCarrito(product) {
+    let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    let existeEnCarrito = false;
+
+    // Verifica si el producto ya está en el carrito
+    carrito.forEach((productoEnCarrito) => {
+        if (productoEnCarrito.id === product.id) {
+            productoEnCarrito.quantity += 1;
+            productoEnCarrito.subtotal = productoEnCarrito.cost * productoEnCarrito.quantity;
+            existeEnCarrito = true;
+        }
+    });
+
+    // Si no existe en el carrito, agregarlo
+    if (!existeEnCarrito) {
+        const nuevoProducto = {
+            id: product.id,
+            name: product.name,
+            description: product.description,
+            cost: product.cost,
+            currency: product.currency,
+            image: product.images && product.images.length > 0 ? product.images[0] : 'ruta/por/defecto/imagen.jpg', // Verifica y asigna una imagen por defecto
+            subtotal: product.cost,
+            quantity: 1
+        };
+        carrito.push(nuevoProducto);
+    }
+
+    // Guardar carrito actualizado en localStorage
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+
+    // Actualizar el contador de productos en el carrito
+    updateCantProductos();
+}
+
+
+
+// Función para actualizar la cantidad de productos en el carrito
+function updateCantProductos() {
+    const carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
+    const totalCant = carrito.reduce((acc, producto) => acc + producto.quantity, 0);
+    localStorage.setItem('cantProductos', totalCant);
+    document.getElementById('cantCarrito').innerText = totalCant;  // Asegúrate de que este id esté en el HTML
 }
 
 // Creando el filtro de precio
