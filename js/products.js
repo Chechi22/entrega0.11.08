@@ -188,7 +188,12 @@ document.getElementById("rangoFiltroPrecio").addEventListener("click", function 
     }
     // Verifica que el rango de precios sea válido; si el máximo es menor o igual al mínimo, muestra un mensaje de error
     if (maximoPrecio != undefined && minimoPrecio != undefined && maximoPrecio <= minimoPrecio) {
-        alert("Error en rango de precios");
+        Swal.fire({
+            title: 'Error en rango de precios',
+            text: "Seleccione un rango válido",
+            icon: "warning",
+            timer: 3000
+        })
         limpiarFiltro(); // Limpia los filtros si hay un error en el rango
     }
     // Vuelve a mostrar la lista de productos aplicando los nuevos filtros de precio
