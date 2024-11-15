@@ -116,6 +116,7 @@ document.getElementById("rangoFiltroPrecio").addEventListener("click", function 
         Swal.fire({
             title: 'Error en rango de precios',
             text: "Seleccione un rango válido",
+            confirmButtonText: 'Aceptar',            
             icon: "warning",
             timer: 3000
         })

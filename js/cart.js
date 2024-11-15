@@ -26,7 +26,13 @@ function displayCartItems(carrito) {
 
     // Si el carrito está vacío
     if (carrito.length === 0) {
-        swal("¡Carrito vacío!", "No hay productos en el carrito.", "warning");
+        swal.fire({
+            icon: 'warning',
+            title: '¡Carrito vacío!',
+            text: 'No hay productos en el carrito.',
+            confirmButtonText: 'Aceptar',
+            timer: 3000
+        });
         
         // Establecemos todos los totales a 0
         document.getElementById('subtotal').textContent = "USD 0.00";
@@ -190,3 +196,34 @@ function updateTotals() {
     document.addEventListener('DOMContentLoaded', function(){
     updateCantProductos();
 });
+
+document.getElementById('finalizar').addEventListener('click', function(){
+    const departamento = document.getElementById('departamento').value;
+    const localidad = document.getElementById('localidad').value;
+    const calle = document.getElementById('calle').value;
+    const numero = document.getElementById('numero').value;
+    const esquina = document.getElementById('esquina').value;
+    const cantidadProductos = localStorage.getItem('cantProductos-'+emailUsuarioLogueado);
+
+    // Validar campos obligatorios
+if (departamento=="" || localidad=="" || calle=="" || numero=="" || esquina=="" || cantidadProductos == 0) {
+    // SweetAlert para campos obligatorios
+    swal.fire({
+        icon: 'error',
+        title: '¡Oops!',
+        text: 'Por favor completa los campos obligatorios.',
+        confirmButtonText: 'Aceptar',
+        timer: 3000
+    });
+    return;
+}
+else {
+    swal.fire({
+        icon: 'success',
+        title: 'Compra exitosa',
+        text: 'Gracias por comprar.',
+        showConfirmButton: false,
+        timer: 3000
+    });
+}
+})
