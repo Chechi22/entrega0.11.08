@@ -63,19 +63,19 @@ function MostrarListaProductos() {
                     if (searchQuery == undefined || searchQuery === "" || producto.name.toLowerCase().includes(searchQuery) || producto.description.toLowerCase().includes(searchQuery)) {
                         // Crea un bloque de HTML para cada producto, que incluye una imagen, nombre, descripción, costo y cantidad vendida
                         listaProductos += `
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100 shadow-sm">
-                            <a href="product-info.html" onclick="setProductId('${producto.id}')">
-                                <img src="${producto.image}" class="card-img-top" alt="Imagen de ${producto.name}">
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title">${producto.name}</h5>
-                                <p class="card-text">${producto.description}</p>
-                                <p class="card-text text-primary"><strong>${producto.currency} ${producto.cost}</strong></p>
-                                <p class="card-text text-muted">Vendidos: ${producto.soldCount}</p>                                
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 shadow-sm">
+                                <a href="product-info.html" class="card-link" onclick="setProductId('${producto.id}')">
+                                    <img src="${producto.image}" class="card-img-top" alt="Imagen de ${producto.name}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${producto.name}</h5>
+                                        <p class="card-text">${producto.description}</p>
+                                        <p class="card-text text-primary"><strong>${producto.currency} ${producto.cost}</strong></p>
+                                        <p class="card-text text-muted">Vendidos: ${producto.soldCount}</p>
+                                    </div>
+                                </a>
                             </div>
-                        </div>
-                    </div>`;
+                        </div>`;                                      
                     }
                 }
 
