@@ -201,7 +201,19 @@ document.addEventListener('DOMContentLoaded', function () {
 document.getElementById('finalizar').addEventListener('click', (event) => {
     event.preventDefault();
     const formularioDeCompra = document.getElementById('formularioDeCompra');
-    if (formularioDeCompra.checkValidity()) {
+    const cantidadProductos = localStorage.getItem('cantProductos-' + emailUsuarioLogueado);
+    if ( cantidadProductos == 0) {
+// SweetAlert para campos obligatorios
+swal.fire({
+    icon: 'error',
+    title: '¡No es posible comprar!',
+    text: 'Carrito vacío.',
+    showConfirmButton: false,
+    timer: 3000
+});
+    }
+   
+    else if (formularioDeCompra.checkValidity() & cantidadProductos != 0) {
 
         // COMO USAMOS UN FORM AHORA NO ES NECESARIO ESTO
         //  const departamento = document.getElementById('departamento').value;
