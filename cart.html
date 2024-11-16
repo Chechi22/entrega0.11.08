@@ -102,33 +102,42 @@
         <!-- Sección de Dirección de Envío -->
         <div class="section">
           <h4>Dirección de Envío</h4>
-          <div class="form-group">
-            <label for="departamento">Departamento</label>
-            <input type="text" id="departamento" class="form-control" placeholder="Departamento"
-              aria-describedby="errorDepartamento" required>
-            <span class="error-message" id="errorDepartamento">Debe ingresar el Departamento</span>
-          </div>
 
-          <div class="form-group">
-            <label for="localidad">Localidad</label>
-            <input type="text" id="localidad" class="form-control" placeholder="Localidad" aria-describedby="errorLocalidad" required>
-            <span class="error-message" id="errorLocalidad">Debe ingresar la localidad</span>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="departamento">Departamento</label>
+              <input type="text" id="departamento" class="form-control" placeholder="Departamento"
+                aria-describedby="errorDepartamento" required>
+              <span class="error-message" id="errorDepartamento">Debe ingresar el Departamento</span>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="localidad">Localidad</label>
+              <input type="text" id="localidad" class="form-control" placeholder="Localidad"
+                aria-describedby="errorLocalidad" required>
+              <span class="error-message" id="errorLocalidad">Debe ingresar la localidad</span>
+            </div>
           </div>
           <div class="form-group">
             <label for="calle">Calle</label>
-            <input type="text" id="calle" class="form-control" placeholder="Calle" aria-describedby="errorCalle" required>
+            <input type="text" id="calle" class="form-control" placeholder="Calle" aria-describedby="errorCalle"
+              required>
             <span class="error-message" id="errorCalle">Debe ingresar la calle</span>
           </div>
-          <div class="form-group">
+          <div class="row">
+          <div class="form-group col-md-6">
             <label for="numero">Número</label>
-            <input type="text" id="numero" class="form-control" placeholder="Número" aria-describedby="errorNumero" required>
+            <input type="text" id="numero" class="form-control" placeholder="Número" aria-describedby="errorNumero"
+              required>
             <span class="error-message" id="errorNumero">Debe ingresar el número</span>
           </div>
-          <div class="form-group">
+          <div class="form-group col-md-6">
             <label for="esquina">Esquina</label>
-            <input type="text" id="esquina" class="form-control" placeholder="Esquina" aria-describedby="errorEsquina" required>
+            <input type="text" id="esquina" class="form-control" placeholder="Esquina" aria-describedby="errorEsquina"
+              required>
             <span class="error-message" id="errorEsquina">Debe ingresar la esquina</span>
           </div>
+        </div>
         </div>
 
         <!-- Sección de Forma de Pago -->
@@ -149,17 +158,20 @@
             <div class="form-group">
               <label for="numeroTarjeta">Número de Tarjeta</label>
               <input type="text" id="numeroTarjeta" class="form-control" placeholder="1234-1234-1234-1234 (16 digitos)"
-              aria-describedby="errorNumeroTarjeta" pattern="^\d{4}-\d{4}-\d{4}-\d{4}$" required>
-              <span class="error-message" id="errorNumeroTarjeta">Debe ingresar el número de la tarjeta con el formato 1234-1234-1234-1234</span>
+                aria-describedby="errorNumeroTarjeta" pattern="^\d{4}-\d{4}-\d{4}-\d{4}$" required>
+              <span class="error-message" id="errorNumeroTarjeta">Debe ingresar el número de la tarjeta con el formato
+                1234-1234-1234-1234</span>
             </div>
             <div class="form-group">
               <label for="fechaVencimiento">Fecha de Vencimiento</label>
-              <input type="month" id="fechaVencimiento" class="form-control"aria-describedby="errorVencimiento" required>
+              <input type="month" id="fechaVencimiento" class="form-control" aria-describedby="errorVencimiento"
+                required>
               <span class="error-message" id="errorVencimiento">Debe ingresar el vencimiento</span>
             </div>
             <div class="form-group">
               <label for="codigoSeguridad">Código de Seguridad (CVV)</label>
-              <input type="password" id="codigoSeguridad" class="form-control" placeholder="Código CVV" aria-describedby="errorCodigoCVV" pattern="\d{3}" required>
+              <input type="password" id="codigoSeguridad" class="form-control" placeholder="Código CVV"
+                aria-describedby="errorCodigoCVV" pattern="\d{3}" required>
               <span class="error-message" id="errorCodigoCVV">Debe ingresar el código CVV de 3 dígitos</span>
             </div>
           </div>
