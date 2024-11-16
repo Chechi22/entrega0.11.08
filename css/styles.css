@@ -767,4 +767,11 @@ table.table tbody td {
   color: inherit; /* Hereda el color del texto de la card */
 }
 
-
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  display: none;
+}
+.invalid {
+  border-color: red;
+}
