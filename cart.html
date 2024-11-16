@@ -98,29 +98,29 @@
             <option value="standard">Standard (12 a 15 días)</option>
         </select>
     </div>
-
+    <form>
     <!-- Sección de Dirección de Envío -->
     <div class="section">
         <h4>Dirección de Envío</h4>
         <div class="form-group">
             <label for="departamento">Departamento</label>
-            <input type="text" id="departamento" class="form-control" placeholder="Departamento">
+            <input type="text" id="departamento" class="form-control" placeholder="Departamento" required>
         </div>
         <div class="form-group">
             <label for="localidad">Localidad</label>
-            <input type="text" id="localidad" class="form-control" placeholder="Localidad">
-        </div>
+            <input type="text" id="localidad" class="form-control" placeholder="Localidad" required>  
+          </div>
         <div class="form-group">
             <label for="calle">Calle</label>
-            <input type="text" id="calle" class="form-control" placeholder="Calle">
+            <input type="text" id="calle" class="form-control" placeholder="Calle" required>
         </div>
         <div class="form-group">
             <label for="numero">Número</label>
-            <input type="text" id="numero" class="form-control" placeholder="Número">
+            <input type="text" id="numero" class="form-control" placeholder="Número" required>
         </div>
         <div class="form-group">
             <label for="esquina">Esquina</label>
-            <input type="text" id="esquina" class="form-control" placeholder="Esquina">
+            <input type="text" id="esquina" class="form-control" placeholder="Esquina" required>
         </div>
     </div>
 
@@ -153,18 +153,16 @@
           </div>
         </div>
     </div>
-
      <!-- Costos finales -->
      <div class="mt-3">
       <p>Subtotal: <span id="subtotal">USD 0.00</span></p>
       <p>Costo de Envío: <span id="costoEnvio">USD 0.00</span></p>
       <p>Total: <span id="total">USD 0.00</span></p>
     </div>
-
-
     <!-- Botón de Finalizar Compra -->
-    <button id="finalizar" class="btn btn-success btn-finalizar">Finalizar Compra</button>
+    <button type= "submit" id="finalizar" class="btn btn-success btn-finalizar">Finalizar Compra</button>
 </div>
+</form>
 </main>
   </div>
   </main>
