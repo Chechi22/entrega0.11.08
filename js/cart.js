@@ -212,7 +212,7 @@ document.getElementById('finalizar').addEventListener('click', function(){
 
     // Validar campos obligatorios
 if ((departamento=="" || localidad=="" || calle=="" || numero=="" || esquina=="" || cantidadProductos == 0) ||
-(tarjeta && (numeroTarjeta=="" || fechaVencimiento=="" || codigoSeguridad==""))) {
+(tarjeta && (numeroTarjeta==""|| numeroTarjeta.length!=16 || fechaVencimiento=="" || codigoSeguridad==""))) {
     // SweetAlert para campos obligatorios
     swal.fire({
         icon: 'error',
