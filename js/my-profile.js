@@ -55,7 +55,8 @@ function guardarCambios() {
             icon: 'error',
             title: '¡Oops!',
             text: 'Por favor completa los campos obligatorios.',
-            confirmButtonText: 'Aceptar'
+            confirmButtonText: 'Aceptar',
+            timer: 3000
         });
         return;  // Salir de la función si hay campos vacíos
     }
@@ -80,7 +81,8 @@ function guardarCambios() {
         icon: 'success',
         title: '¡Éxito!',
         text: 'Los cambios han sido guardados exitosamente.',
-        confirmButtonText: 'Aceptar'
+        confirmButtonText: 'Aceptar',
+        timer: 3000
     });
 }
 

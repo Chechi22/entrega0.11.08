@@ -203,7 +203,12 @@ document.getElementById("enviarComentario").addEventListener("click", function()
 
     // Verificar si el campo de comentario y calificación están llenos 
     if (!comUsuario || !calificacionComentario) { 
-        Swal.fire("¡Por favor, completa los campos antes de enviar!"); //usamos sweet alert
+        Swal.fire({
+            icon: 'warning',
+            title: '¡Por favor, completa los campos antes de enviar!',
+            confirmButtonText: 'Aceptar',
+            timer: 3000
+        }); //usamos sweet alert
     return; // Detener la ejecución si hay campos vacíos
     }
 
