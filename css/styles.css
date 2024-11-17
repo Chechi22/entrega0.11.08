@@ -747,3 +747,31 @@ table.table tbody td {
   word-wrap: break-word; /* Evita el desbordamiento de texto */
   text-align: left; /* Alineación del texto a la izquierda */
 }
+/* Asegura que el enlace cubra toda la card */
+.card-link {
+  display: block; /* El enlace cubre toda la card */
+  text-decoration: none; /* Elimina el subrayado */
+  color: inherit; /* Hereda el color del texto para no cambiarlo */
+}
+
+/* Cuando el mouse pasa sobre el enlace */
+.card-link:hover {
+  background-color: #f8f9fa; /* Cambia el fondo cuando el mouse pasa por encima */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una sombra para un efecto de profundidad */
+  transform: scale(1.05); /* Efecto de zoom suave */
+  transition: all 0.3s ease-in-out; /* Transición suave */
+}
+
+/* Asegura que los textos dentro de la card no cambien */
+.card-body, .card-title, .card-text {
+  color: inherit; /* Hereda el color del texto de la card */
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  display: none;
+}
+.invalid {
+  border-color: red;
+}
