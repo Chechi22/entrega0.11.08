@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     displayCartItems(carrito);
     document.getElementById('tipoEnvio').addEventListener('change', updateTotals);
     updateCantProductos();
-    
+}); 
 
 // Función para actualizar la cantidad de productos en el carrito
 function updateCantProductos() {
