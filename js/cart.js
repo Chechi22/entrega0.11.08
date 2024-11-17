@@ -10,8 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     displayCartItems(carrito);
     document.getElementById('tipoEnvio').addEventListener('change', updateTotals);
     updateCantProductos();
-    //ocultarDetalleTarjeta(); ESTA FUNCION NO ESTA DEFINIDA
-});
+    
 
 // Función para actualizar la cantidad de productos en el carrito
 function updateCantProductos() {
@@ -213,27 +212,9 @@ swal.fire({
 });
     }
    
-    else if (formularioDeCompra.checkValidity() & cantidadProductos != 0) {
+    else if (formularioDeCompra.checkValidity() ) {
 
-        // COMO USAMOS UN FORM AHORA NO ES NECESARIO ESTO
-        //  const departamento = document.getElementById('departamento').value;
-        //  const localidad = document.getElementById('localidad').value;
-        //  const calle = document.getElementById('calle').value;
-        //   const numero = document.getElementById('numero').value;
-        //   const esquina = document.getElementById('esquina').value;
-        //   const cantidadProductos = localStorage.getItem('cantProductos-' + emailUsuarioLogueado);
-        //   const tarjeta = document.getElementById('tarjeta').checked;
-        //   const numeroTarjeta = document.getElementById('numeroTarjeta').value;
-        //  const fechaVencimiento = document.getElementById('fechaVencimiento').value;
-        //  const codigoSeguridad = document.getElementById('codigoSeguridad').value;
-
-        // Validar campos obligatorios
-        // if ((departamento == "" || localidad == "" || calle == "" || numero == "" || esquina == "" || cantidadProductos == 0) ||
-        //      (tarjeta && (numeroTarjeta == "" || numeroTarjeta.length != 16 || fechaVencimiento == "" || codigoSeguridad == ""))) {
-
-        //      return;
-        //  }
-        //  else {
+       
         swal.fire({
             icon: 'success',
             title: 'Compra exitosa',
