@@ -293,4 +293,5 @@ document.getElementById('numeroTarjeta').addEventListener('input', function () {
     }
     // Formatear el número en el formato 1234-1234-1234-1234
     this.value = value.replace(/(\d{4})(?=\d)/g, '$1-');
+})
 });
